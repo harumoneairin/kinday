@@ -237,6 +237,35 @@ class _InputFieldState extends State<InputField> {
   }
 }
 
+// TextEditingController that prevents accidental text selection on cursor drag/tap
+class NonSelectingTextEditingController extends TextEditingController {
+  NonSelectingTextEditingController({super.text});
+
+  @override
+  set value(TextEditingValue newValue) {
+    if (!newValue.selection.isCollapsed && newValue.selection.isValid) {
+      // Allow Select All if explicitly triggered (covers the entire text)
+      if (newValue.selection.baseOffset == 0 &&
+          newValue.selection.extentOffset == newValue.text.length &&
+          newValue.text.length > 1) {
+        super.value = newValue;
+        return;
+      }
+
+      // Collapse partial selection to extentOffset (where the user's cursor/finger is)
+      final safeOffset = newValue.selection.extentOffset.clamp(
+        0,
+        newValue.text.length,
+      );
+      super.value = newValue.copyWith(
+        selection: TextSelection.collapsed(offset: safeOffset),
+      );
+      return;
+    }
+    super.value = newValue;
+  }
+}
+
 // Container white
 class Container1 extends StatelessWidget {
   const Container1({super.key, this.height, this.width, required this.child});

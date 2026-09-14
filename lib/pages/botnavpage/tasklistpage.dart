@@ -72,8 +72,8 @@ class _TasklistpageState extends State<Tasklistpage> {
   }
 
   void _showEditTaskBottomSheet(TaskCard task) {
-    final titleController = TextEditingController(text: task.title);
-    final descController = TextEditingController(text: task.description ?? "");
+    final titleController = NonSelectingTextEditingController(text: task.title);
+    final descController = NonSelectingTextEditingController(text: task.description ?? "");
     int tempPriority = task.prioritytask;
     int tempEnergyLvl = task.energylvl;
     int tempScheduleMode = task.repeatType == RepeatType.none ? 0 : 1;
@@ -84,7 +84,7 @@ class _TasklistpageState extends State<Tasklistpage> {
     final List<Map<String, dynamic>> tempSubtasks = List.from(
       task.subtasks.map((e) => Map<String, dynamic>.from(e)),
     );
-    final newSubtaskController = TextEditingController();
+    final newSubtaskController = NonSelectingTextEditingController();
     RepeatType tempRepeatType = task.repeatType;
     List<int> tempSelectedWeekDays = List.from(task.selectedWeekDays);
     DateTime? tempFinishDate = task.finishDate;
@@ -354,6 +354,17 @@ class _TasklistpageState extends State<Tasklistpage> {
                       const SizedBox(height: 20),
                       TextFormField(
                         controller: titleController,
+                        onTap: () {
+                          if (!titleController.selection.isCollapsed &&
+                              titleController.selection.isValid) {
+                            titleController.selection = TextSelection.collapsed(
+                              offset: titleController.selection.extentOffset.clamp(
+                                0,
+                                titleController.text.length,
+                              ),
+                            );
+                          }
+                        },
                         style: const TextStyle(color: Color(0xFF5852A0)),
                         decoration: InputDecoration(
                           labelText: "Task Title",
@@ -385,6 +396,17 @@ class _TasklistpageState extends State<Tasklistpage> {
                       TextFormField(
                         controller: descController,
                         maxLines: 3,
+                        onTap: () {
+                          if (!descController.selection.isCollapsed &&
+                              descController.selection.isValid) {
+                            descController.selection = TextSelection.collapsed(
+                              offset: descController.selection.extentOffset.clamp(
+                                0,
+                                descController.text.length,
+                              ),
+                            );
+                          }
+                        },
                         style: const TextStyle(color: Color(0xFF5852A0)),
                         decoration: InputDecoration(
                           labelText: "Description",
@@ -1213,6 +1235,17 @@ class _TasklistpageState extends State<Tasklistpage> {
                           Expanded(
                             child: TextFormField(
                               controller: newSubtaskController,
+                              onTap: () {
+                                if (!newSubtaskController.selection.isCollapsed &&
+                                    newSubtaskController.selection.isValid) {
+                                  newSubtaskController.selection = TextSelection.collapsed(
+                                    offset: newSubtaskController.selection.extentOffset.clamp(
+                                      0,
+                                      newSubtaskController.text.length,
+                                    ),
+                                  );
+                                }
+                              },
                               style: const TextStyle(color: Color(0xFF5852A0)),
                               decoration: InputDecoration(
                                 hintText: L10n.tr("Add new subtask...", "Tambah sub-tugas baru..."),
@@ -1329,7 +1362,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                       ),
                                       onPressed: () {
                                         final editController =
-                                            TextEditingController(
+                                            NonSelectingTextEditingController(
                                               text: sub["title"],
                                             );
                                         showDialog(
@@ -1338,6 +1371,17 @@ class _TasklistpageState extends State<Tasklistpage> {
                                             title: Text(L10n.tr("Edit Subtask", "Ubah Sub-tugas")),
                                             content: TextField(
                                               controller: editController,
+                                              onTap: () {
+                                                if (!editController.selection.isCollapsed &&
+                                                    editController.selection.isValid) {
+                                                  editController.selection = TextSelection.collapsed(
+                                                    offset: editController.selection.extentOffset.clamp(
+                                                      0,
+                                                      editController.text.length,
+                                                    ),
+                                                  );
+                                                }
+                                              },
                                               decoration: InputDecoration(
                                                 hintText: L10n.tr("Edit subtask title", "Ubah judul sub-tugas"),
                                               ),
@@ -1604,7 +1648,7 @@ class _TasklistpageState extends State<Tasklistpage> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 2),
+              padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
               child: Row(
                 children: [
                   if (selectedTab == 3) ...[
@@ -1869,6 +1913,7 @@ class EnergyLevelView extends StatelessWidget {
     return ListView(
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.only(top: 4, bottom: 20),
       children: [
         Container1(
           child: Column(
@@ -2066,6 +2111,7 @@ class DueDateView extends StatelessWidget {
     return ListView(
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.only(top: 4, bottom: 20),
       children: [
         Container1(
           child: Column(
@@ -2400,6 +2446,7 @@ class PriorityView extends StatelessWidget {
       return ListView(
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.only(top: 4, bottom: 20),
         children: [
           // 2x2 Matrix Overview Summary Box
           Padding(
@@ -2647,6 +2694,7 @@ class PriorityView extends StatelessWidget {
     return ListView(
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.only(top: 4, bottom: 20),
       children: [
         Container1(
           child: Column(

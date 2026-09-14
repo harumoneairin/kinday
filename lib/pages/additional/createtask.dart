@@ -33,8 +33,8 @@ class CreateTaskPage extends StatefulWidget {
 
 class _CreateTaskPageState extends State<CreateTaskPage> {
   final energylvlController = DropdownController();
-  final titleController = TextEditingController();
-  final descController = TextEditingController();
+  final titleController = NonSelectingTextEditingController();
+  final descController = NonSelectingTextEditingController();
   List<Map<String, dynamic>> subtasks = [];
 
   String? selectedDropdown = "Mid priority";
@@ -921,6 +921,17 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                       TextFormField(
                         controller: titleController,
                         maxLines: 2,
+                        onTap: () {
+                          if (!titleController.selection.isCollapsed &&
+                              titleController.selection.isValid) {
+                            titleController.selection = TextSelection.collapsed(
+                              offset: titleController.selection.extentOffset.clamp(
+                                0,
+                                titleController.text.length,
+                              ),
+                            );
+                          }
+                        },
                         style: TextStyle(
                           color: AppColors.button,
                           fontFamily: "Nunito",
@@ -988,6 +999,17 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                       TextFormField(
                         controller: descController,
                         maxLines: 3,
+                        onTap: () {
+                          if (!descController.selection.isCollapsed &&
+                              descController.selection.isValid) {
+                            descController.selection = TextSelection.collapsed(
+                              offset: descController.selection.extentOffset.clamp(
+                                0,
+                                descController.text.length,
+                              ),
+                            );
+                          }
+                        },
                         style: TextStyle(
                           color: AppColors.button,
                           fontFamily: "Nunito",
@@ -2879,7 +2901,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   }
 
   void _showAddSubtaskDialog() {
-    TextEditingController subtaskcontroller = TextEditingController();
+    final subtaskcontroller = NonSelectingTextEditingController();
 
     showDialog(
       context: context,
@@ -2898,6 +2920,17 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
               ),
               content: TextField(
                 controller: subtaskcontroller,
+                onTap: () {
+                  if (!subtaskcontroller.selection.isCollapsed &&
+                      subtaskcontroller.selection.isValid) {
+                    subtaskcontroller.selection = TextSelection.collapsed(
+                      offset: subtaskcontroller.selection.extentOffset.clamp(
+                        0,
+                        subtaskcontroller.text.length,
+                      ),
+                    );
+                  }
+                },
                 style: TextStyle(color: AppColors.button, fontFamily: "Nunito"),
                 decoration: InputDecoration(
                   hintText: L10n.tr("Eg. Read Chapter 1", "Misal: Baca Bab 1"),
@@ -2952,7 +2985,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   void _showEditSubtaskDialog(int index) {
     if (index < 0 || index >= subtasks.length) return;
     final sub = subtasks[index];
-    final editController = TextEditingController(text: sub["title"]);
+    final editController = NonSelectingTextEditingController(text: sub["title"]);
 
     showDialog(
       context: context,
@@ -2971,6 +3004,17 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
           ),
           content: TextField(
             controller: editController,
+            onTap: () {
+              if (!editController.selection.isCollapsed &&
+                  editController.selection.isValid) {
+                editController.selection = TextSelection.collapsed(
+                  offset: editController.selection.extentOffset.clamp(
+                    0,
+                    editController.text.length,
+                  ),
+                );
+              }
+            },
             style: TextStyle(
               color: AppColors.button,
               fontFamily: "Nunito",
