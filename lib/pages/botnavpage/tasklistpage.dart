@@ -228,6 +228,104 @@ class _TasklistpageState extends State<Tasklistpage> {
 
     TimeOfDay? tempDueTime = parseTimeOfDay(task.dueTime);
 
+    Widget buildPriorityChip({
+      required String label,
+      required Color color,
+      required bool isSelected,
+      required VoidCallback onTap,
+    }) {
+      return InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(10),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          decoration: BoxDecoration(
+            color: isSelected ? color : color.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: isSelected ? color : color.withValues(alpha: 0.4),
+              width: 1,
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.flag_rounded,
+                size: 13,
+                color: isSelected ? Colors.white : color,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  fontFamily: "Quicksand",
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  color: isSelected ? Colors.white : color,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    Widget buildDateTimeTile({
+      required IconData icon,
+      required String label,
+      required String value,
+      required VoidCallback onTap,
+      VoidCallback? onClear,
+    }) {
+      return Row(
+        children: [
+          Icon(icon, size: 16, color: AppColors.button),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              label,
+              style: TextStyle(
+                fontFamily: "Nunito",
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+                color: AppColors.button,
+              ),
+            ),
+          ),
+          if (onClear != null)
+            IconButton(
+              icon: const Icon(Icons.clear, color: Colors.redAccent, size: 18),
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+              onPressed: onClear,
+            ),
+          if (onClear != null) const SizedBox(width: 6),
+          InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: AppColors.button,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                value,
+                style: const TextStyle(
+                  fontFamily: "Nunito",
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -240,43 +338,63 @@ class _TasklistpageState extends State<Tasklistpage> {
                 bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
               child: Container(
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height * 0.9,
+                ),
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
                 ),
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
                 child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Pull handle
                       Center(
                         child: Container(
                           width: 40,
                           height: 4,
-                          margin: const EdgeInsets.only(bottom: 20),
+                          margin: const EdgeInsets.only(bottom: 16),
                           decoration: BoxDecoration(
                             color: Colors.grey.shade300,
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),
                       ),
+
+                      // Header Row (Title & Delete Button)
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            L10n.tr("Edit Task Details", "Ubah Detail Tugas"),
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.button,
-                            ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.edit_note_rounded,
+                                color: AppColors.button,
+                                size: 26,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                L10n.tr("Edit Task Details", "Ubah Detail Tugas"),
+                                style: TextStyle(
+                                  fontFamily: "Quicksand",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.button,
+                                ),
+                              ),
+                            ],
                           ),
                           IconButton(
                             icon: const Icon(
-                              Icons.delete_outline,
+                              Icons.delete_outline_rounded,
                               color: Colors.redAccent,
+                              size: 22,
                             ),
+                            tooltip: L10n.tr("Delete Task", "Hapus Tugas"),
                             onPressed: () async {
                               final confirm = await showDialog<bool>(
                                 context: context,
@@ -317,7 +435,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                           backgroundColor: Colors.redAccent,
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(
-                                              20,
+                                              16,
                                             ),
                                           ),
                                         ),
@@ -351,639 +469,300 @@ class _TasklistpageState extends State<Tasklistpage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
-                      TextFormField(
-                        controller: titleController,
-                        onTap: () {
-                          if (!titleController.selection.isCollapsed &&
-                              titleController.selection.isValid) {
-                            titleController.selection = TextSelection.collapsed(
-                              offset: titleController.selection.extentOffset.clamp(
-                                0,
-                                titleController.text.length,
-                              ),
-                            );
-                          }
-                        },
-                        style: const TextStyle(color: Color(0xFF5852A0)),
-                        decoration: InputDecoration(
-                          labelText: "Task Title",
-                          labelStyle: TextStyle(color: AppColors.button),
-                          filled: true,
-                          fillColor: Colors.grey.shade100,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
-                              color: AppColors.background,
-                              width: 1.5,
-                            ),
-                          ),
-                          suffixIcon: SpeechMicButton(
-                            isListening: isListeningTitle,
-                            onTap: () => listenForField(
-                              titleController,
-                              true,
-                              setModalState,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      TextFormField(
-                        controller: descController,
-                        maxLines: 3,
-                        onTap: () {
-                          if (!descController.selection.isCollapsed &&
-                              descController.selection.isValid) {
-                            descController.selection = TextSelection.collapsed(
-                              offset: descController.selection.extentOffset.clamp(
-                                0,
-                                descController.text.length,
-                              ),
-                            );
-                          }
-                        },
-                        style: const TextStyle(color: Color(0xFF5852A0)),
-                        decoration: InputDecoration(
-                          labelText: "Description",
-                          labelStyle: TextStyle(color: AppColors.button),
-                          filled: true,
-                          fillColor: Colors.grey.shade100,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
-                              color: AppColors.background,
-                              width: 1.5,
-                            ),
-                          ),
-                          suffixIcon: SpeechMicButton(
-                            isListening: isListeningDesc,
-                            onTap: () => listenForField(
-                              descController,
-                              false,
-                              setModalState,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      // Priority Selection
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Priority",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: AppColors.button,
-                            ),
-                          ),
-                          Row(
-                            children: List.generate(3, (index) {
-                              final pVal = index + 1;
-                              final isSelected = tempPriority == pVal;
-                              Color color;
-                              String label;
-                              if (pVal == 3) {
-                                color = Colors.red;
-                                label = "High";
-                              } else if (pVal == 2) {
-                                color = Colors.orange;
-                                label = "Mid";
-                              } else {
-                                color = Colors.green;
-                                label = "Low";
-                              }
-                              return Padding(
-                                padding: const EdgeInsets.only(left: 6.0),
-                                child: ChoiceChip(
-                                  label: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(
-                                        Icons.flag,
-                                        size: 14,
-                                        color: isSelected
-                                            ? Colors.white
-                                            : color,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        label,
-                                        style: TextStyle(
-                                          color: isSelected
-                                              ? Colors.white
-                                              : Colors.black87,
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  selected: isSelected,
-                                  selectedColor: color,
+                      const SizedBox(height: 14),
 
-                                  onSelected: (selected) {
-                                    if (selected) {
-                                      setModalState(() {
-                                        tempPriority = pVal;
-                                      });
-                                    }
-                                  },
-                                ),
-                              );
-                            }),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      // Mode Selector: Single Task vs Repeated Task
-                      CustomSlidingSegmentedControl<int>(
-                        isStretch: true,
+                      // Card 1: Task Information (Title & Description)
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: AppColors.container2,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            width: 1,
-                            color: AppColors.containerline2,
-                          ),
+                          color: Colors.grey.shade50,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: Colors.grey.shade200),
                         ),
-                        thumbDecoration: BoxDecoration(
-                          color: AppColors.button,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        initialValue: tempScheduleMode,
-                        children: {
-                          0: Text(
-                            L10n.tr("Single Task", "Tugas Sekali"),
-                            style: TextStyle(
-                              fontFamily: "Quicksand",
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
-                              color: tempScheduleMode == 0
-                                  ? Colors.white
-                                  : AppColors.button,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          1: Text(
-                            L10n.tr("Repeated Task", "Tugas Berulang"),
-                            style: TextStyle(
-                              fontFamily: "Quicksand",
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
-                              color: tempScheduleMode == 1
-                                  ? Colors.white
-                                  : AppColors.button,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        },
-                        onValueChanged: (val) {
-                          setModalState(() {
-                            tempScheduleMode = val;
-                            if (val == 0) {
-                              tempRepeatType = RepeatType.none;
-                              tempFinishDate = null;
-                              tempSelectedWeekDays = [];
-                            } else {
-                              if (tempRepeatType == RepeatType.none) {
-                                tempRepeatType = RepeatType.daily;
-                              }
-                            }
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 16),
-
-                      if (tempScheduleMode == 0) ...[
-                        // --- SINGLE TASK FIELDS ---
-                        // 1. Start Date (Tanggal Mulai)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              L10n.tr("Start Date", "Tanggal Mulai"),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: AppColors.button,
-                              ),
-                            ),
-                            ElevatedButton.icon(
-                              onPressed: () async {
-                                final picked = await showDatePicker(
-                                  context: context,
-                                  initialDate: tempStartDate ?? DateTime.now(),
-                                  firstDate: DateTime(2020),
-                                  lastDate: DateTime(2100),
-                                );
-                                if (picked != null) {
-                                  setModalState(() {
-                                    tempStartDate = picked;
-                                  });
+                            TextFormField(
+                              controller: titleController,
+                              onTap: () {
+                                if (!titleController.selection.isCollapsed &&
+                                    titleController.selection.isValid) {
+                                  titleController.selection = TextSelection.collapsed(
+                                    offset: titleController.selection.extentOffset.clamp(
+                                      0,
+                                      titleController.text.length,
+                                    ),
+                                  );
                                 }
                               },
-                              icon: const Icon(
-                                Icons.calendar_today,
-                                size: 16,
-                                color: Colors.white,
+                              style: const TextStyle(
+                                color: Color(0xFF5852A0),
+                                fontFamily: "Nunito",
+                                fontWeight: FontWeight.w600,
                               ),
-                              label: Text(
-                                tempStartDate == null
-                                    ? L10n.tr("Today", "Hari Ini")
-                                    : "${tempStartDate!.day}/${tempStartDate!.month}/${tempStartDate!.year}",
-                                style: const TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                labelText: L10n.tr("Task Title", "Judul Tugas"),
+                                labelStyle: TextStyle(
+                                  color: AppColors.button,
+                                  fontFamily: "Quicksand",
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                  vertical: 12,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(color: Colors.grey.shade300),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(color: Colors.grey.shade300),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(
+                                    color: AppColors.button,
+                                    width: 1.5,
+                                  ),
+                                ),
+                                suffixIcon: SpeechMicButton(
+                                  isListening: isListeningTitle,
+                                  onTap: () => listenForField(
+                                    titleController,
+                                    true,
+                                    setModalState,
+                                  ),
+                                ),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.button,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                            ),
+                            const SizedBox(height: 12),
+                            TextFormField(
+                              controller: descController,
+                              maxLines: 3,
+                              onTap: () {
+                                if (!descController.selection.isCollapsed &&
+                                    descController.selection.isValid) {
+                                  descController.selection = TextSelection.collapsed(
+                                    offset: descController.selection.extentOffset.clamp(
+                                      0,
+                                      descController.text.length,
+                                    ),
+                                  );
+                                }
+                              },
+                              style: const TextStyle(
+                                color: Color(0xFF5852A0),
+                                fontFamily: "Nunito",
+                              ),
+                              decoration: InputDecoration(
+                                labelText: L10n.tr("Description", "Deskripsi"),
+                                labelStyle: TextStyle(
+                                  color: AppColors.button,
+                                  fontFamily: "Quicksand",
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                filled: true,
+                                fillColor: Colors.white,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                  vertical: 12,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(color: Colors.grey.shade300),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(color: Colors.grey.shade300),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  borderSide: BorderSide(
+                                    color: AppColors.button,
+                                    width: 1.5,
+                                  ),
+                                ),
+                                suffixIcon: SpeechMicButton(
+                                  isListening: isListeningDesc,
+                                  onTap: () => listenForField(
+                                    descController,
+                                    false,
+                                    setModalState,
+                                  ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16),
-                        // 2. Due Date (Batas Waktu)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      ),
+                      const SizedBox(height: 14),
+
+                      // Card 2: Schedule & Timing
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade50,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: Colors.grey.shade200),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              L10n.tr("Due Date", "Batas Waktu"),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: AppColors.button,
-                              ),
-                            ),
                             Row(
                               children: [
-                                if (tempDueDate != null)
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.clear,
-                                      color: Colors.redAccent,
-                                      size: 20,
-                                    ),
-                                    onPressed: () {
-                                      setModalState(() {
-                                        tempDueDate = null;
-                                        tempDueTime = null;
-                                        tempReminderMinutes = null;
-                                      });
-                                    },
-                                  ),
-                                ElevatedButton.icon(
-                                  onPressed: () async {
-                                    final picked = await showDatePicker(
-                                      context: context,
-                                      initialDate: tempDueDate ?? (tempStartDate ?? DateTime.now()),
-                                      firstDate: DateTime(2020),
-                                      lastDate: DateTime(2100),
-                                    );
-                                    if (picked != null) {
-                                      setModalState(() {
-                                        tempDueDate = picked;
-                                      });
-                                    }
-                                  },
-                                  icon: const Icon(
-                                    Icons.calendar_today,
-                                    size: 16,
-                                    color: Colors.white,
-                                  ),
-                                  label: Text(
-                                    tempDueDate == null
-                                        ? L10n.tr("Choose Date", "Pilih Tanggal")
-                                        : "${tempDueDate!.day}/${tempDueDate!.month}/${tempDueDate!.year}",
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.button,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
+                                Icon(
+                                  Icons.calendar_month_rounded,
+                                  size: 18,
+                                  color: AppColors.button,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  L10n.tr("Schedule & Timing", "Jadwal & Waktu"),
+                                  style: TextStyle(
+                                    fontFamily: "Quicksand",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    color: AppColors.button,
                                   ),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        if (tempDueDate != null) ...[
-                          const SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                L10n.tr("Due Time", "Waktu Tenggat"),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: AppColors.button,
+                            const SizedBox(height: 12),
+                            // Mode Selector: Single Task vs Repeated Task
+                            CustomSlidingSegmentedControl<int>(
+                              isStretch: true,
+                              decoration: BoxDecoration(
+                                color: AppColors.container2,
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  width: 1,
+                                  color: AppColors.containerline2,
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  if (tempDueTime != null)
-                                    IconButton(
-                                      icon: const Icon(
-                                        Icons.clear,
-                                        color: Colors.redAccent,
-                                        size: 20,
-                                      ),
-                                      onPressed: () {
-                                        setModalState(() {
-                                          tempDueTime = null;
-                                        });
-                                      },
-                                    ),
-                                  ElevatedButton.icon(
-                                    onPressed: () async {
-                                      final picked = await showTimePicker(
-                                        context: context,
-                                        initialTime:
-                                            tempDueTime ?? TimeOfDay.now(),
-                                      );
-                                      if (picked != null) {
-                                        setModalState(() {
-                                          tempDueTime = picked;
-                                        });
-                                      }
-                                    },
-                                    icon: const Icon(
-                                      Icons.access_time,
-                                      size: 16,
-                                      color: Colors.white,
-                                    ),
-                                    label: Text(
-                                      tempDueTime == null
-                                          ? L10n.tr("Choose Time", "Pilih Jam")
-                                          : tempDueTime!.format(context),
-                                      style: const TextStyle(color: Colors.white),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.button,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                L10n.tr("Reminder", "Pengingat"),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: AppColors.button,
-                                ),
-                              ),
-                              DropdownButton<int?>(
-                                value: tempReminderMinutes,
-                                dropdownColor: Colors.white,
-                                style: TextStyle(color: AppColors.button),
-                                items: [
-                                  DropdownMenuItem(
-                                    value: null,
-                                    child: Text(L10n.tr("None", "Tidak Ada")),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 0,
-                                    child: Text(L10n.tr("At due time", "Pada batas waktu")),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 5,
-                                    child: Text(L10n.tr("5 minutes before", "5 menit sebelum")),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 10,
-                                    child: Text(L10n.tr("10 minutes before", "10 menit sebelum")),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 15,
-                                    child: Text(L10n.tr("15 minutes before", "15 menit sebelum")),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 30,
-                                    child: Text(L10n.tr("30 minutes before", "30 menit sebelum")),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 60,
-                                    child: Text(L10n.tr("1 hour before", "1 jam sebelum")),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 1440,
-                                    child: Text(L10n.tr("1 day before", "1 hari sebelum")),
-                                  ),
-                                ],
-                                onChanged: (int? value) {
-                                  setModalState(() {
-                                    tempReminderMinutes = value;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
-                      ] else ...[
-                        // --- REPEATED TASK FIELDS ---
-                        // 1. Repeat Frequency
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              L10n.tr("Repeat", "Ulang"),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                              thumbDecoration: BoxDecoration(
                                 color: AppColors.button,
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                            ),
-                            DropdownButton<RepeatType>(
-                              value: tempRepeatType == RepeatType.none ? RepeatType.daily : tempRepeatType,
-                              dropdownColor: Colors.white,
-                              style: TextStyle(color: AppColors.button),
-                              items: [
-                                DropdownMenuItem(
-                                  value: RepeatType.daily,
-                                  child: Text(L10n.tr("Every Day", "Setiap Hari")),
+                              initialValue: tempScheduleMode,
+                              children: {
+                                0: Text(
+                                  L10n.tr("Single Task", "Tugas Sekali"),
+                                  style: TextStyle(
+                                    fontFamily: "Quicksand",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                    color: tempScheduleMode == 0
+                                        ? Colors.white
+                                        : AppColors.button,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                DropdownMenuItem(
-                                  value: RepeatType.selectedDays,
-                                  child: Text(L10n.tr("Every Few Days", "Setiap Beberapa Hari")),
+                                1: Text(
+                                  L10n.tr("Repeated Task", "Tugas Berulang"),
+                                  style: TextStyle(
+                                    fontFamily: "Quicksand",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                    color: tempScheduleMode == 1
+                                        ? Colors.white
+                                        : AppColors.button,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                DropdownMenuItem(
-                                  value: RepeatType.weekly,
-                                  child: Text(L10n.tr("Every Week", "Setiap Minggu")),
-                                ),
-                                DropdownMenuItem(
-                                  value: RepeatType.monthly,
-                                  child: Text(L10n.tr("Every Month", "Setiap Bulan")),
-                                ),
-                                DropdownMenuItem(
-                                  value: RepeatType.yearly,
-                                  child: Text(L10n.tr("Every Year", "Setiap Tahun")),
-                                ),
-                              ],
-                              onChanged: (RepeatType? value) {
+                              },
+                              onValueChanged: (val) {
                                 setModalState(() {
-                                  tempRepeatType = value ?? RepeatType.daily;
+                                  tempScheduleMode = val;
+                                  if (val == 0) {
+                                    tempRepeatType = RepeatType.none;
+                                    tempFinishDate = null;
+                                    tempSelectedWeekDays = [];
+                                  } else {
+                                    if (tempRepeatType == RepeatType.none) {
+                                      tempRepeatType = RepeatType.daily;
+                                    }
+                                  }
                                 });
                               },
                             ),
-                          ],
-                        ),
-                        if (tempRepeatType == RepeatType.selectedDays) ...[
-                          const SizedBox(height: 12),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children:
-                                [
-                                  {"label": "Mon", "value": DateTime.monday},
-                                  {"label": "Tue", "value": DateTime.tuesday},
-                                  {"label": "Wed", "value": DateTime.wednesday},
-                                  {"label": "Thu", "value": DateTime.thursday},
-                                  {"label": "Fri", "value": DateTime.friday},
-                                  {"label": "Sat", "value": DateTime.saturday},
-                                  {"label": "Sun", "value": DateTime.sunday},
-                                ].map((day) {
-                                  final isSelected = tempSelectedWeekDays
-                                      .contains(day["value"]);
-                                  return GestureDetector(
-                                    onTap: () {
-                                      setModalState(() {
-                                        if (isSelected) {
-                                          tempSelectedWeekDays.remove(
-                                            day["value"],
-                                          );
-                                        } else {
-                                          tempSelectedWeekDays.add(
-                                            day["value"] as int,
-                                          );
-                                        }
-                                      });
-                                    },
-                                    child: Container(
-                                      width: 38,
-                                      height: 38,
-                                      decoration: BoxDecoration(
-                                        color: isSelected
-                                            ? AppColors.button
-                                            : Colors.grey.shade200,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        L10n.tr(day["label"] as String),
-                                        style: TextStyle(
-                                          color: isSelected
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
-                          ),
-                        ],
-                        const SizedBox(height: 16),
-                        // 2. Start Date (Tanggal Mulai)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              L10n.tr("Start Date", "Tanggal Mulai"),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: AppColors.button,
-                              ),
-                            ),
-                            ElevatedButton.icon(
-                              onPressed: () async {
-                                final picked = await showDatePicker(
-                                  context: context,
-                                  initialDate: tempStartDate ?? DateTime.now(),
-                                  firstDate: DateTime(2020),
-                                  lastDate: DateTime(2100),
-                                );
-                                if (picked != null) {
-                                  setModalState(() {
-                                    tempStartDate = picked;
-                                  });
-                                }
-                              },
-                              icon: const Icon(
-                                Icons.calendar_today,
-                                size: 16,
-                                color: Colors.white,
-                              ),
-                              label: Text(
-                                tempStartDate == null
+                            const SizedBox(height: 14),
+
+                            if (tempScheduleMode == 0) ...[
+                              // --- SINGLE TASK FIELDS ---
+                              buildDateTimeTile(
+                                icon: Icons.calendar_today_rounded,
+                                label: L10n.tr("Start Date", "Tanggal Mulai"),
+                                value: tempStartDate == null
                                     ? L10n.tr("Today", "Hari Ini")
                                     : "${tempStartDate!.day}/${tempStartDate!.month}/${tempStartDate!.year}",
-                                style: const TextStyle(color: Colors.white),
+                                onTap: () async {
+                                  final picked = await showDatePicker(
+                                    context: context,
+                                    initialDate: tempStartDate ?? DateTime.now(),
+                                    firstDate: DateTime(2020),
+                                    lastDate: DateTime(2100),
+                                  );
+                                  if (picked != null) {
+                                    setModalState(() {
+                                      tempStartDate = picked;
+                                    });
+                                  }
+                                },
                               ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.button,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                              const SizedBox(height: 10),
+                              buildDateTimeTile(
+                                icon: Icons.event_available_rounded,
+                                label: L10n.tr("Due Date", "Batas Waktu"),
+                                value: tempDueDate == null
+                                    ? L10n.tr("Choose Date", "Pilih Tanggal")
+                                    : "${tempDueDate!.day}/${tempDueDate!.month}/${tempDueDate!.year}",
+                                onClear: tempDueDate != null
+                                    ? () {
+                                        setModalState(() {
+                                          tempDueDate = null;
+                                          tempDueTime = null;
+                                          tempReminderMinutes = null;
+                                        });
+                                      }
+                                    : null,
+                                onTap: () async {
+                                  final picked = await showDatePicker(
+                                    context: context,
+                                    initialDate: tempDueDate ?? (tempStartDate ?? DateTime.now()),
+                                    firstDate: DateTime(2020),
+                                    lastDate: DateTime(2100),
+                                  );
+                                  if (picked != null) {
+                                    setModalState(() {
+                                      tempDueDate = picked;
+                                    });
+                                  }
+                                },
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        // 3. Time (Jam Pelaksanaan)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              L10n.tr("Time", "Jam"),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: AppColors.button,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                if (tempDueTime != null)
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.clear,
-                                      color: Colors.redAccent,
-                                      size: 20,
-                                    ),
-                                    onPressed: () {
-                                      setModalState(() {
-                                        tempDueTime = null;
-                                      });
-                                    },
-                                  ),
-                                ElevatedButton.icon(
-                                  onPressed: () async {
+                              if (tempDueDate != null) ...[
+                                const SizedBox(height: 10),
+                                buildDateTimeTile(
+                                  icon: Icons.access_time_rounded,
+                                  label: L10n.tr("Time", "Jam"),
+                                  value: tempDueTime == null
+                                      ? L10n.tr("Choose Time", "Pilih Jam")
+                                      : tempDueTime!.format(context),
+                                  onClear: tempDueTime != null
+                                      ? () {
+                                          setModalState(() {
+                                            tempDueTime = null;
+                                          });
+                                        }
+                                      : null,
+                                  onTap: () async {
                                     final picked = await showTimePicker(
                                       context: context,
-                                      initialTime:
-                                          tempDueTime ?? TimeOfDay.now(),
+                                      initialTime: tempDueTime ?? TimeOfDay.now(),
                                     );
                                     if (picked != null) {
                                       setModalState(() {
@@ -991,460 +770,1018 @@ class _TasklistpageState extends State<Tasklistpage> {
                                       });
                                     }
                                   },
-                                  icon: const Icon(
-                                    Icons.access_time,
-                                    size: 16,
-                                    color: Colors.white,
-                                  ),
-                                  label: Text(
-                                    tempDueTime == null
-                                        ? L10n.tr("Choose Time", "Pilih Jam")
-                                        : tempDueTime!.format(context),
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.button,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        // 4. Finish Date (Ulang Sampai)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              L10n.tr("Finish Date", "Ulang Sampai"),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: AppColors.button,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                if (tempFinishDate != null)
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.clear,
-                                      color: Colors.redAccent,
-                                      size: 20,
-                                    ),
-                                    onPressed: () {
-                                      setModalState(() {
-                                        tempFinishDate = null;
-                                      });
-                                    },
-                                  ),
-                                ElevatedButton.icon(
-                                  onPressed: () async {
-                                    final picked = await showDatePicker(
-                                      context: context,
-                                      initialDate:
-                                          tempFinishDate ?? (tempStartDate ?? DateTime.now()),
-                                      firstDate: DateTime.now(),
-                                      lastDate: DateTime(2100),
-                                    );
-                                    if (picked != null) {
-                                      setModalState(() {
-                                        tempFinishDate = picked;
-                                      });
-                                    }
-                                  },
-                                  icon: const Icon(
-                                    Icons.event_busy,
-                                    size: 16,
-                                    color: Colors.white,
-                                  ),
-                                  label: Text(
-                                    tempFinishDate == null
-                                        ? L10n.tr(
-                                            "Choose Date",
-                                            "Pilih Tanggal",
-                                          )
-                                        : "${tempFinishDate!.day}/${tempFinishDate!.month}/${tempFinishDate!.year}",
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.button,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        // 5. Reminder
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              L10n.tr("Reminder", "Pengingat"),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: AppColors.button,
-                              ),
-                            ),
-                            DropdownButton<int?>(
-                              value: tempReminderMinutes,
-                              dropdownColor: Colors.white,
-                              style: TextStyle(color: AppColors.button),
-                              items: [
-                                DropdownMenuItem(
-                                  value: null,
-                                  child: Text(L10n.tr("None", "Tidak Ada")),
-                                ),
-                                DropdownMenuItem(
-                                  value: 0,
-                                  child: Text(L10n.tr("At task time", "Pada jam tugas")),
-                                ),
-                                DropdownMenuItem(
-                                  value: 5,
-                                  child: Text(L10n.tr("5 minutes before", "5 menit sebelum")),
-                                ),
-                                DropdownMenuItem(
-                                  value: 10,
-                                  child: Text(L10n.tr("10 minutes before", "10 menit sebelum")),
-                                ),
-                                DropdownMenuItem(
-                                  value: 15,
-                                  child: Text(L10n.tr("15 minutes before", "15 menit sebelum")),
-                                ),
-                                DropdownMenuItem(
-                                  value: 30,
-                                  child: Text(L10n.tr("30 minutes before", "30 menit sebelum")),
-                                ),
-                                DropdownMenuItem(
-                                  value: 60,
-                                  child: Text(L10n.tr("1 hour before", "1 jam sebelum")),
-                                ),
-                                DropdownMenuItem(
-                                  value: 1440,
-                                  child: Text(L10n.tr("1 day before", "1 hari sebelum")),
-                                ),
-                              ],
-                              onChanged: (int? value) {
-                                setModalState(() {
-                                  tempReminderMinutes = value;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                      const SizedBox(height: 16),
-                      // Energy Level Selection
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Energy Level",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: AppColors.button,
-                                ),
-                              ),
-                              Row(
-                                children: List.generate(5, (index) {
-                                  final lvl = index + 1;
-                                  final isActive = tempEnergyLvl >= lvl;
-                                  return IconButton(
-                                    padding: EdgeInsets.zero,
-                                    constraints: const BoxConstraints(),
-                                    icon: Icon(
-                                      Icons.energy_savings_leaf,
-                                      color: isActive
-                                          ? AppColors.button
-                                          : Colors.grey.shade400,
-                                      size: 28,
-                                    ),
-                                    onPressed: () {
-                                      setModalState(() {
-                                        tempEnergyLvl = lvl;
-                                      });
-                                    },
-                                  );
-                                }),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 4),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              "Level: ${_getEnergyLabel(tempEnergyLvl)}",
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.button,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      // Completion Toggle
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Completed",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Switch(
-                            value: tempIsCompleted,
-                            activeThumbColor: AppColors.button,
-                            activeTrackColor: AppColors.button,
-                            onChanged: (val) {
-                              setModalState(() {
-                                tempIsCompleted = val;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      // Subtask Header and List
-                      Text(
-                        L10n.tr("Subtasks", "Sub-tugas"),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      // Add new subtask inline
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: newSubtaskController,
-                              onTap: () {
-                                if (!newSubtaskController.selection.isCollapsed &&
-                                    newSubtaskController.selection.isValid) {
-                                  newSubtaskController.selection = TextSelection.collapsed(
-                                    offset: newSubtaskController.selection.extentOffset.clamp(
-                                      0,
-                                      newSubtaskController.text.length,
-                                    ),
-                                  );
-                                }
-                              },
-                              style: const TextStyle(color: Color(0xFF5852A0)),
-                              decoration: InputDecoration(
-                                hintText: L10n.tr("Add new subtask...", "Tambah sub-tugas baru..."),
-                                hintStyle: TextStyle(
-                                  color: Colors.grey.shade400,
-                                ),
-                                filled: true,
-                                fillColor: Colors.grey.shade100,
-                                contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide: BorderSide.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          ElevatedButton(
-                            onPressed: () {
-                              final text = newSubtaskController.text.trim();
-                              if (text.isNotEmpty) {
-                                setModalState(() {
-                                  tempSubtasks.add({
-                                    "title": text,
-                                    "isDone": false,
-                                  });
-                                  newSubtaskController.clear();
-                                });
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.button,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 8,
-                              ),
-                              minimumSize: Size.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            ),
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      if (tempSubtasks.isEmpty)
-                        Text(
-                          L10n.tr("No subtasks yet", "Belum ada sub-tugas"),
-                          style: TextStyle(
-                            color: Colors.grey.shade500,
-                            fontSize: 13,
-                          ),
-                        )
-                      else
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(maxHeight: 200),
-                          child: ReorderableListView.builder(
-                            shrinkWrap: true,
-                            physics: const ClampingScrollPhysics(),
-                            buildDefaultDragHandles: false,
-                            itemCount: tempSubtasks.length,
-                            onReorder: (oldIndex, newIndex) {
-                              setModalState(() {
-                                if (oldIndex < newIndex) {
-                                  newIndex -= 1;
-                                }
-                                final item = tempSubtasks.removeAt(oldIndex);
-                                tempSubtasks.insert(newIndex, item);
-                              });
-                            },
-                            itemBuilder: (context, index) {
-                              final sub = tempSubtasks[index];
-                              return ListTile(
-                                key: ValueKey(
-                                  (sub["title"] ?? "") + index.toString(),
-                                ),
-                                contentPadding: EdgeInsets.zero,
-                                leading: Checkbox(
-                                  activeColor: AppColors.button,
-                                  value: sub["isDone"] ?? false,
-                                  onChanged: (val) {
-                                    setModalState(() {
-                                      sub["isDone"] = val;
-                                    });
-                                  },
-                                ),
-                                title: Text(
-                                  sub["title"] ?? "",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: const Color(0xFF5852A0),
-                                    decoration: (sub["isDone"] ?? false)
-                                        ? TextDecoration.lineThrough
-                                        : TextDecoration.none,
-                                  ),
-                                ),
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
+                                const SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.edit_outlined,
-                                        color: AppColors.button,
-                                        size: 20,
-                                      ),
-                                      onPressed: () {
-                                        final editController =
-                                            NonSelectingTextEditingController(
-                                              text: sub["title"],
-                                            );
-                                        showDialog(
-                                          context: context,
-                                           builder: (context) => AlertDialog(
-                                            title: Text(L10n.tr("Edit Subtask", "Ubah Sub-tugas")),
-                                            content: TextField(
-                                              controller: editController,
-                                              onTap: () {
-                                                if (!editController.selection.isCollapsed &&
-                                                    editController.selection.isValid) {
-                                                  editController.selection = TextSelection.collapsed(
-                                                    offset: editController.selection.extentOffset.clamp(
-                                                      0,
-                                                      editController.text.length,
-                                                    ),
-                                                  );
-                                                }
-                                              },
-                                              decoration: InputDecoration(
-                                                hintText: L10n.tr("Edit subtask title", "Ubah judul sub-tugas"),
-                                              ),
-                                              autofocus: true,
-                                            ),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () =>
-                                                    Navigator.pop(context),
-                                                child: Text(L10n.tr("Cancel", "Batal")),
-                                              ),
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  final text = editController
-                                                      .text
-                                                      .trim();
-                                                  if (text.isNotEmpty) {
-                                                    setModalState(() {
-                                                      sub["title"] = text;
-                                                    });
-                                                  }
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Text(L10n.tr("Save", "Simpan")),
-                                              ),
-                                            ],
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.notifications_active_rounded,
+                                          size: 16,
+                                          color: AppColors.button,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          L10n.tr("Reminder", "Pengingat"),
+                                          style: TextStyle(
+                                            fontFamily: "Nunito",
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                            color: AppColors.button,
                                           ),
-                                        );
-                                      },
+                                        ),
+                                      ],
                                     ),
-                                    IconButton(
-                                      icon: const Icon(
-                                        Icons.delete_outline,
-                                        color: Colors.redAccent,
-                                        size: 20,
+                                    DropdownButton<int?>(
+                                      value: tempReminderMinutes,
+                                      dropdownColor: Colors.white,
+                                      style: TextStyle(
+                                        color: AppColors.button,
+                                        fontFamily: "Nunito",
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 13,
                                       ),
-                                      onPressed: () {
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: null,
+                                          child: Text(L10n.tr("None", "Tidak Ada")),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: 0,
+                                          child: Text(L10n.tr("At due time", "Pada batas waktu")),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: 5,
+                                          child: Text(L10n.tr("5 minutes before", "5 menit sebelum")),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: 10,
+                                          child: Text(L10n.tr("10 minutes before", "10 menit sebelum")),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: 15,
+                                          child: Text(L10n.tr("15 minutes before", "15 menit sebelum")),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: 30,
+                                          child: Text(L10n.tr("30 minutes before", "30 menit sebelum")),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: 60,
+                                          child: Text(L10n.tr("1 hour before", "1 jam sebelum")),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: 1440,
+                                          child: Text(L10n.tr("1 day before", "1 hari sebelum")),
+                                        ),
+                                      ],
+                                      onChanged: (int? value) {
                                         setModalState(() {
-                                          tempSubtasks.removeAt(index);
+                                          tempReminderMinutes = value;
                                         });
                                       },
                                     ),
-                                    ReorderableDragStartListener(
-                                      index: index,
-                                      child: const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 8.0,
+                                  ],
+                                ),
+                              ],
+                            ] else ...[
+                              // --- REPEATED TASK FIELDS ---
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.repeat_rounded,
+                                        size: 16,
+                                        color: AppColors.button,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        L10n.tr("Repeat", "Ulang"),
+                                        style: TextStyle(
+                                          fontFamily: "Nunito",
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14,
+                                          color: AppColors.button,
                                         ),
-                                        child: Icon(
-                                          Icons.drag_handle,
-                                          color: Colors.grey,
-                                          size: 20,
+                                      ),
+                                    ],
+                                  ),
+                                  DropdownButton<RepeatType>(
+                                    value: tempRepeatType == RepeatType.none
+                                        ? RepeatType.daily
+                                        : tempRepeatType,
+                                    dropdownColor: Colors.white,
+                                    style: TextStyle(
+                                      color: AppColors.button,
+                                      fontFamily: "Nunito",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                    ),
+                                    items: [
+                                      DropdownMenuItem(
+                                        value: RepeatType.daily,
+                                        child: Text(L10n.tr("Every Day", "Setiap Hari")),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: RepeatType.selectedDays,
+                                        child: Text(
+                                          L10n.tr("Every Few Days", "Setiap Beberapa Hari"),
                                         ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: RepeatType.weekly,
+                                        child: Text(L10n.tr("Every Week", "Setiap Minggu")),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: RepeatType.monthly,
+                                        child: Text(L10n.tr("Every Month", "Setiap Bulan")),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: RepeatType.yearly,
+                                        child: Text(L10n.tr("Every Year", "Setiap Tahun")),
+                                      ),
+                                    ],
+                                    onChanged: (RepeatType? value) {
+                                      setModalState(() {
+                                        tempRepeatType = value ?? RepeatType.daily;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                              if (tempRepeatType == RepeatType.selectedDays) ...[
+                                const SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    {"label": "Mon", "value": DateTime.monday},
+                                    {"label": "Tue", "value": DateTime.tuesday},
+                                    {"label": "Wed", "value": DateTime.wednesday},
+                                    {"label": "Thu", "value": DateTime.thursday},
+                                    {"label": "Fri", "value": DateTime.friday},
+                                    {"label": "Sat", "value": DateTime.saturday},
+                                    {"label": "Sun", "value": DateTime.sunday},
+                                  ].map((day) {
+                                    final isSelected = tempSelectedWeekDays
+                                        .contains(day["value"]);
+                                    return GestureDetector(
+                                      onTap: () {
+                                        setModalState(() {
+                                          if (isSelected) {
+                                            tempSelectedWeekDays.remove(
+                                              day["value"],
+                                            );
+                                          } else {
+                                            tempSelectedWeekDays.add(
+                                              day["value"] as int,
+                                            );
+                                          }
+                                        });
+                                      },
+                                      child: Container(
+                                        width: 36,
+                                        height: 36,
+                                        decoration: BoxDecoration(
+                                          color: isSelected
+                                              ? AppColors.button
+                                              : Colors.white,
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: isSelected
+                                                ? AppColors.button
+                                                : Colors.grey.shade300,
+                                            width: 1,
+                                          ),
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          L10n.tr(day["label"] as String),
+                                          style: TextStyle(
+                                            color: isSelected
+                                                ? Colors.white
+                                                : Colors.black87,
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Quicksand",
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ],
+                              const SizedBox(height: 10),
+                              buildDateTimeTile(
+                                icon: Icons.calendar_today_rounded,
+                                label: L10n.tr("Start Date", "Tanggal Mulai"),
+                                value: tempStartDate == null
+                                    ? L10n.tr("Today", "Hari Ini")
+                                    : "${tempStartDate!.day}/${tempStartDate!.month}/${tempStartDate!.year}",
+                                onTap: () async {
+                                  final picked = await showDatePicker(
+                                    context: context,
+                                    initialDate: tempStartDate ?? DateTime.now(),
+                                    firstDate: DateTime(2020),
+                                    lastDate: DateTime(2100),
+                                  );
+                                  if (picked != null) {
+                                    setModalState(() {
+                                      tempStartDate = picked;
+                                    });
+                                  }
+                                },
+                              ),
+                              const SizedBox(height: 10),
+                              buildDateTimeTile(
+                                icon: Icons.access_time_rounded,
+                                label: L10n.tr("Time", "Jam"),
+                                value: tempDueTime == null
+                                    ? L10n.tr("Choose Time", "Pilih Jam")
+                                    : tempDueTime!.format(context),
+                                onClear: tempDueTime != null
+                                    ? () {
+                                        setModalState(() {
+                                          tempDueTime = null;
+                                        });
+                                      }
+                                    : null,
+                                onTap: () async {
+                                  final picked = await showTimePicker(
+                                    context: context,
+                                    initialTime: tempDueTime ?? TimeOfDay.now(),
+                                  );
+                                  if (picked != null) {
+                                    setModalState(() {
+                                      tempDueTime = picked;
+                                    });
+                                  }
+                                },
+                              ),
+                              const SizedBox(height: 10),
+                              buildDateTimeTile(
+                                icon: Icons.event_busy_rounded,
+                                label: L10n.tr("Finish Date", "Ulang Sampai"),
+                                value: tempFinishDate == null
+                                    ? L10n.tr("Choose Date", "Pilih Tanggal")
+                                    : "${tempFinishDate!.day}/${tempFinishDate!.month}/${tempFinishDate!.year}",
+                                onClear: tempFinishDate != null
+                                    ? () {
+                                        setModalState(() {
+                                          tempFinishDate = null;
+                                        });
+                                      }
+                                    : null,
+                                onTap: () async {
+                                  final picked = await showDatePicker(
+                                    context: context,
+                                    initialDate: tempFinishDate ??
+                                        (tempStartDate ?? DateTime.now()),
+                                    firstDate: DateTime.now(),
+                                    lastDate: DateTime(2100),
+                                  );
+                                  if (picked != null) {
+                                    setModalState(() {
+                                      tempFinishDate = picked;
+                                    });
+                                  }
+                                },
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.notifications_active_rounded,
+                                        size: 16,
+                                        color: AppColors.button,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        L10n.tr("Reminder", "Pengingat"),
+                                        style: TextStyle(
+                                          fontFamily: "Nunito",
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14,
+                                          color: AppColors.button,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  DropdownButton<int?>(
+                                    value: tempReminderMinutes,
+                                    dropdownColor: Colors.white,
+                                    style: TextStyle(
+                                      color: AppColors.button,
+                                      fontFamily: "Nunito",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                    ),
+                                    items: [
+                                      DropdownMenuItem(
+                                        value: null,
+                                        child: Text(L10n.tr("None", "Tidak Ada")),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 0,
+                                        child: Text(
+                                          L10n.tr("At task time", "Pada jam tugas"),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 5,
+                                        child: Text(
+                                          L10n.tr("5 minutes before", "5 menit sebelum"),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 10,
+                                        child: Text(
+                                          L10n.tr("10 minutes before", "10 menit sebelum"),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 15,
+                                        child: Text(
+                                          L10n.tr("15 minutes before", "15 menit sebelum"),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 30,
+                                        child: Text(
+                                          L10n.tr("30 minutes before", "30 menit sebelum"),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 60,
+                                        child: Text(
+                                          L10n.tr("1 hour before", "1 jam sebelum"),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 1440,
+                                        child: Text(
+                                          L10n.tr("1 day before", "1 hari sebelum"),
+                                        ),
+                                      ),
+                                    ],
+                                    onChanged: (int? value) {
+                                      setModalState(() {
+                                        tempReminderMinutes = value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+
+                      // Card 3: Priority & Energy Level
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade50,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: Colors.grey.shade200),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Priority
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.flag_rounded,
+                                      size: 18,
+                                      color: AppColors.button,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      L10n.tr("Priority", "Prioritas"),
+                                      style: TextStyle(
+                                        fontFamily: "Quicksand",
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: AppColors.button,
                                       ),
                                     ),
                                   ],
                                 ),
-                              );
-                            },
-                          ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    buildPriorityChip(
+                                      label: L10n.tr("Low", "Rendah"),
+                                      color: Colors.green,
+                                      isSelected: tempPriority == 1,
+                                      onTap: () => setModalState(() => tempPriority = 1),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    buildPriorityChip(
+                                      label: L10n.tr("Mid", "Sedang"),
+                                      color: Colors.orange,
+                                      isSelected: tempPriority == 2,
+                                      onTap: () => setModalState(() => tempPriority = 2),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    buildPriorityChip(
+                                      label: L10n.tr("High", "Tinggi"),
+                                      color: Colors.red,
+                                      isSelected: tempPriority == 3,
+                                      onTap: () => setModalState(() => tempPriority = 3),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 12),
+                              child: Divider(height: 1),
+                            ),
+                            // Energy Level
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.bolt_rounded,
+                                      size: 20,
+                                      color: AppColors.button,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      L10n.tr("Energy Level", "Tingkat Energi"),
+                                      style: TextStyle(
+                                        fontFamily: "Quicksand",
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: AppColors.button,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.button.withValues(alpha: 0.12),
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: AppColors.button.withValues(alpha: 0.25),
+                                      width: 0.8,
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "${L10n.tr('Level', 'Level')} $tempEnergyLvl • ${_getEnergyLabel(tempEnergyLvl)}",
+                                    style: TextStyle(
+                                      fontFamily: "Quicksand",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 11,
+                                      color: AppColors.button,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            // Responsive 5-segment energy level rating
+                            Row(
+                              children: List.generate(5, (index) {
+                                final lvl = index + 1;
+                                final isSelected = tempEnergyLvl == lvl;
+                                final isFilled = tempEnergyLvl >= lvl;
+                                return Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 3),
+                                    child: InkWell(
+                                      onTap: () {
+                                        setModalState(() {
+                                          tempEnergyLvl = lvl;
+                                        });
+                                      },
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: AnimatedContainer(
+                                        duration: const Duration(milliseconds: 180),
+                                        padding: const EdgeInsets.symmetric(vertical: 8),
+                                        decoration: BoxDecoration(
+                                          color: isSelected
+                                              ? AppColors.button
+                                              : isFilled
+                                                  ? AppColors.button.withValues(alpha: 0.12)
+                                                  : Colors.white,
+                                          borderRadius: BorderRadius.circular(12),
+                                          border: Border.all(
+                                            color: isSelected
+                                                ? AppColors.button
+                                                : isFilled
+                                                    ? AppColors.button.withValues(alpha: 0.3)
+                                                    : Colors.grey.shade300,
+                                            width: isSelected ? 1.5 : 1,
+                                          ),
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(
+                                              Icons.energy_savings_leaf_rounded,
+                                              size: 20,
+                                              color: isSelected
+                                                  ? Colors.white
+                                                  : isFilled
+                                                      ? AppColors.button
+                                                      : Colors.grey.shade400,
+                                            ),
+                                            const SizedBox(height: 2),
+                                            Text(
+                                              "$lvl",
+                                              style: TextStyle(
+                                                fontFamily: "Quicksand",
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.bold,
+                                                color: isSelected
+                                                    ? Colors.white
+                                                    : isFilled
+                                                        ? AppColors.button
+                                                        : Colors.grey.shade600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ],
                         ),
-                      const SizedBox(height: 24),
-                      // Actions
+                      ),
+                      const SizedBox(height: 14),
+
+                      // Card 4: Subtasks
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade50,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: Colors.grey.shade200),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.checklist_rounded,
+                                      size: 18,
+                                      color: AppColors.button,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      L10n.tr("Subtasks", "Sub-tugas"),
+                                      style: TextStyle(
+                                        fontFamily: "Quicksand",
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: AppColors.button,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                if (tempSubtasks.isNotEmpty)
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 3,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.button.withValues(alpha: 0.12),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Text(
+                                      "${tempSubtasks.where((s) => s['isDone'] == true).length}/${tempSubtasks.length}",
+                                      style: TextStyle(
+                                        fontFamily: "Quicksand",
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.button,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            // Add new subtask inline
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: TextFormField(
+                                    controller: newSubtaskController,
+                                    onTap: () {
+                                      if (!newSubtaskController.selection.isCollapsed &&
+                                          newSubtaskController.selection.isValid) {
+                                        newSubtaskController.selection =
+                                            TextSelection.collapsed(
+                                          offset: newSubtaskController
+                                              .selection.extentOffset
+                                              .clamp(
+                                            0,
+                                            newSubtaskController.text.length,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    style: const TextStyle(
+                                      color: Color(0xFF5852A0),
+                                      fontFamily: "Nunito",
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    decoration: InputDecoration(
+                                      hintText: L10n.tr(
+                                        "Add new subtask...",
+                                        "Tambah sub-tugas baru...",
+                                      ),
+                                      hintStyle: TextStyle(
+                                        color: Colors.grey.shade400,
+                                        fontSize: 13,
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                        horizontal: 14,
+                                        vertical: 10,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          color: Colors.grey.shade300,
+                                        ),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          color: Colors.grey.shade300,
+                                        ),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          color: AppColors.button,
+                                          width: 1.5,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    final text = newSubtaskController.text.trim();
+                                    if (text.isNotEmpty) {
+                                      setModalState(() {
+                                        tempSubtasks.add({
+                                          "title": text,
+                                          "isDone": false,
+                                        });
+                                        newSubtaskController.clear();
+                                      });
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.button,
+                                    foregroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 14,
+                                      vertical: 12,
+                                    ),
+                                    elevation: 0,
+                                  ),
+                                  child: const Icon(Icons.add, size: 20),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            if (tempSubtasks.isEmpty)
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                child: Text(
+                                  L10n.tr("No subtasks yet", "Belum ada sub-tugas"),
+                                  style: TextStyle(
+                                    color: Colors.grey.shade500,
+                                    fontSize: 13,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
+                              )
+                            else
+                              ConstrainedBox(
+                                constraints: const BoxConstraints(maxHeight: 220),
+                                child: ReorderableListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const ClampingScrollPhysics(),
+                                  buildDefaultDragHandles: false,
+                                  itemCount: tempSubtasks.length,
+                                  onReorder: (oldIndex, newIndex) {
+                                    setModalState(() {
+                                      if (oldIndex < newIndex) {
+                                        newIndex -= 1;
+                                      }
+                                      final item = tempSubtasks.removeAt(oldIndex);
+                                      tempSubtasks.insert(newIndex, item);
+                                    });
+                                  },
+                                  itemBuilder: (context, index) {
+                                    final sub = tempSubtasks[index];
+                                    return Container(
+                                      key: ValueKey(
+                                        (sub["title"] ?? "") + index.toString(),
+                                      ),
+                                      margin: const EdgeInsets.only(bottom: 6),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          color: Colors.grey.shade200,
+                                        ),
+                                      ),
+                                      child: ListTile(
+                                        dense: true,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                        ),
+                                        leading: Checkbox(
+                                          activeColor: AppColors.button,
+                                          value: sub["isDone"] ?? false,
+                                          onChanged: (val) {
+                                            setModalState(() {
+                                              sub["isDone"] = val;
+                                            });
+                                          },
+                                        ),
+                                        title: Text(
+                                          sub["title"] ?? "",
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontFamily: "Nunito",
+                                            color: const Color(0xFF5852A0),
+                                            decoration: (sub["isDone"] ?? false)
+                                                ? TextDecoration.lineThrough
+                                                : TextDecoration.none,
+                                          ),
+                                        ),
+                                        trailing: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            IconButton(
+                                              icon: Icon(
+                                                Icons.edit_outlined,
+                                                color: AppColors.button,
+                                                size: 18,
+                                              ),
+                                              padding: EdgeInsets.zero,
+                                              constraints:
+                                                  const BoxConstraints(),
+                                              onPressed: () {
+                                                final editController =
+                                                    NonSelectingTextEditingController(
+                                                  text: sub["title"],
+                                                );
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      AlertDialog(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        20,
+                                                      ),
+                                                    ),
+                                                    title: Text(
+                                                      L10n.tr(
+                                                        "Edit Subtask",
+                                                        "Ubah Sub-tugas",
+                                                      ),
+                                                      style: const TextStyle(
+                                                        fontFamily: "Quicksand",
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    content: TextField(
+                                                      controller:
+                                                          editController,
+                                                      onTap: () {
+                                                        if (!editController
+                                                                .selection
+                                                                .isCollapsed &&
+                                                            editController
+                                                                .selection
+                                                                .isValid) {
+                                                          editController
+                                                                  .selection =
+                                                              TextSelection
+                                                                  .collapsed(
+                                                            offset:
+                                                                editController
+                                                                    .selection
+                                                                    .extentOffset
+                                                                    .clamp(
+                                                              0,
+                                                              editController
+                                                                  .text.length,
+                                                            ),
+                                                          );
+                                                        }
+                                                      },
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText: L10n.tr(
+                                                          "Edit subtask title",
+                                                          "Ubah judul sub-tugas",
+                                                        ),
+                                                      ),
+                                                      autofocus: true,
+                                                    ),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                          context,
+                                                        ),
+                                                        child: Text(
+                                                          L10n.tr(
+                                                            "Cancel",
+                                                            "Batal",
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          final text =
+                                                              editController
+                                                                  .text
+                                                                  .trim();
+                                                          if (text.isNotEmpty) {
+                                                            setModalState(() {
+                                                              sub["title"] =
+                                                                  text;
+                                                            });
+                                                          }
+                                                          Navigator.pop(
+                                                            context,
+                                                          );
+                                                        },
+                                                        style:
+                                                            ElevatedButton
+                                                                .styleFrom(
+                                                          backgroundColor:
+                                                              AppColors.button,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                              12,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        child: Text(
+                                                          L10n.tr(
+                                                            "Save",
+                                                            "Simpan",
+                                                          ),
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                            const SizedBox(width: 8),
+                                            IconButton(
+                                              icon: const Icon(
+                                                Icons.delete_outline_rounded,
+                                                color: Colors.redAccent,
+                                                size: 18,
+                                              ),
+                                              padding: EdgeInsets.zero,
+                                              constraints:
+                                                  const BoxConstraints(),
+                                              onPressed: () {
+                                                setModalState(() {
+                                                  tempSubtasks.removeAt(index);
+                                                });
+                                              },
+                                            ),
+                                            const SizedBox(width: 4),
+                                            ReorderableDragStartListener(
+                                              index: index,
+                                              child: const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 6.0,
+                                                ),
+                                                child: Icon(
+                                                  Icons.drag_handle_rounded,
+                                                  color: Colors.grey,
+                                                  size: 18,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+
+                      // Card 5: Completion Status
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade50,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: Colors.grey.shade200),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.check_circle_outline_rounded,
+                                  size: 20,
+                                  color: tempIsCompleted
+                                      ? Colors.green
+                                      : AppColors.button,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  L10n.tr("Completed", "Selesai"),
+                                  style: TextStyle(
+                                    fontFamily: "Quicksand",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    color: AppColors.button,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Switch.adaptive(
+                              value: tempIsCompleted,
+                              activeThumbColor: AppColors.button,
+                              activeTrackColor: AppColors.button.withValues(
+                                alpha: 0.5,
+                              ),
+                              onChanged: (val) {
+                                setModalState(() {
+                                  tempIsCompleted = val;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Action Buttons (Cancel & Save)
                       Row(
                         children: [
                           Expanded(
@@ -1456,9 +1793,12 @@ class _TasklistpageState extends State<Tasklistpage> {
                                 Navigator.pop(context);
                               },
                               style: OutlinedButton.styleFrom(
-                                side: BorderSide(color: AppColors.button),
+                                side: BorderSide(
+                                  color: AppColors.button,
+                                  width: 1.5,
+                                ),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(14),
                                 ),
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 14,
@@ -1466,7 +1806,12 @@ class _TasklistpageState extends State<Tasklistpage> {
                               ),
                               child: Text(
                                 L10n.tr("Cancel", "Batal"),
-                                style: TextStyle(color: AppColors.button),
+                                style: TextStyle(
+                                  fontFamily: "Quicksand",
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.button,
+                                  fontSize: 15,
+                                ),
                               ),
                             ),
                           ),
@@ -1479,7 +1824,8 @@ class _TasklistpageState extends State<Tasklistpage> {
                                   task.description = descController.text.trim();
                                   task.prioritytask = tempPriority;
                                   task.energylvl = tempEnergyLvl;
-                                  task.startDate = tempStartDate ?? DateTime.now();
+                                  task.startDate =
+                                      tempStartDate ?? DateTime.now();
                                   task.dueDate = tempScheduleMode == 0
                                       ? tempDueDate
                                       : (tempStartDate ?? DateTime.now());
@@ -1526,15 +1872,21 @@ class _TasklistpageState extends State<Tasklistpage> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.button,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(14),
                                 ),
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 14,
                                 ),
+                                elevation: 1,
                               ),
                               child: Text(
                                 L10n.tr("Save", "Simpan"),
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(
+                                  fontFamily: "Quicksand",
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
                               ),
                             ),
                           ),
