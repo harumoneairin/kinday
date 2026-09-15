@@ -200,6 +200,20 @@ class AppDictionary {
     "Fri": "Jum",
     "Sat": "Sab",
     "Sun": "Min",
+    "Feature unavailable at the moment": "Fitur belum tersedia saat ini",
+    "Information": "Informasi",
+    "Theme Preview": "Pratinjau Tema",
+    "Unlock for Rp 3.000": "Buka seharga Rp 3.000",
+    "Tap tabs or swipe to preview pages": "Ketuk tab atau usap untuk melihat pratinjau",
+    "Buy Rp 3.000": "Beli Rp 3.000",
+    "OK": "OK",
+    "Home": "Beranda",
+    "Timer": "Timer",
+    "Energy": "Energi",
+    "Profile": "Profil",
+    "Focus Session": "Sesi Fokus",
+    "How's your energy right now?": "Bagaimana energimu saat ini?",
+    "Mini Live Preview": "Mini Pratinjau Langsung",
   };
 
   static const Map<String, String> ja = {
@@ -436,6 +450,20 @@ class AppDictionary {
     "Customize your Kinday experience": "Kindayの体験をカスタマイズしましょう",
     "Last Updated": "最終更新",
     "No logs yet": "ログはまだありません",
+    "Feature unavailable at the moment": "現在この機能は利用できません",
+    "Information": "お知らせ",
+    "Theme Preview": "テーマプレビュー",
+    "Unlock for Rp 3.000": "Rp 3.000 で解放",
+    "Tap tabs or swipe to preview pages": "タブをタップまたはスワイプしてプレビュー",
+    "Buy Rp 3.000": "Rp 3.000 で購入",
+    "OK": "OK",
+    "Home": "ホーム",
+    "Timer": "タイマー",
+    "Energy": "エネルギー",
+    "Profile": "プロフィール",
+    "Focus Session": "集中セッション",
+    "How's your energy right now?": "現在のエネルギーはどうですか？",
+    "Mini Live Preview": "ミニライブプレビュー",
   };
 
   static String? translate(String key, String lang) {

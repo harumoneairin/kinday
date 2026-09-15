@@ -17,6 +17,7 @@ import 'package:kinday/models/user_model_sql.dart';
 import 'package:kinday/pages/additional/about.dart';
 import 'package:kinday/pages/additional/changepass.dart';
 import 'package:kinday/pages/additional/faq.dart';
+import 'package:kinday/pages/additional/theme_preview_sheet.dart';
 import 'package:kinday/pages/auth/login.dart';
 import 'package:kinday/pages/auth/terms_conditions.dart';
 import 'package:kinday/pages/service/google_calendar_service.dart';
@@ -1492,106 +1493,17 @@ class _SettingProfileState extends State<SettingProfile> {
       context: context,
       isDismissible: false,
       enableDrag: false,
+      isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) {
-        final themeData = AppColors.themes[newTheme];
-        return PopScope(
-          canPop: false,
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: themeData?.background2 ?? Colors.white,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-              boxShadow: const [
-                BoxShadow(color: Colors.black26, blurRadius: 10, spreadRadius: 2)
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Previewing $newTheme",
-                  style: TextStyle(
-                    fontFamily: "Quicksand",
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: themeData?.normaltext,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Unlock this premium theme permanently for Rp 3.000",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: "Nunito",
-                    fontSize: 14,
-                    color: themeData?.normaltext.withValues(alpha: 0.8),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: () {
-                          AppColors.themeNotifier.value = previousTheme;
-                          Navigator.pop(context);
-                        },
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          side: BorderSide(color: themeData?.button ?? Colors.grey),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                        ),
-                        child: Text(
-                          "Cancel",
-                          style: TextStyle(
-                            fontFamily: "Quicksand",
-                            fontWeight: FontWeight.bold,
-                            color: themeData?.button,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          await PreferenceHandler.unlockTheme(newTheme);
-                          setState(() {
-                            _currentTheme = newTheme;
-                          });
-                          AppColors.setTheme(newTheme);
-                          if (context.mounted) {
-                            Navigator.pop(context);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text("$newTheme Unlocked!"),
-                                backgroundColor: Colors.green,
-                              ),
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          backgroundColor: themeData?.button,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                        ),
-                        child: const Text(
-                          "Buy Rp 3.000",
-                          style: TextStyle(
-                            fontFamily: "Quicksand",
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-              ],
-            ),
-          ),
+        return ThemePreviewSheet(
+          themeName: newTheme,
+          previousTheme: previousTheme,
+          userName: _name,
+          onCancel: () {
+            AppColors.themeNotifier.value = previousTheme;
+            Navigator.pop(context);
+          },
         );
       },
     );
