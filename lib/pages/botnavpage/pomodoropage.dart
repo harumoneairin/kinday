@@ -35,7 +35,7 @@ class _PomodoropageState extends State<Pomodoropage> {
   String _selectedSound = "Fireplace";
 
   String get taskName =>
-      activeTask?.title ?? L10n.tr("Learn Flutter", "Belajar Flutter");
+      activeTask?.title ?? L10n.tr("Learn Flutter");
 
   double get progress {
     return secondsRemaining / totalSeconds;
@@ -239,28 +239,28 @@ class _PomodoropageState extends State<Pomodoropage> {
                           size: 20,
                           color: AppColors.button,
                         ),
-                        tooltip: "Sort subtasks",
+                        tooltip: L10n.tr("Sort subtasks"),
                         onSelected: (criteria) => _sortSubtasks(
                           criteria,
                           () => setSubtaskState(() {}),
                         ),
                         itemBuilder: (BuildContext context) =>
                             <PopupMenuEntry<String>>[
-                              const PopupMenuItem<String>(
+                              PopupMenuItem<String>(
                                 value: 'A-Z',
-                                child: Text('Alphabetical (A-Z)'),
+                                child: Text(L10n.tr('Alphabetical (A-Z)', 'Alfabetis (A-Z)')),
                               ),
-                              const PopupMenuItem<String>(
+                              PopupMenuItem<String>(
                                 value: 'Z-A',
-                                child: Text('Alphabetical (Z-A)'),
+                                child: Text(L10n.tr('Alphabetical (Z-A)', 'Alfabetis (Z-A)')),
                               ),
-                              const PopupMenuItem<String>(
+                              PopupMenuItem<String>(
                                 value: 'Incomplete first',
-                                child: Text('Incomplete first'),
+                                child: Text(L10n.tr('Incomplete first', 'Belum selesai dahulu')),
                               ),
-                              const PopupMenuItem<String>(
+                              PopupMenuItem<String>(
                                 value: 'Completed first',
-                                child: Text('Completed first'),
+                                child: Text(L10n.tr('Completed first', 'Selesai dahulu')),
                               ),
                             ],
                       ),
@@ -388,18 +388,18 @@ class _PomodoropageState extends State<Pomodoropage> {
                                 showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                    title: const Text("Edit Subtask"),
+                                    title: Text(L10n.tr("Edit Subtask")),
                                     content: TextField(
                                       controller: editController,
-                                      decoration: const InputDecoration(
-                                        hintText: "Edit subtask title",
+                                      decoration: InputDecoration(
+                                        hintText: L10n.tr("Edit subtask title"),
                                       ),
                                       autofocus: true,
                                     ),
                                     actions: [
                                       TextButton(
                                         onPressed: () => Navigator.pop(context),
-                                        child: const Text("Cancel"),
+                                        child: Text(L10n.tr("Cancel")),
                                       ),
                                       ElevatedButton(
                                         onPressed: () async {
@@ -420,7 +420,7 @@ class _PomodoropageState extends State<Pomodoropage> {
                                             Navigator.pop(context);
                                           }
                                         },
-                                        child: const Text("Save"),
+                                        child: Text(L10n.tr("Save")),
                                       ),
                                     ],
                                   ),
@@ -478,10 +478,7 @@ class _PomodoropageState extends State<Pomodoropage> {
                         fontFamily: "Nunito",
                       ),
                       decoration: InputDecoration(
-                        hintText: L10n.tr(
-                          "Add quick subtask...",
-                          "Tambah tugas cepat...",
-                        ),
+                        hintText: L10n.tr("Add quick subtask..."),
                         hintStyle: TextStyle(
                           color: AppColors.button.withValues(alpha: 0.4),
                         ),
@@ -561,7 +558,7 @@ class _PomodoropageState extends State<Pomodoropage> {
               Icon(Icons.settings_outlined, color: AppColors.button),
               const SizedBox(width: 8),
               Text(
-                L10n.tr("Focus Settings", "Pengaturan Fokus"),
+                L10n.tr("Focus Settings"),
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -581,7 +578,7 @@ class _PomodoropageState extends State<Pomodoropage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                L10n.tr("Focus Session Duration", "Durasi Sesi Fokus"),
+                L10n.tr("Focus Session Duration"),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: AppColors.button,
@@ -589,10 +586,7 @@ class _PomodoropageState extends State<Pomodoropage> {
                 ),
               ),
               Text(
-                L10n.tr(
-                  "${focusDuration ~/ 60} mins",
-                  "${focusDuration ~/ 60} menit",
-                ),
+                L10n.tr("${focusDuration ~/ 60} mins"),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: AppColors.button,
@@ -637,7 +631,7 @@ class _PomodoropageState extends State<Pomodoropage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                L10n.tr("Break Session Duration", "Durasi Sesi Istirahat"),
+                L10n.tr("Break Session Duration"),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: AppColors.button,
@@ -645,10 +639,7 @@ class _PomodoropageState extends State<Pomodoropage> {
                 ),
               ),
               Text(
-                L10n.tr(
-                  "${breakDuration ~/ 60} mins",
-                  "${breakDuration ~/ 60} menit",
-                ),
+                L10n.tr("${breakDuration ~/ 60} mins"),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: AppColors.button,
@@ -694,7 +685,7 @@ class _PomodoropageState extends State<Pomodoropage> {
             children: [
               Expanded(
                 child: Text(
-                  L10n.tr("Background Sound", "Suara Latar Belakang"),
+                  L10n.tr("Background Sound"),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: AppColors.button,
@@ -727,7 +718,7 @@ class _PomodoropageState extends State<Pomodoropage> {
                         ]
                         .map(
                           (val) =>
-                              DropdownMenuItem(value: val, child: Text(val)),
+                              DropdownMenuItem(value: val, child: Text(L10n.tr(val))),
                         )
                         .toList(),
                 onChanged: (value) async {
@@ -810,8 +801,8 @@ class _PomodoropageState extends State<Pomodoropage> {
                       top: 50,
                       child: Text(
                         isFocusTime
-                            ? L10n.tr("Focus Time", "Waktu Fokus")
-                            : L10n.tr("Break Time", "Waktu Istirahat"),
+                            ? L10n.tr("Focus Time")
+                            : L10n.tr("Break Time"),
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -875,7 +866,7 @@ class _PomodoropageState extends State<Pomodoropage> {
                     size: 18,
                   ),
                   label: Text(
-                    L10n.tr("Reset Timer", "Atur Ulang Timer"),
+                    L10n.tr("Reset Timer"),
                     style: TextStyle(
                       color: AppColors.button,
                       fontWeight: FontWeight.bold,
@@ -912,48 +903,30 @@ class _PomodoropageState extends State<Pomodoropage> {
       if (secondsRemaining > 300) {
         NotificationHelper().schedulePomodoroNotification(
           id: 9990,
-          title: L10n.tr(
-            "Focus Time Almost Over",
-            "Waktu Fokus Hampir Selesai",
-          ),
-          body: L10n.tr(
-            "5 minutes left before break time starts.",
-            "Tersisa 5 menit sebelum waktu istirahat dimulai.",
-          ),
+          title: L10n.tr("Focus Time Almost Over"),
+          body: L10n.tr("5 minutes left before break time starts."),
           seconds: secondsRemaining - 300,
         );
       }
       NotificationHelper().schedulePomodoroNotification(
         id: 9991,
-        title: L10n.tr("Focus Time Ended", "Waktu Fokus Selesai"),
-        body: L10n.tr(
-          "Great job! Now take a break.",
-          "Kerja bagus! Sekarang waktunya istirahat.",
-        ),
+        title: L10n.tr("Focus Time Ended"),
+        body: L10n.tr("Great job! Now take a break."),
         seconds: secondsRemaining,
       );
     } else {
       if (secondsRemaining > 60) {
         NotificationHelper().schedulePomodoroNotification(
           id: 9992,
-          title: L10n.tr(
-            "Break Time Almost Over",
-            "Waktu Istirahat Hampir Selesai",
-          ),
-          body: L10n.tr(
-            "1 minute left before focus time starts.",
-            "Tersisa 1 menit sebelum waktu fokus dimulai.",
-          ),
+          title: L10n.tr("Break Time Almost Over"),
+          body: L10n.tr("1 minute left before focus time starts."),
           seconds: secondsRemaining - 60,
         );
       }
       NotificationHelper().schedulePomodoroNotification(
         id: 9993,
-        title: L10n.tr("Break Time Ended", "Waktu Istirahat Selesai"),
-        body: L10n.tr(
-          "Time to focus again! Let's get back to work.",
-          "Waktunya fokus kembali! Mari kembali bekerja.",
-        ),
+        title: L10n.tr("Break Time Ended"),
+        body: L10n.tr("Time to focus again! Let's get back to work."),
         seconds: secondsRemaining,
       );
     }
@@ -1016,20 +989,14 @@ class _PomodoropageState extends State<Pomodoropage> {
       _saveFocusSession(focusDuration ~/ 60);
       NotificationHelper().showInstantPomodoroNotification(
         id: 9994,
-        title: L10n.tr("Focus Time Ended", "Waktu Fokus Selesai"),
-        body: L10n.tr(
-          "Great job! Now take a break.",
-          "Kerja bagus! Sekarang waktunya istirahat.",
-        ),
+        title: L10n.tr("Focus Time Ended"),
+        body: L10n.tr("Great job! Now take a break."),
       );
     } else {
       NotificationHelper().showInstantPomodoroNotification(
         id: 9995,
-        title: L10n.tr("Break Time Ended", "Waktu Istirahat Selesai"),
-        body: L10n.tr(
-          "Time to focus again! Let's get back to work.",
-          "Waktunya fokus kembali! Mari kembali bekerja.",
-        ),
+        title: L10n.tr("Break Time Ended"),
+        body: L10n.tr("Time to focus again! Let's get back to work."),
       );
     }
   }

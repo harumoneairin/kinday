@@ -1,106 +1,112 @@
 import 'package:flutter/material.dart';
 import 'package:kinday/constant/app_colors.dart';
 import 'package:kinday/constant/app_widget.dart';
+import 'package:kinday/constant/l10n.dart';
 
 class TermsConditionsPage extends StatelessWidget {
   const TermsConditionsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BgContainer(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new, color: AppColors.button),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          title: Text(
-            "Syarat & Ketentuan",
-            style: TextStyle(
-              color: AppColors.button,
-              fontFamily: "Super",
-              fontSize: 20,
-            ),
-          ),
-          centerTitle: true,
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
-                color: Colors.white70,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  width: 1,
-                  style: BorderStyle.solid,
-                  color: AppColors.background,
+    return ValueListenableBuilder<String>(
+      valueListenable: L10n.languageNotifier,
+      builder: (context, lang, child) {
+        return BgContainer(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios_new, color: AppColors.button),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              title: Text(
+                L10n.tr("Terms & Conditions"),
+                style: TextStyle(
+                  color: AppColors.button,
+                  fontFamily: "Super",
+                  fontSize: 20,
                 ),
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Syarat & Ketentuan Penggunaan Kinday",
-                      style: TextStyle(
-                        fontFamily: "Nunito",
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        color: AppColors.button,
-                      ),
+              centerTitle: true,
+            ),
+            body: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white70,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      width: 1,
+                      style: BorderStyle.solid,
+                      color: AppColors.background,
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "Terakhir diperbarui: 8 Juli 2026",
-                      style: TextStyle(
-                        fontFamily: "Nunito",
-                        fontSize: 12,
-                        color: AppColors.button.withAlpha(153),
-                      ),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          L10n.tr("Kinday Terms & Conditions of Use"),
+                          style: TextStyle(
+                            fontFamily: "Nunito",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: AppColors.button,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          L10n.tr("Last updated: July 8, 2026"),
+                          style: TextStyle(
+                            fontFamily: "Nunito",
+                            fontSize: 12,
+                            color: AppColors.button.withAlpha(153),
+                          ),
+                        ),
+                        const Divider(height: 30),
+                        _buildSectionTitle(L10n.tr("1. Introduction")),
+                        _buildSectionBody(
+                          L10n.tr("Welcome to Kinday! By creating an account or using our application, you agree to be bound by these Terms and Conditions. Please read this document carefully before using our Service."),
+                        ),
+                        _buildSectionTitle(L10n.tr("2. User Accounts")),
+                        _buildSectionBody(
+                          L10n.tr("To use certain features, you must create an account by providing accurate and complete information. You are fully responsible for maintaining the confidentiality of your account password and for all activities that occur under your account."),
+                        ),
+                        _buildSectionTitle(L10n.tr("3. Use of Service")),
+                        _buildSectionBody(
+                          L10n.tr("You agree to use Kinday only for lawful purposes and not to violate the laws or rights of others. You are strictly prohibited from misusing our system, attempting to access other users' data without authorization, or disrupting app performance."),
+                        ),
+                        _buildSectionTitle(L10n.tr("4. Intellectual Property Rights")),
+                        _buildSectionBody(
+                          L10n.tr("All materials, designs, logos, and code within Kinday are our exclusive property or that of our licensors. You may not copy, modify, distribute, or sell any part of our Service without our written consent."),
+                        ),
+                        _buildSectionTitle(L10n.tr("5. Limitation of Liability")),
+                        _buildSectionBody(
+                          L10n.tr("Kinday is provided 'as is' without warranties of any kind, whether express or implied. We are not liable for any direct, indirect, or consequential damages arising from your use or inability to use our application."),
+                        ),
+                        _buildSectionTitle(L10n.tr("6. Changes to Terms")),
+                        _buildSectionBody(
+                          L10n.tr("We reserve the right to modify or update these Terms and Conditions at any time. Changes will take effect immediately upon publication in the app. Your continued use after such changes constitutes your acceptance of the new terms."),
+                        ),
+                        _buildSectionTitle(L10n.tr("7. Contact Us")),
+                        _buildSectionBody(
+                          L10n.tr("If you have any questions about these Terms and Conditions, please contact us via our support email at harumone.airin@gmail.com."),
+                        ),
+                        const SizedBox(height: 20),
+                      ],
                     ),
-                    const Divider(height: 30),
-                    _buildSectionTitle("1. Pengenalan"),
-                    _buildSectionBody(
-                      "Selamat datang di Kinday! Dengan membuat akun atau menggunakan aplikasi kami, Anda setuju untuk terikat oleh Syarat dan Ketentuan ini. Harap baca dokumen ini dengan saksama sebelum menggunakan Layanan kami.",
-                    ),
-                    _buildSectionTitle("2. Akun Pengguna"),
-                    _buildSectionBody(
-                      "Untuk menggunakan fitur tertentu, Anda wajib membuat akun dengan menyediakan informasi yang akurat dan lengkap. Anda bertanggung jawab penuh untuk menjaga kerahasiaan kata sandi akun Anda dan atas semua aktivitas yang terjadi di bawah akun Anda.",
-                    ),
-                    _buildSectionTitle("3. Penggunaan Layanan"),
-                    _buildSectionBody(
-                      "Anda setuju untuk menggunakan Kinday hanya untuk tujuan yang sah dan tidak melanggar hukum atau hak orang lain. Anda dilarang keras menyalahgunakan sistem kami, mencoba mengakses data pengguna lain tanpa izin, atau mengganggu kinerja aplikasi.",
-                    ),
-                    _buildSectionTitle("4. Hak Kekayaan Intelektual"),
-                    _buildSectionBody(
-                      "Semua materi, desain, logo, dan kode di dalam Kinday merupakan hak milik eksklusif kami atau pemberi lisensi kami. Anda tidak diperbolehkan menyalin, memodifikasi, mendistribusikan, atau menjual bagian apa pun dari Layanan kami tanpa persetujuan tertulis dari kami.",
-                    ),
-                    _buildSectionTitle("5. Batasan Tanggung Jawab"),
-                    _buildSectionBody(
-                      "Kinday disediakan 'sebagaimana adanya' tanpa jaminan apa pun, baik tersurat maupun tersirat. Kami tidak bertanggung jawab atas kerugian langsung, tidak langsung, atau konsekuensial yang timbul dari penggunaan atau ketidakmampuan Anda untuk menggunakan aplikasi kami.",
-                    ),
-                    _buildSectionTitle("6. Perubahan Ketentuan"),
-                    _buildSectionBody(
-                      "Kami berhak mengubah atau memperbarui Syarat dan Ketentuan ini kapan saja. Perubahan akan berlaku segera setelah dipublikasikan di dalam aplikasi. Penggunaan berkelanjutan Anda setelah perubahan tersebut dianggap sebagai persetujuan Anda terhadap ketentuan baru.",
-                    ),
-                    _buildSectionTitle("7. Hubungi Kami"),
-                    _buildSectionBody(
-                      "Jika Anda memiliki pertanyaan tentang Syarat dan Ketentuan ini, silakan hubungi kami melalui email dukungan kami di harumone.airin@gmail.com.",
-                    ),
-                    const SizedBox(height: 20),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 

@@ -148,7 +148,9 @@ class _TasklistpageState extends State<Tasklistpage> {
           });
           messenger.showSnackBar(
             SnackBar(
-              content: Text("Speech recognition error: ${error.errorMsg}"),
+              content: Text(
+                L10n.tr("Speech recognition error: ${error.errorMsg}"),
+              ),
             ),
           );
         },
@@ -378,7 +380,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                               ),
                               const SizedBox(width: 8),
                               Text(
-                                L10n.tr("Edit Task Details", "Ubah Detail Tugas"),
+                                L10n.tr("Edit Task Details"),
                                 style: TextStyle(
                                   fontFamily: "Quicksand",
                                   fontSize: 20,
@@ -394,7 +396,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                               color: Colors.redAccent,
                               size: 22,
                             ),
-                            tooltip: L10n.tr("Delete Task", "Hapus Tugas"),
+                            tooltip: L10n.tr("Delete Task"),
                             onPressed: () async {
                               final confirm = await showDialog<bool>(
                                 context: context,
@@ -404,7 +406,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     title: Text(
-                                      L10n.tr("Delete Task", "Hapus Tugas"),
+                                      L10n.tr("Delete Task"),
                                       style: const TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -412,17 +414,14 @@ class _TasklistpageState extends State<Tasklistpage> {
                                       ),
                                     ),
                                     content: Text(
-                                      L10n.tr(
-                                        "Are you sure you want to delete this task?",
-                                        "Apakah Anda yakin ingin menghapus tugas ini?",
-                                      ),
+                                      L10n.tr("Are you sure you want to delete this task?"),
                                     ),
                                     actions: [
                                       TextButton(
                                         onPressed: () =>
                                             Navigator.pop(context, false),
                                         child: Text(
-                                          L10n.tr("Cancel", "Batal"),
+                                          L10n.tr("Cancel"),
                                           style: const TextStyle(
                                             color: Colors.grey,
                                           ),
@@ -440,7 +439,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                           ),
                                         ),
                                         child: Text(
-                                          L10n.tr("Delete", "Hapus"),
+                                          L10n.tr("Delete"),
                                           style: const TextStyle(
                                             color: Colors.white,
                                           ),
@@ -502,7 +501,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                 fontWeight: FontWeight.w600,
                               ),
                               decoration: InputDecoration(
-                                labelText: L10n.tr("Task Title", "Judul Tugas"),
+                                labelText: L10n.tr("Task Title"),
                                 labelStyle: TextStyle(
                                   color: AppColors.button,
                                   fontFamily: "Quicksand",
@@ -559,7 +558,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                 fontFamily: "Nunito",
                               ),
                               decoration: InputDecoration(
-                                labelText: L10n.tr("Description", "Deskripsi"),
+                                labelText: L10n.tr("Description"),
                                 labelStyle: TextStyle(
                                   color: AppColors.button,
                                   fontFamily: "Quicksand",
@@ -622,7 +621,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  L10n.tr("Schedule & Timing", "Jadwal & Waktu"),
+                                  L10n.tr("Schedule & Timing"),
                                   style: TextStyle(
                                     fontFamily: "Quicksand",
                                     fontWeight: FontWeight.bold,
@@ -651,7 +650,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                               initialValue: tempScheduleMode,
                               children: {
                                 0: Text(
-                                  L10n.tr("Single Task", "Tugas Sekali"),
+                                  L10n.tr("Single Task"),
                                   style: TextStyle(
                                     fontFamily: "Quicksand",
                                     fontWeight: FontWeight.bold,
@@ -663,7 +662,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                   textAlign: TextAlign.center,
                                 ),
                                 1: Text(
-                                  L10n.tr("Repeated Task", "Tugas Berulang"),
+                                  L10n.tr("Repeated Task"),
                                   style: TextStyle(
                                     fontFamily: "Quicksand",
                                     fontWeight: FontWeight.bold,
@@ -696,9 +695,9 @@ class _TasklistpageState extends State<Tasklistpage> {
                               // --- SINGLE TASK FIELDS ---
                               buildDateTimeTile(
                                 icon: Icons.calendar_today_rounded,
-                                label: L10n.tr("Start Date", "Tanggal Mulai"),
+                                label: L10n.tr("Start Date"),
                                 value: tempStartDate == null
-                                    ? L10n.tr("Today", "Hari Ini")
+                                    ? L10n.tr("Today")
                                     : "${tempStartDate!.day}/${tempStartDate!.month}/${tempStartDate!.year}",
                                 onTap: () async {
                                   final picked = await showDatePicker(
@@ -717,9 +716,9 @@ class _TasklistpageState extends State<Tasklistpage> {
                               const SizedBox(height: 10),
                               buildDateTimeTile(
                                 icon: Icons.event_available_rounded,
-                                label: L10n.tr("Due Date", "Batas Waktu"),
+                                label: L10n.tr("Due Date"),
                                 value: tempDueDate == null
-                                    ? L10n.tr("Choose Date", "Pilih Tanggal")
+                                    ? L10n.tr("Choose Date")
                                     : "${tempDueDate!.day}/${tempDueDate!.month}/${tempDueDate!.year}",
                                 onClear: tempDueDate != null
                                     ? () {
@@ -748,9 +747,9 @@ class _TasklistpageState extends State<Tasklistpage> {
                                 const SizedBox(height: 10),
                                 buildDateTimeTile(
                                   icon: Icons.access_time_rounded,
-                                  label: L10n.tr("Time", "Jam"),
+                                  label: L10n.tr("Time"),
                                   value: tempDueTime == null
-                                      ? L10n.tr("Choose Time", "Pilih Jam")
+                                      ? L10n.tr("Choose Time")
                                       : tempDueTime!.format(context),
                                   onClear: tempDueTime != null
                                       ? () {
@@ -784,7 +783,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                         ),
                                         const SizedBox(width: 8),
                                         Text(
-                                          L10n.tr("Reminder", "Pengingat"),
+                                          L10n.tr("Reminder"),
                                           style: TextStyle(
                                             fontFamily: "Nunito",
                                             fontWeight: FontWeight.w600,
@@ -806,35 +805,35 @@ class _TasklistpageState extends State<Tasklistpage> {
                                       items: [
                                         DropdownMenuItem(
                                           value: null,
-                                          child: Text(L10n.tr("None", "Tidak Ada")),
+                                          child: Text(L10n.tr("None")),
                                         ),
                                         DropdownMenuItem(
                                           value: 0,
-                                          child: Text(L10n.tr("At due time", "Pada batas waktu")),
+                                          child: Text(L10n.tr("At due time")),
                                         ),
                                         DropdownMenuItem(
                                           value: 5,
-                                          child: Text(L10n.tr("5 minutes before", "5 menit sebelum")),
+                                          child: Text(L10n.tr("5 minutes before")),
                                         ),
                                         DropdownMenuItem(
                                           value: 10,
-                                          child: Text(L10n.tr("10 minutes before", "10 menit sebelum")),
+                                          child: Text(L10n.tr("10 minutes before")),
                                         ),
                                         DropdownMenuItem(
                                           value: 15,
-                                          child: Text(L10n.tr("15 minutes before", "15 menit sebelum")),
+                                          child: Text(L10n.tr("15 minutes before")),
                                         ),
                                         DropdownMenuItem(
                                           value: 30,
-                                          child: Text(L10n.tr("30 minutes before", "30 menit sebelum")),
+                                          child: Text(L10n.tr("30 minutes before")),
                                         ),
                                         DropdownMenuItem(
                                           value: 60,
-                                          child: Text(L10n.tr("1 hour before", "1 jam sebelum")),
+                                          child: Text(L10n.tr("1 hour before")),
                                         ),
                                         DropdownMenuItem(
                                           value: 1440,
-                                          child: Text(L10n.tr("1 day before", "1 hari sebelum")),
+                                          child: Text(L10n.tr("1 day before")),
                                         ),
                                       ],
                                       onChanged: (int? value) {
@@ -860,7 +859,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                       ),
                                       const SizedBox(width: 8),
                                       Text(
-                                        L10n.tr("Repeat", "Ulang"),
+                                        L10n.tr("Repeat"),
                                         style: TextStyle(
                                           fontFamily: "Nunito",
                                           fontWeight: FontWeight.w600,
@@ -884,25 +883,25 @@ class _TasklistpageState extends State<Tasklistpage> {
                                     items: [
                                       DropdownMenuItem(
                                         value: RepeatType.daily,
-                                        child: Text(L10n.tr("Every Day", "Setiap Hari")),
+                                        child: Text(L10n.tr("Every Day")),
                                       ),
                                       DropdownMenuItem(
                                         value: RepeatType.selectedDays,
                                         child: Text(
-                                          L10n.tr("Every Few Days", "Setiap Beberapa Hari"),
+                                          L10n.tr("Every Few Days"),
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: RepeatType.weekly,
-                                        child: Text(L10n.tr("Every Week", "Setiap Minggu")),
+                                        child: Text(L10n.tr("Every Week")),
                                       ),
                                       DropdownMenuItem(
                                         value: RepeatType.monthly,
-                                        child: Text(L10n.tr("Every Month", "Setiap Bulan")),
+                                        child: Text(L10n.tr("Every Month")),
                                       ),
                                       DropdownMenuItem(
                                         value: RepeatType.yearly,
-                                        child: Text(L10n.tr("Every Year", "Setiap Tahun")),
+                                        child: Text(L10n.tr("Every Year")),
                                       ),
                                     ],
                                     onChanged: (RepeatType? value) {
@@ -977,9 +976,9 @@ class _TasklistpageState extends State<Tasklistpage> {
                               const SizedBox(height: 10),
                               buildDateTimeTile(
                                 icon: Icons.calendar_today_rounded,
-                                label: L10n.tr("Start Date", "Tanggal Mulai"),
+                                label: L10n.tr("Start Date"),
                                 value: tempStartDate == null
-                                    ? L10n.tr("Today", "Hari Ini")
+                                    ? L10n.tr("Today")
                                     : "${tempStartDate!.day}/${tempStartDate!.month}/${tempStartDate!.year}",
                                 onTap: () async {
                                   final picked = await showDatePicker(
@@ -998,9 +997,9 @@ class _TasklistpageState extends State<Tasklistpage> {
                               const SizedBox(height: 10),
                               buildDateTimeTile(
                                 icon: Icons.access_time_rounded,
-                                label: L10n.tr("Time", "Jam"),
+                                label: L10n.tr("Time"),
                                 value: tempDueTime == null
-                                    ? L10n.tr("Choose Time", "Pilih Jam")
+                                    ? L10n.tr("Choose Time")
                                     : tempDueTime!.format(context),
                                 onClear: tempDueTime != null
                                     ? () {
@@ -1024,9 +1023,9 @@ class _TasklistpageState extends State<Tasklistpage> {
                               const SizedBox(height: 10),
                               buildDateTimeTile(
                                 icon: Icons.event_busy_rounded,
-                                label: L10n.tr("Finish Date", "Ulang Sampai"),
+                                label: L10n.tr("Finish Date"),
                                 value: tempFinishDate == null
-                                    ? L10n.tr("Choose Date", "Pilih Tanggal")
+                                    ? L10n.tr("Choose Date")
                                     : "${tempFinishDate!.day}/${tempFinishDate!.month}/${tempFinishDate!.year}",
                                 onClear: tempFinishDate != null
                                     ? () {
@@ -1063,7 +1062,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                       ),
                                       const SizedBox(width: 8),
                                       Text(
-                                        L10n.tr("Reminder", "Pengingat"),
+                                        L10n.tr("Reminder"),
                                         style: TextStyle(
                                           fontFamily: "Nunito",
                                           fontWeight: FontWeight.w600,
@@ -1085,48 +1084,48 @@ class _TasklistpageState extends State<Tasklistpage> {
                                     items: [
                                       DropdownMenuItem(
                                         value: null,
-                                        child: Text(L10n.tr("None", "Tidak Ada")),
+                                        child: Text(L10n.tr("None")),
                                       ),
                                       DropdownMenuItem(
                                         value: 0,
                                         child: Text(
-                                          L10n.tr("At task time", "Pada jam tugas"),
+                                          L10n.tr("At task time"),
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 5,
                                         child: Text(
-                                          L10n.tr("5 minutes before", "5 menit sebelum"),
+                                          L10n.tr("5 minutes before"),
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 10,
                                         child: Text(
-                                          L10n.tr("10 minutes before", "10 menit sebelum"),
+                                          L10n.tr("10 minutes before"),
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 15,
                                         child: Text(
-                                          L10n.tr("15 minutes before", "15 menit sebelum"),
+                                          L10n.tr("15 minutes before"),
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 30,
                                         child: Text(
-                                          L10n.tr("30 minutes before", "30 menit sebelum"),
+                                          L10n.tr("30 minutes before"),
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 60,
                                         child: Text(
-                                          L10n.tr("1 hour before", "1 jam sebelum"),
+                                          L10n.tr("1 hour before"),
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 1440,
                                         child: Text(
-                                          L10n.tr("1 day before", "1 hari sebelum"),
+                                          L10n.tr("1 day before"),
                                         ),
                                       ),
                                     ],
@@ -1169,7 +1168,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                     ),
                                     const SizedBox(width: 8),
                                     Text(
-                                      L10n.tr("Priority", "Prioritas"),
+                                      L10n.tr("Priority"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -1183,21 +1182,21 @@ class _TasklistpageState extends State<Tasklistpage> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     buildPriorityChip(
-                                      label: L10n.tr("Low", "Rendah"),
+                                      label: L10n.tr("Low"),
                                       color: Colors.green,
                                       isSelected: tempPriority == 1,
                                       onTap: () => setModalState(() => tempPriority = 1),
                                     ),
                                     const SizedBox(width: 6),
                                     buildPriorityChip(
-                                      label: L10n.tr("Mid", "Sedang"),
+                                      label: L10n.tr("Mid"),
                                       color: Colors.orange,
                                       isSelected: tempPriority == 2,
                                       onTap: () => setModalState(() => tempPriority = 2),
                                     ),
                                     const SizedBox(width: 6),
                                     buildPriorityChip(
-                                      label: L10n.tr("High", "Tinggi"),
+                                      label: L10n.tr("High"),
                                       color: Colors.red,
                                       isSelected: tempPriority == 3,
                                       onTap: () => setModalState(() => tempPriority = 3),
@@ -1223,7 +1222,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                     ),
                                     const SizedBox(width: 8),
                                     Text(
-                                      L10n.tr("Energy Level", "Tingkat Energi"),
+                                      L10n.tr("Energy Level"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -1357,7 +1356,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                     ),
                                     const SizedBox(width: 8),
                                     Text(
-                                      L10n.tr("Subtasks", "Sub-tugas"),
+                                      L10n.tr("Subtasks"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -1416,10 +1415,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                       fontWeight: FontWeight.w600,
                                     ),
                                     decoration: InputDecoration(
-                                      hintText: L10n.tr(
-                                        "Add new subtask...",
-                                        "Tambah sub-tugas baru...",
-                                      ),
+                                      hintText: L10n.tr("Add new subtask..."),
                                       hintStyle: TextStyle(
                                         color: Colors.grey.shade400,
                                         fontSize: 13,
@@ -1488,7 +1484,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 8),
                                 child: Text(
-                                  L10n.tr("No subtasks yet", "Belum ada sub-tugas"),
+                                  L10n.tr("No subtasks yet"),
                                   style: TextStyle(
                                     color: Colors.grey.shade500,
                                     fontSize: 13,
@@ -1582,10 +1578,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                                       ),
                                                     ),
                                                     title: Text(
-                                                      L10n.tr(
-                                                        "Edit Subtask",
-                                                        "Ubah Sub-tugas",
-                                                      ),
+                                                      L10n.tr("Edit Subtask"),
                                                       style: const TextStyle(
                                                         fontFamily: "Quicksand",
                                                         fontWeight:
@@ -1620,10 +1613,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                                       },
                                                       decoration:
                                                           InputDecoration(
-                                                        hintText: L10n.tr(
-                                                          "Edit subtask title",
-                                                          "Ubah judul sub-tugas",
-                                                        ),
+                                                        hintText: L10n.tr("Edit subtask title"),
                                                       ),
                                                       autofocus: true,
                                                     ),
@@ -1634,10 +1624,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                                           context,
                                                         ),
                                                         child: Text(
-                                                          L10n.tr(
-                                                            "Cancel",
-                                                            "Batal",
-                                                          ),
+                                                          L10n.tr("Cancel"),
                                                         ),
                                                       ),
                                                       ElevatedButton(
@@ -1671,10 +1658,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                                           ),
                                                         ),
                                                         child: Text(
-                                                          L10n.tr(
-                                                            "Save",
-                                                            "Simpan",
-                                                          ),
+                                                          L10n.tr("Save"),
                                                           style:
                                                               const TextStyle(
                                                             color: Colors.white,
@@ -1754,7 +1738,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  L10n.tr("Completed", "Selesai"),
+                                  L10n.tr("Completed"),
                                   style: TextStyle(
                                     fontFamily: "Quicksand",
                                     fontWeight: FontWeight.bold,
@@ -1805,7 +1789,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                 ),
                               ),
                               child: Text(
-                                L10n.tr("Cancel", "Batal"),
+                                L10n.tr("Cancel"),
                                 style: TextStyle(
                                   fontFamily: "Quicksand",
                                   fontWeight: FontWeight.bold,
@@ -1880,7 +1864,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                                 elevation: 1,
                               ),
                               child: Text(
-                                L10n.tr("Save", "Simpan"),
+                                L10n.tr("Save"),
                                 style: const TextStyle(
                                   fontFamily: "Quicksand",
                                   fontWeight: FontWeight.bold,
@@ -1908,15 +1892,15 @@ class _TasklistpageState extends State<Tasklistpage> {
   String _getEnergyLabel(int level) {
     switch (level) {
       case 5:
-        return L10n.tr("High", "Tinggi");
+        return L10n.tr("High");
       case 4:
-        return L10n.tr("Mid-High", "Cukup Tinggi");
+        return L10n.tr("Mid-High");
       case 3:
-        return L10n.tr("Mid", "Sedang");
+        return L10n.tr("Mid");
       case 2:
-        return L10n.tr("Mid-Low", "Cukup Rendah");
+        return L10n.tr("Mid-Low");
       default:
-        return L10n.tr("Low", "Rendah");
+        return L10n.tr("Low");
     }
   }
 
@@ -1934,11 +1918,11 @@ class _TasklistpageState extends State<Tasklistpage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(L10n.tr("Tasks", "Tugas"), style: AppTextStyles.greeting),
+                      Text(L10n.tr("Tasks"), style: AppTextStyles.greeting),
                       Transform.translate(
                         offset: const Offset(0, -5),
                         child: Text(
-                          L10n.tr("Organized around your energy", "Diorganisir berdasarkan energimu"),
+                          L10n.tr("Organized around your energy"),
                           style: AppTextStyles.affirmation,
                         ),
                       ),
@@ -1966,7 +1950,7 @@ class _TasklistpageState extends State<Tasklistpage> {
               initialValue: selectedTab,
               children: {
                 1: Text(
-                  L10n.tr("Energy", "Energi"),
+                  L10n.tr("Energy"),
                   style: TextStyle(
                     fontFamily: "Quicksand",
                     fontWeight: FontWeight.bold,
@@ -1975,7 +1959,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                   ),
                 ),
                 2: Text(
-                  L10n.tr("Due Date", "Batas Waktu"),
+                  L10n.tr("Due Date"),
                   style: TextStyle(
                     fontFamily: "Quicksand",
                     fontWeight: FontWeight.bold,
@@ -1984,7 +1968,7 @@ class _TasklistpageState extends State<Tasklistpage> {
                   ),
                 ),
                 3: Text(
-                  L10n.tr("Priority", "Prioritas"),
+                  L10n.tr("Priority"),
                   style: TextStyle(
                     fontFamily: "Quicksand",
                     fontWeight: FontWeight.bold,
@@ -2043,8 +2027,8 @@ class _TasklistpageState extends State<Tasklistpage> {
                             const SizedBox(width: 5),
                             Text(
                               _isEisenhowerMode
-                                  ? L10n.tr("Eisenhower Matrix", "Matriks Eisenhower")
-                                  : L10n.tr("Priority Levels", "Tingkat Prioritas"),
+                                  ? L10n.tr("Eisenhower Matrix")
+                                  : L10n.tr("Priority Levels"),
                               style: TextStyle(
                                 fontFamily: "Quicksand",
                                 fontWeight: FontWeight.bold,
@@ -2069,8 +2053,8 @@ class _TasklistpageState extends State<Tasklistpage> {
                     const SizedBox(width: 6),
                     Text(
                       _isListView
-                          ? L10n.tr("List View", "Tampilan Daftar")
-                          : L10n.tr("Card View", "Tampilan Kartu"),
+                          ? L10n.tr("List View")
+                          : L10n.tr("Card View"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -2115,8 +2099,8 @@ class _TasklistpageState extends State<Tasklistpage> {
                           const SizedBox(width: 5),
                           Text(
                             _isListView
-                                ? L10n.tr("Cards", "Kartu")
-                                : L10n.tr("List", "Daftar"),
+                                ? L10n.tr("Cards")
+                                : L10n.tr("List"),
                             style: TextStyle(
                               fontFamily: "Quicksand",
                               fontWeight: FontWeight.bold,
@@ -2278,7 +2262,7 @@ class EnergyLevelView extends StatelessWidget {
                     Icon(Icons.recommend, size: 20, color: AppColors.button),
                     const SizedBox(width: 10),
                     Text(
-                      L10n.tr("Recommended Task", "Tugas Disarankan"),
+                      L10n.tr("Recommended Task"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -2289,7 +2273,7 @@ class EnergyLevelView extends StatelessWidget {
                 ),
               ),
               if (recommendedTasks.isEmpty)
-                buildEmptyState(L10n.tr("No recommended tasks", "Tidak ada tugas disarankan"))
+                buildEmptyState(L10n.tr("No recommended tasks"))
               else
                 buildTaskList(recommendedTasks),
             ],
@@ -2306,7 +2290,7 @@ class EnergyLevelView extends StatelessWidget {
                     Icon(Icons.favorite, size: 20, color: AppColors.button),
                     const SizedBox(width: 10),
                     Text(
-                      L10n.tr("Low Energy Task", "Tugas Energi Rendah"),
+                      L10n.tr("Low Energy Task"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -2317,7 +2301,7 @@ class EnergyLevelView extends StatelessWidget {
                 ),
               ),
               if (lowEnergyTasks.isEmpty)
-                buildEmptyState(L10n.tr("No low energy tasks", "Tidak ada tugas energi rendah"))
+                buildEmptyState(L10n.tr("No low energy tasks"))
               else
                 buildTaskList(lowEnergyTasks),
             ],
@@ -2338,7 +2322,7 @@ class EnergyLevelView extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      L10n.tr("High Focus Task", "Tugas Fokus Tinggi"),
+                      L10n.tr("High Focus Task"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -2349,7 +2333,7 @@ class EnergyLevelView extends StatelessWidget {
                 ),
               ),
               if (highFocusTasks.isEmpty)
-                buildEmptyState(L10n.tr("No high focus tasks", "Tidak ada tugas fokus tinggi"))
+                buildEmptyState(L10n.tr("No high focus tasks"))
               else
                 buildTaskList(highFocusTasks),
             ],
@@ -2476,7 +2460,7 @@ class DueDateView extends StatelessWidget {
                     Icon(Icons.today, size: 20, color: AppColors.button),
                     const SizedBox(width: 10),
                     Text(
-                      L10n.tr("Today", "Hari Ini"),
+                      L10n.tr("Today"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -2487,7 +2471,7 @@ class DueDateView extends StatelessWidget {
                 ),
               ),
               if (todayTasks.isEmpty)
-                buildEmptyState(L10n.tr("No tasks today", "Tidak ada tugas hari ini"))
+                buildEmptyState(L10n.tr("No tasks today"))
               else
                 buildTaskList(todayTasks),
             ],
@@ -2504,7 +2488,7 @@ class DueDateView extends StatelessWidget {
                     Icon(Icons.schedule, size: 20, color: AppColors.button),
                     const SizedBox(width: 10),
                     Text(
-                      L10n.tr("Tomorrow", "Besok"),
+                      L10n.tr("Tomorrow"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -2515,7 +2499,7 @@ class DueDateView extends StatelessWidget {
                 ),
               ),
               if (tomorrowTasks.isEmpty)
-                buildEmptyState(L10n.tr("No tasks tomorrow", "Tidak ada tugas besok"))
+                buildEmptyState(L10n.tr("No tasks tomorrow"))
               else
                 buildTaskList(tomorrowTasks),
             ],
@@ -2532,7 +2516,7 @@ class DueDateView extends StatelessWidget {
                     Icon(Icons.upcoming, size: 20, color: AppColors.button),
                     const SizedBox(width: 10),
                     Text(
-                      L10n.tr("Upcoming", "Mendatang"),
+                      L10n.tr("Upcoming"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -2543,7 +2527,7 @@ class DueDateView extends StatelessWidget {
                 ),
               ),
               if (upcomingTasks.isEmpty)
-                buildEmptyState(L10n.tr("No upcoming tasks", "Tidak ada tugas mendatang"))
+                buildEmptyState(L10n.tr("No upcoming tasks"))
               else
                 buildTaskList(upcomingTasks),
             ],
@@ -2564,7 +2548,7 @@ class DueDateView extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      L10n.tr("Completed", "Selesai"),
+                      L10n.tr("Completed"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -2575,7 +2559,7 @@ class DueDateView extends StatelessWidget {
                 ),
               ),
               if (completedTasks.isEmpty)
-                buildEmptyState(L10n.tr("No completed tasks", "Tidak ada tugas diselesaikan"))
+                buildEmptyState(L10n.tr("No completed tasks"))
               else
                 buildTaskList(completedTasks),
             ],
@@ -2825,7 +2809,7 @@ class PriorityView extends StatelessWidget {
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        L10n.tr("Eisenhower Matrix Overview", "Ringkasan Matriks Eisenhower"),
+                        L10n.tr("Eisenhower Matrix Overview"),
                         style: TextStyle(
                           fontFamily: "Quicksand",
                           fontWeight: FontWeight.bold,
@@ -2852,7 +2836,7 @@ class PriorityView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                L10n.tr("Q1 • Do First", "Q1 • Kerjakan"),
+                                L10n.tr("Q1 • Do First"),
                                 style: const TextStyle(
                                   fontFamily: "Quicksand",
                                   fontWeight: FontWeight.bold,
@@ -2861,7 +2845,7 @@ class PriorityView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "${q1DoFirst.length} ${L10n.tr("tasks", "tugas")}",
+                                "${q1DoFirst.length} ${L10n.tr("tasks")}",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 10,
@@ -2887,7 +2871,7 @@ class PriorityView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                L10n.tr("Q2 • Schedule", "Q2 • Jadwalkan"),
+                                L10n.tr("Q2 • Schedule"),
                                 style: const TextStyle(
                                   fontFamily: "Quicksand",
                                   fontWeight: FontWeight.bold,
@@ -2896,7 +2880,7 @@ class PriorityView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "${q2Schedule.length} ${L10n.tr("tasks", "tugas")}",
+                                "${q2Schedule.length} ${L10n.tr("tasks")}",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 10,
@@ -2926,7 +2910,7 @@ class PriorityView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                L10n.tr("Q3 • Delegate", "Q3 • Delegasikan"),
+                                L10n.tr("Q3 • Delegate"),
                                 style: const TextStyle(
                                   fontFamily: "Quicksand",
                                   fontWeight: FontWeight.bold,
@@ -2935,7 +2919,7 @@ class PriorityView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "${q3Delegate.length} ${L10n.tr("tasks", "tugas")}",
+                                "${q3Delegate.length} ${L10n.tr("tasks")}",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 10,
@@ -2961,7 +2945,7 @@ class PriorityView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                L10n.tr("Q4 • Eliminate", "Q4 • Tunda/Hapus"),
+                                L10n.tr("Q4 • Eliminate"),
                                 style: const TextStyle(
                                   fontFamily: "Quicksand",
                                   fontWeight: FontWeight.bold,
@@ -2970,7 +2954,7 @@ class PriorityView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "${q4Eliminate.length} ${L10n.tr("tasks", "tugas")}",
+                                "${q4Eliminate.length} ${L10n.tr("tasks")}",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 10,
@@ -2991,46 +2975,46 @@ class PriorityView extends StatelessWidget {
 
           // Q1: Do First
           buildQuadrantCard(
-            title: L10n.tr("Do First", "Kerjakan Sekarang"),
-            subtitle: L10n.tr("Important & Urgent — Focus on these today!", "Penting & mendesak — selesaikan sekarang!"),
+            title: L10n.tr("Do First"),
+            subtitle: L10n.tr("Important & Urgent — Focus on these today!"),
             code: "Q1",
             color: Colors.red.shade400,
             icon: Icons.local_fire_department_rounded,
             taskList: q1DoFirst,
-            emptyText: L10n.tr("No urgent & important tasks!", "Tidak ada tugas mendesak & penting!"),
+            emptyText: L10n.tr("No urgent & important tasks!"),
           ),
 
           // Q2: Schedule
           buildQuadrantCard(
-            title: L10n.tr("Schedule & Plan", "Jadwalkan & Rencanakan"),
-            subtitle: L10n.tr("Important, Not Urgent — High long-term value.", "Penting tapi belum mendesak — bernilai tinggi."),
+            title: L10n.tr("Schedule & Plan"),
+            subtitle: L10n.tr("Important, Not Urgent — High long-term value."),
             code: "Q2",
             color: Colors.blue.shade500,
             icon: Icons.calendar_month_rounded,
             taskList: q2Schedule,
-            emptyText: L10n.tr("No scheduled important tasks.", "Tidak ada tugas penting yang perlu dijadwalkan."),
+            emptyText: L10n.tr("No scheduled important tasks."),
           ),
 
           // Q3: Delegate / Quick
           buildQuadrantCard(
-            title: L10n.tr("Delegate / Quick Finish", "Cepat Selesaikan / Delegasi"),
-            subtitle: L10n.tr("Urgent, Less Important — Finish fast or delegate.", "Mendesak tapi prioritas rendah — selesaikan cepat."),
+            title: L10n.tr("Delegate / Quick Finish"),
+            subtitle: L10n.tr("Urgent, Less Important — Finish fast or delegate."),
             code: "Q3",
             color: Colors.orange.shade500,
             icon: Icons.bolt_rounded,
             taskList: q3Delegate,
-            emptyText: L10n.tr("No quick urgent tasks.", "Tidak ada tugas cepat/delegasi."),
+            emptyText: L10n.tr("No quick urgent tasks."),
           ),
 
           // Q4: Eliminate / Backlog
           buildQuadrantCard(
-            title: L10n.tr("Don't Do / Backlog", "Tunda / Backlog"),
-            subtitle: L10n.tr("Not Urgent & Low Priority — Drop or save for later.", "Tidak mendesak & prioritas rendah — tunda/evaluasi."),
+            title: L10n.tr("Don't Do / Backlog"),
+            subtitle: L10n.tr("Not Urgent & Low Priority — Drop or save for later."),
             code: "Q4",
             color: Colors.blueGrey.shade400,
             icon: Icons.inventory_2_outlined,
             taskList: q4Eliminate,
-            emptyText: L10n.tr("No backlog tasks.", "Tidak ada tugas di backlog."),
+            emptyText: L10n.tr("No backlog tasks."),
           ),
         ],
       );
@@ -3059,7 +3043,7 @@ class PriorityView extends StatelessWidget {
                     const Icon(Icons.flag, color: Colors.red, size: 20),
                     const SizedBox(width: 10),
                     Text(
-                      L10n.tr("High Priority Tasks", "Tugas Prioritas Tinggi"),
+                      L10n.tr("High Priority Tasks"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -3070,7 +3054,7 @@ class PriorityView extends StatelessWidget {
                 ),
               ),
               if (highPriority.isEmpty)
-                buildEmptyState(L10n.tr("No high priority tasks", "Tidak ada tugas prioritas tinggi"))
+                buildEmptyState(L10n.tr("No high priority tasks"))
               else
                 buildTaskList(highPriority),
             ],
@@ -3087,7 +3071,7 @@ class PriorityView extends StatelessWidget {
                     const Icon(Icons.flag, color: Colors.orange, size: 20),
                     const SizedBox(width: 10),
                     Text(
-                      L10n.tr("Medium Priority Tasks", "Tugas Prioritas Sedang"),
+                      L10n.tr("Medium Priority Tasks"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -3098,7 +3082,7 @@ class PriorityView extends StatelessWidget {
                 ),
               ),
               if (midPriority.isEmpty)
-                buildEmptyState(L10n.tr("No medium priority tasks", "Tidak ada tugas prioritas sedang"))
+                buildEmptyState(L10n.tr("No medium priority tasks"))
               else
                 buildTaskList(midPriority),
             ],
@@ -3115,7 +3099,7 @@ class PriorityView extends StatelessWidget {
                     const Icon(Icons.flag, color: Colors.green, size: 20),
                     const SizedBox(width: 10),
                     Text(
-                      L10n.tr("Low Priority Tasks", "Tugas Prioritas Rendah"),
+                      L10n.tr("Low Priority Tasks"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -3126,7 +3110,7 @@ class PriorityView extends StatelessWidget {
                 ),
               ),
               if (lowPriority.isEmpty)
-                buildEmptyState(L10n.tr("No low priority tasks", "Tidak ada tugas prioritas rendah"))
+                buildEmptyState(L10n.tr("No low priority tasks"))
               else
                 buildTaskList(lowPriority),
             ],

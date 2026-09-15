@@ -72,7 +72,7 @@ class CalendarEventCard extends StatelessWidget {
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
-                          L10n.tr("Convert to KinDay Task", "Jadikan Task KinDay"),
+                          L10n.tr("Convert to KinDay Task"),
                           style: TextStyle(
                             fontFamily: "Quicksand",
                             fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class CalendarEventCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    L10n.tr("Estimated Energy Level", "Perkiraan Tingkat Energi"),
+                    L10n.tr("Estimated Energy Level"),
                     style: TextStyle(
                       fontFamily: "Quicksand",
                       fontWeight: FontWeight.bold,
@@ -220,10 +220,7 @@ class CalendarEventCard extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              L10n.tr(
-                                "Event converted to KinDay Task!",
-                                "Jadwal berhasil dijadikan Task KinDay!",
-                              ),
+                              L10n.tr("Event converted to KinDay Task!"),
                             ),
                             backgroundColor: AppColors.button,
                           ),
@@ -239,7 +236,7 @@ class CalendarEventCard extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      L10n.tr("Save as Task", "Simpan Sebagai Task"),
+                      L10n.tr("Save as Task"),
                       style: const TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -402,7 +399,7 @@ class CalendarEventCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          L10n.tr("Added to KinDay", "Sudah Jadi Task"),
+                          L10n.tr("Added to KinDay"),
                           style: const TextStyle(
                             fontFamily: "Quicksand",
                             fontWeight: FontWeight.bold,
@@ -417,7 +414,7 @@ class CalendarEventCard extends StatelessWidget {
                     onPressed: () => _showConvertToTaskDialog(context),
                     icon: const Icon(Icons.add_task_rounded, size: 14),
                     label: Text(
-                      L10n.tr("+ Make KinDay Task", "+ Jadikan Task"),
+                      L10n.tr("+ Make KinDay Task"),
                       style: const TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,

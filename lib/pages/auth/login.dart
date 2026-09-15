@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kinday/constant/app_colors.dart';
 import 'package:kinday/constant/app_image.dart';
 import 'package:kinday/constant/app_widget.dart';
+import 'package:kinday/constant/l10n.dart';
 import 'package:kinday/database/db_helper.dart';
 import 'package:kinday/database/firebase_auth_service.dart';
 import 'package:kinday/database/notification_helper.dart';
@@ -68,12 +69,12 @@ class _LoginPageState extends State<LoginPage> {
           await authService.sendEmailVerification();
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
+              SnackBar(
                 content: Text(
-                  "Please verify your email. A new link has been sent to your inbox.",
+                  L10n.tr("Please verify your email. A new link has been sent to your inbox."),
                 ),
                 backgroundColor: Colors.orange,
-                duration: Duration(seconds: 5),
+                duration: const Duration(seconds: 5),
               ),
             );
             Navigator.pushAndRemoveUntil(
@@ -119,9 +120,13 @@ class _LoginPageState extends State<LoginPage> {
           await PreferenceHandler.setLogin(true);
 
           if (mounted) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(const SnackBar(content: Text("Login successful!")));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  L10n.tr("Login successful!"),
+                ),
+              ),
+            );
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const Mainpage()),
@@ -132,8 +137,10 @@ class _LoginPageState extends State<LoginPage> {
         } else {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Error setting up local profile session."),
+              SnackBar(
+                content: Text(
+                  L10n.tr("Error setting up local profile session."),
+                ),
               ),
             );
           }
@@ -141,7 +148,11 @@ class _LoginPageState extends State<LoginPage> {
       } else {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Invalid email or password.")),
+            SnackBar(
+              content: Text(
+                L10n.tr("Invalid email or password."),
+              ),
+            ),
           );
         }
       }
@@ -202,9 +213,13 @@ class _LoginPageState extends State<LoginPage> {
           await PreferenceHandler.setLogin(true);
 
           if (mounted) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(const SnackBar(content: Text("Login successful!")));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  L10n.tr("Login successful!"),
+                ),
+              ),
+            );
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const Mainpage()),
@@ -215,8 +230,10 @@ class _LoginPageState extends State<LoginPage> {
         } else {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Error setting up local profile session."),
+              SnackBar(
+                content: Text(
+                  L10n.tr("Error setting up local profile session."),
+                ),
               ),
             );
           }
@@ -273,7 +290,7 @@ class _LoginPageState extends State<LoginPage> {
                 Image(image: AssetImage(AppImage.mascotlogin), height: 300),
 
                 Text(
-                  "Welcome Back",
+                  L10n.tr("Welcome Back"),
                   style: TextStyle(
                     color: AppColors.button,
                     fontFamily: "Super",
@@ -282,7 +299,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Text(
-                  "Let's make today manageable",
+                  L10n.tr("Let's make today manageable"),
                   style: TextStyle(color: AppColors.button, letterSpacing: 2),
                 ),
                 SizedBox(height: 20),
@@ -300,7 +317,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Text(
-                                "Email",
+                                L10n.tr("Email"),
                                 style: TextStyle(
                                   color: AppColors.button,
                                   fontFamily: "Nunito",
@@ -309,18 +326,18 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
                           InputField(
-                            hint: "your email",
+                            hint: L10n.tr("your email"),
                             icon: Icons.email,
                             controller: _emailController,
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
-                                return "Please enter your email";
+                                return L10n.tr("Please enter your email");
                               }
                               final emailRegex = RegExp(
                                 r'^[^@]+@[^@]+\.[^@]+$',
                               );
                               if (!emailRegex.hasMatch(value.trim())) {
-                                return "Please enter a valid email address";
+                                return L10n.tr("Please enter a valid email address");
                               }
                               return null;
                             },
@@ -329,7 +346,7 @@ class _LoginPageState extends State<LoginPage> {
                           Row(
                             children: [
                               Text(
-                                "Password",
+                                L10n.tr("Password"),
                                 style: TextStyle(
                                   color: AppColors.button,
                                   fontFamily: "Nunito",
@@ -338,13 +355,13 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
                           InputField(
-                            hint: "your password",
+                            hint: L10n.tr("your password"),
                             icon: Icons.key,
                             pwhide: true,
                             controller: _passwordController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return "Please enter your password";
+                                return L10n.tr("Please enter your password");
                               }
                               return null;
                             },
@@ -362,7 +379,7 @@ class _LoginPageState extends State<LoginPage> {
                                   );
                                 },
                                 child: Text(
-                                  "Forgot Password ?",
+                                  L10n.tr("Forgot Password ?"),
                                   style: TextStyle(
                                     color: AppColors.button,
                                     fontFamily: "Nunito",
@@ -375,7 +392,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(height: 20),
 
                           AccButton(
-                            sign: "Sign In",
+                            sign: L10n.tr("Sign In"),
                             warnaBox: AppColors.button,
                             destination: const SizedBox(),
                             textbuttoncolor: Colors.white,
@@ -396,7 +413,7 @@ class _LoginPageState extends State<LoginPage> {
                                     horizontal: 10,
                                   ),
                                   child: Text(
-                                    "or continue with",
+                                    L10n.tr("or continue with"),
                                     style: TextStyle(
                                       color: AppColors.background,
                                       fontFamily: "Nunito",
@@ -422,7 +439,7 @@ class _LoginPageState extends State<LoginPage> {
                                 destination: const SizedBox(),
                                 textbuttoncolor: AppColors.button,
                                 leadImage: AppImage.icongoogle,
-                                sign: "sign in with google",
+                                sign: L10n.tr("sign in with google"),
                                 onPressed: _handleGoogleSignIn,
                               ),
                             ],
@@ -432,7 +449,7 @@ class _LoginPageState extends State<LoginPage> {
 
                           Text.rich(
                             TextSpan(
-                              text: "New here ?",
+                              text: L10n.tr("New here ?"),
                               style: TextStyle(
                                 color: AppColors.button,
                                 fontFamily: "Nunito",
@@ -450,7 +467,7 @@ class _LoginPageState extends State<LoginPage> {
                                       );
                                     },
                                   style: const TextStyle(color: Colors.blue),
-                                  text: " Create an account",
+                                  text: " ${L10n.tr("Create an account")}",
                                 ),
                               ],
                             ),

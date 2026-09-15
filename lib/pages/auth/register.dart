@@ -98,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            L10n.tr("Password Requirements:", "Syarat Kata Sandi:"),
+            L10n.tr("Password Requirements:"),
             style: TextStyle(
               fontFamily: "Nunito",
               fontWeight: FontWeight.bold,
@@ -108,32 +108,23 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           const SizedBox(height: 6),
           requirementRow(
-            L10n.tr("Minimum 8 characters", "Minimal 8 karakter"),
+            L10n.tr("Minimum 8 characters"),
             hasLen,
           ),
           requirementRow(
-            L10n.tr(
-              "At least one uppercase letter",
-              "Minimal satu huruf besar",
-            ),
+            L10n.tr("At least one uppercase letter"),
             hasUpper,
           ),
           requirementRow(
-            L10n.tr(
-              "At least one lowercase letter",
-              "Minimal satu huruf kecil",
-            ),
+            L10n.tr("At least one lowercase letter"),
             hasLower,
           ),
           requirementRow(
-            L10n.tr("At least one number", "Minimal satu angka"),
+            L10n.tr("At least one number"),
             hasNum,
           ),
           requirementRow(
-            L10n.tr(
-              "At least one special character",
-              "Minimal satu karakter spesial",
-            ),
+            L10n.tr("At least one special character"),
             hasSpec,
           ),
         ],
@@ -143,37 +134,22 @@ class _RegisterPageState extends State<RegisterPage> {
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return L10n.tr("Please enter a password", "Silakan masukkan kata sandi");
+      return L10n.tr("Please enter a password");
     }
     if (value.length < 8) {
-      return L10n.tr(
-        "Password must be at least 8 characters",
-        "Kata sandi harus minimal 8 karakter",
-      );
+      return L10n.tr("Password must be at least 8 characters");
     }
     if (!RegExp(r'[A-Z]').hasMatch(value)) {
-      return L10n.tr(
-        "Password must contain at least one uppercase letter",
-        "Kata sandi harus mengandung minimal satu huruf besar",
-      );
+      return L10n.tr("Password must contain at least one uppercase letter");
     }
     if (!RegExp(r'[a-z]').hasMatch(value)) {
-      return L10n.tr(
-        "Password must contain at least one lowercase letter",
-        "Kata sandi harus mengandung minimal satu huruf kecil",
-      );
+      return L10n.tr("Password must contain at least one lowercase letter");
     }
     if (!RegExp(r'[0-9]').hasMatch(value)) {
-      return L10n.tr(
-        "Password must contain at least one number",
-        "Kata sandi harus mengandung minimal satu angka",
-      );
+      return L10n.tr("Password must contain at least one number");
     }
     if (!RegExp(r'[!@#\$%^&*(),.?":{}|<>]').hasMatch(value)) {
-      return L10n.tr(
-        "Password must contain at least one special character",
-        "Kata sandi harus mengandung minimal satu karakter spesial",
-      );
+      return L10n.tr("Password must contain at least one special character");
     }
     return null;
   }
@@ -187,21 +163,24 @@ class _RegisterPageState extends State<RegisterPage> {
             borderRadius: BorderRadius.circular(20),
           ),
           title: Text(
-            "Syarat & Ketentuan",
+            L10n.tr("Terms & Conditions"),
             style: TextStyle(
               fontFamily: "Quicksand",
               fontWeight: FontWeight.bold,
               color: AppColors.button,
             ),
           ),
-          content: const Text(
-            "Silakan membaca dan menyetujui Syarat & Ketentuan sebelum mendaftar akun Kinday.",
-            style: TextStyle(fontFamily: "Nunito"),
+          content: Text(
+            L10n.tr("Please read and agree to the Terms & Conditions before registering a Kinday account."),
+            style: const TextStyle(fontFamily: "Nunito"),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text("Tutup", style: TextStyle(color: Colors.grey)),
+              child: Text(
+                L10n.tr("Close"),
+                style: const TextStyle(color: Colors.grey),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
@@ -219,9 +198,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              child: const Text(
-                "Baca T&C",
-                style: TextStyle(color: Colors.white),
+              child: Text(
+                L10n.tr("Read T&C"),
+                style: const TextStyle(color: Colors.white),
               ),
             ),
           ],
@@ -391,7 +370,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Image(image: AssetImage(AppImage.mascotlogin), height: 300),
 
                 Text(
-                  "Welcome",
+                  L10n.tr("Welcome"),
                   style: TextStyle(
                     color: AppColors.button,
                     fontFamily: "Super",
@@ -400,7 +379,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 Text(
-                  "Let's make today manageable",
+                  L10n.tr("Let's make today manageable"),
                   style: TextStyle(color: AppColors.button, letterSpacing: 2),
                 ),
                 SizedBox(height: 20),
@@ -418,7 +397,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Row(
                             children: [
                               Text(
-                                "name",
+                                L10n.tr("Name"),
                                 style: TextStyle(
                                   color: AppColors.button,
                                   fontFamily: "Nunito",
@@ -427,15 +406,15 @@ class _RegisterPageState extends State<RegisterPage> {
                             ],
                           ),
                           InputField(
-                            hint: "your name",
+                            hint: L10n.tr("your name"),
                             icon: Icons.person,
                             controller: _usernameController,
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
-                                return "Please enter your name";
+                                return L10n.tr("Please enter your name");
                               }
                               if (value.length > 30 || value.trim().isEmpty) {
-                                return "Name has to be up to 30 letters";
+                                return L10n.tr("Name has to be up to 30 letters");
                               }
                               return null;
                             },
@@ -444,7 +423,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Row(
                             children: [
                               Text(
-                                "Email",
+                                L10n.tr("Email"),
                                 style: TextStyle(
                                   color: AppColors.button,
                                   fontFamily: "Nunito",
@@ -453,18 +432,18 @@ class _RegisterPageState extends State<RegisterPage> {
                             ],
                           ),
                           InputField(
-                            hint: "your email",
+                            hint: L10n.tr("your email"),
                             icon: Icons.email,
                             controller: _emailController,
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
-                                return "Please enter your email";
+                                return L10n.tr("Please enter your email");
                               }
                               final emailRegex = RegExp(
                                 r'^[^@]+@[^@]+\.[^@]+$',
                               );
                               if (!emailRegex.hasMatch(value.trim())) {
-                                return "Please enter a valid email address";
+                                return L10n.tr("Please enter a valid email address");
                               }
                               return null;
                             },
@@ -473,7 +452,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Row(
                             children: [
                               Text(
-                                "Password",
+                                L10n.tr("Password"),
                                 style: TextStyle(
                                   color: AppColors.button,
                                   fontFamily: "Nunito",
@@ -482,7 +461,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ],
                           ),
                           InputField(
-                            hint: "your password",
+                            hint: L10n.tr("your password"),
                             icon: Icons.key,
                             pwhide: true,
                             controller: _passwordController,
@@ -495,7 +474,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Row(
                             children: [
                               Text(
-                                "Password Confirmation",
+                                L10n.tr("Password Confirmation"),
                                 style: TextStyle(
                                   color: AppColors.button,
                                   fontFamily: "Nunito",
@@ -504,16 +483,16 @@ class _RegisterPageState extends State<RegisterPage> {
                             ],
                           ),
                           InputField(
-                            hint: "retype your password",
+                            hint: L10n.tr("retype your password"),
                             icon: Icons.key,
                             pwhide: true,
                             controller: _confirmPasswordController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return "Please retype your password";
+                                return L10n.tr("Please retype your password");
                               }
                               if (value != _passwordController.text) {
-                                return "Passwords do not match!";
+                                return L10n.tr("Passwords do not match!");
                               }
                               return null;
                             },
@@ -522,7 +501,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           SizedBox(height: 20),
 
                           AccButton(
-                            sign: "Register",
+                            sign: L10n.tr("Register"),
                             warnaBox: AppColors.button,
                             destination: const SizedBox(),
                             textbuttoncolor: Colors.white,
@@ -546,7 +525,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               Expanded(
                                 child: Text.rich(
                                   TextSpan(
-                                    text: "Saya menyetujui ",
+                                    text: "${L10n.tr("I agree to the")} ",
                                     style: TextStyle(
                                       color: AppColors.button,
                                       fontFamily: "Nunito",
@@ -569,10 +548,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                           fontWeight: FontWeight.bold,
                                           decoration: TextDecoration.underline,
                                         ),
-                                        text: "Syarat & Ketentuan",
+                                        text: L10n.tr("Terms & Conditions"),
                                       ),
                                       TextSpan(
-                                        text: " yang berlaku.",
+                                        text: " ${L10n.tr("applicable.")}",
                                         style: TextStyle(
                                           color: AppColors.button,
                                           fontFamily: "Nunito",
@@ -590,7 +569,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                           Text.rich(
                             TextSpan(
-                              text: "Already have an account?",
+                              text: L10n.tr("Already have an account?"),
                               style: TextStyle(
                                 color: AppColors.button,
                                 fontFamily: "Nunito",
@@ -608,7 +587,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       );
                                     },
                                   style: const TextStyle(color: Colors.blue),
-                                  text: " Login",
+                                  text: " ${L10n.tr("Login")}",
                                 ),
                               ],
                             ),

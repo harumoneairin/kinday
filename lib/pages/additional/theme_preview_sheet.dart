@@ -89,7 +89,7 @@ class _ThemePreviewSheetState extends State<ThemePreviewSheet> {
             Icon(Icons.info_outline_rounded, color: themeData.button, size: 24),
             const SizedBox(width: 8),
             Text(
-              L10n.tr("Information", "Informasi"),
+              L10n.tr("Information"),
               style: TextStyle(
                 fontFamily: "Quicksand",
                 fontWeight: FontWeight.bold,
@@ -100,10 +100,7 @@ class _ThemePreviewSheetState extends State<ThemePreviewSheet> {
           ],
         ),
         content: Text(
-          L10n.tr(
-            "Feature unavailable at the moment",
-            "Fitur belum tersedia saat ini",
-          ),
+          L10n.tr("Feature unavailable at the moment"),
           style: TextStyle(
             fontFamily: "Nunito",
             color: themeData.normaltext.withValues(alpha: 0.9),
@@ -122,7 +119,7 @@ class _ThemePreviewSheetState extends State<ThemePreviewSheet> {
               ),
             ),
             child: Text(
-              L10n.tr("OK", "OK"),
+              L10n.tr("OK"),
               style: const TextStyle(
                 fontFamily: "Quicksand",
                 fontWeight: FontWeight.bold,
@@ -195,10 +192,7 @@ class _ThemePreviewSheetState extends State<ThemePreviewSheet> {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          L10n.tr(
-                            "Tap tabs or swipe to preview pages",
-                            "Ketuk tab atau usap untuk melihat pratinjau",
-                          ),
+                          L10n.tr("Tap tabs or swipe to preview pages"),
                           style: TextStyle(
                             fontFamily: "Nunito",
                             fontSize: 12,
@@ -253,7 +247,7 @@ class _ThemePreviewSheetState extends State<ThemePreviewSheet> {
                         ),
                       ),
                       child: Text(
-                        L10n.tr("Cancel", "Batal"),
+                        L10n.tr("Cancel"),
                         style: TextStyle(
                           fontFamily: "Quicksand",
                           fontWeight: FontWeight.bold,
@@ -276,7 +270,7 @@ class _ThemePreviewSheetState extends State<ThemePreviewSheet> {
                         ),
                       ),
                       child: Text(
-                        L10n.tr("Buy Rp 3.000", "Beli Rp 3.000"),
+                        L10n.tr("Buy Rp 3.000"),
                         style: const TextStyle(
                           fontFamily: "Quicksand",
                           fontWeight: FontWeight.bold,

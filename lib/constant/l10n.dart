@@ -45,8 +45,16 @@ class L10n {
         r'^(\d+)\s*Days?$': r'$1日',
         r'^(\d+)\s*out\s+of\s+(\d+)\s+tasks\s+completed$': r'$2個中$1個のタスク完了',
         r'^(\d+)\s*out\s+of\s+(\d+)\s+tasks$': r'$2個中$1個のタスク',
+        r'^(\d+)\s+of\s+(\d+)\s+selected$': r'$2個中$1個選択中',
+        r'^(\d+)\s+subtask\(s\)\s+added\s+successfully!$': r'$1個のサブタスクを追加しました！',
         r'^Delete\s+failed:\s*(.+)$': r'削除失敗: $1',
         r'^An\s+error\s+occurred:\s*(.+)$': r'エラーが発生しました: $1',
+        r'^Speech\s+recognition\s+error:\s*(.+)$': r'音声認識エラー: $1',
+        r'^Failed\s+to\s+break\s+down\s+task:\s*(.+)$': r'タスクの細分化に失敗しました: $1',
+        r'^Your\s+daily\s+AI\s+limit\s+of\s+(\d+)\s+breakdowns\s+has\s+been\s+reached!\s+Try\s+again\s+tomorrow\.$':
+            r'1日のAI上限（$1回）に達しました！ 明日もう一度お試しください。',
+        r'^Add\s*\((\d+)\)$': r'追加 ($1)',
+        r'^Resend\s+in\s+(\d+)s$': r'$1秒後に再送信',
         // Energy Log Insights
         r'^Your\s+energy\s+tends\s+to\s+peak\s+at\s+(\d{2}:\d{2})\s+and\s+reach\s+its\s+lowest\s+point\s+at\s+(\d{2}:\d{2})\.$':
             r'エネルギーは $1 にピークに達し、$2 に最低値になる傾向があります。',
@@ -66,8 +74,17 @@ class L10n {
         r'^(\d+)\s*min$': r'$1 menit',
         r'^(\d+)\s*Days?$': r'$1 Hari',
         r'^(\d+)\s*out\s+of\s+(\d+)\s+tasks\s+completed$': r'$1 dari $2 tugas selesai',
+        r'^(\d+)\s*out\s+of\s+(\d+)\s+tasks$': r'$1 dari $2 tugas',
+        r'^(\d+)\s+of\s+(\d+)\s+selected$': r'$1 dari $2 dipilih',
+        r'^(\d+)\s+subtask\(s\)\s+added\s+successfully!$': r'$1 sub-tugas berhasil ditambahkan!',
         r'^Delete\s+failed:\s*(.+)$': r'Gagal menghapus: $1',
         r'^An\s+error\s+occurred:\s*(.+)$': r'Terjadi kesalahan: $1',
+        r'^Speech\s+recognition\s+error:\s*(.+)$': r'Kesalahan pengenalan suara: $1',
+        r'^Failed\s+to\s+break\s+down\s+task:\s*(.+)$': r'Gagal memecah tugas: $1',
+        r'^Your\s+daily\s+AI\s+limit\s+of\s+(\d+)\s+breakdowns\s+has\s+been\s+reached!\s+Try\s+again\s+tomorrow\.$':
+            r'Batas harian $1 kali pemecahan AI Anda telah tercapai! Coba lagi besok.',
+        r'^Add\s*\((\d+)\)$': r'Tambah ($1)',
+        r'^Resend\s+in\s+(\d+)s$': r'Kirim ulang dalam $1 detik',
         // Energy Log Insights
         r'^Your\s+energy\s+tends\s+to\s+peak\s+at\s+(\d{2}:\d{2})\s+and\s+reach\s+its\s+lowest\s+point\s+at\s+(\d{2}:\d{2})\.$':
             r'Energi Anda cenderung berada di puncak pada pukul $1 dan di titik terendah pada pukul $2.',

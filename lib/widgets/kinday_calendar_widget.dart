@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:kinday/constant/app_colors.dart';
 import 'package:kinday/constant/app_widget.dart';
 import 'package:kinday/constant/l10n.dart';
@@ -125,11 +124,33 @@ class _KinDayCalendarWidgetState extends State<KinDayCalendarWidget> {
     widget.onDateSelected(now);
   }
 
+  String _formatMonthYear(DateTime date) {
+    const monthKeys = [
+      "",
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    if (L10n.isJa) {
+      return "${date.year}年${date.month}月";
+    }
+    final mKey = date.month >= 1 && date.month <= 12 ? monthKeys[date.month] : "";
+    return "${L10n.tr(mKey)} ${date.year}";
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final now = DateTime.now();
-    final monthFormat = DateFormat.yMMMM();
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
@@ -153,7 +174,7 @@ class _KinDayCalendarWidgetState extends State<KinDayCalendarWidget> {
             children: [
               Expanded(
                 child: Text(
-                  monthFormat.format(_focusedDate),
+                  _formatMonthYear(_focusedDate),
                   style: TextStyle(
                     fontFamily: "Quicksand",
                     fontWeight: FontWeight.bold,
@@ -177,7 +198,7 @@ class _KinDayCalendarWidgetState extends State<KinDayCalendarWidget> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      L10n.tr("Today", "Hari Ini"),
+                      L10n.tr("Today"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -214,15 +235,11 @@ class _KinDayCalendarWidgetState extends State<KinDayCalendarWidget> {
 
           // Weekday Labels (Mon to Sun) - 7 equal columns
           Row(
-            children: [
-              L10n.tr("M", "S"),
-              L10n.tr("T", "S"),
-              L10n.tr("W", "R"),
-              L10n.tr("T", "K"),
-              L10n.tr("F", "J"),
-              L10n.tr("S", "S"),
-              L10n.tr("S", "M"),
-            ].map((day) {
+            children: (L10n.isJa
+                ? const ["月", "火", "水", "木", "金", "土", "日"]
+                : (L10n.isId
+                    ? const ["S", "S", "R", "K", "J", "S", "M"]
+                    : const ["M", "T", "W", "T", "F", "S", "S"])).map((day) {
               return Expanded(
                 child: Center(
                   child: Text(

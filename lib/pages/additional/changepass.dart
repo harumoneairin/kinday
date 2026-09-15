@@ -93,7 +93,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            L10n.tr("Password Requirements:", "Syarat Kata Sandi:"),
+            L10n.tr("Password Requirements:"),
             style: TextStyle(
               fontFamily: "Nunito",
               fontWeight: FontWeight.bold,
@@ -103,32 +103,23 @@ class _ChangePassPageState extends State<ChangePassPage> {
           ),
           const SizedBox(height: 6),
           requirementRow(
-            L10n.tr("Minimum 8 characters", "Minimal 8 karakter"),
+            L10n.tr("Minimum 8 characters"),
             hasLen,
           ),
           requirementRow(
-            L10n.tr(
-              "At least one uppercase letter",
-              "Minimal satu huruf besar",
-            ),
+            L10n.tr("At least one uppercase letter"),
             hasUpper,
           ),
           requirementRow(
-            L10n.tr(
-              "At least one lowercase letter",
-              "Minimal satu huruf kecil",
-            ),
+            L10n.tr("At least one lowercase letter"),
             hasLower,
           ),
           requirementRow(
-            L10n.tr("At least one number", "Minimal satu angka"),
+            L10n.tr("At least one number"),
             hasNum,
           ),
           requirementRow(
-            L10n.tr(
-              "At least one special character",
-              "Minimal satu karakter spesial",
-            ),
+            L10n.tr("At least one special character"),
             hasSpec,
           ),
         ],
@@ -138,40 +129,22 @@ class _ChangePassPageState extends State<ChangePassPage> {
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return L10n.tr(
-        "Please enter a new password",
-        "Silakan masukkan kata sandi baru",
-      );
+      return L10n.tr("Please enter a new password");
     }
     if (value.length < 8) {
-      return L10n.tr(
-        "Password must be at least 8 characters",
-        "Kata sandi harus minimal 8 karakter",
-      );
+      return L10n.tr("Password must be at least 8 characters");
     }
     if (!RegExp(r'[A-Z]').hasMatch(value)) {
-      return L10n.tr(
-        "Password must contain at least one uppercase letter",
-        "Kata sandi harus mengandung minimal satu huruf besar",
-      );
+      return L10n.tr("Password must contain at least one uppercase letter");
     }
     if (!RegExp(r'[a-z]').hasMatch(value)) {
-      return L10n.tr(
-        "Password must contain at least one lowercase letter",
-        "Kata sandi harus mengandung minimal satu huruf kecil",
-      );
+      return L10n.tr("Password must contain at least one lowercase letter");
     }
     if (!RegExp(r'[0-9]').hasMatch(value)) {
-      return L10n.tr(
-        "Password must contain at least one number",
-        "Kata sandi harus mengandung minimal satu angka",
-      );
+      return L10n.tr("Password must contain at least one number");
     }
     if (!RegExp(r'[!@#\$%^&*(),.?":{}|<>]').hasMatch(value)) {
-      return L10n.tr(
-        "Password must contain at least one special character",
-        "Kata sandi harus mengandung minimal satu karakter spesial",
-      );
+      return L10n.tr("Password must contain at least one special character");
     }
     return null;
   }
@@ -205,10 +178,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                L10n.tr(
-                  "User session not found.",
-                  "Sesi pengguna tidak ditemukan.",
-                ),
+                L10n.tr("User session not found."),
               ),
               backgroundColor: Colors.redAccent,
             ),
@@ -225,10 +195,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                L10n.tr(
-                  "User account not found.",
-                  "Akun pengguna tidak ditemukan.",
-                ),
+                L10n.tr("User account not found."),
               ),
               backgroundColor: Colors.redAccent,
             ),
@@ -259,10 +226,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  L10n.tr(
-                    "Password updated successfully!",
-                    "Kata sandi berhasil diperbarui!",
-                  ),
+                  L10n.tr("Password updated successfully!"),
                 ),
                 backgroundColor: Colors.green,
               ),
@@ -274,10 +238,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  L10n.tr(
-                    "Failed to sync SQLite password.",
-                    "Gagal menyinkronkan kata sandi SQLite.",
-                  ),
+                  L10n.tr("Failed to sync SQLite password."),
                 ),
                 backgroundColor: Colors.redAccent,
               ),
@@ -289,10 +250,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                L10n.tr(
-                  "Failed to update password in Firebase.",
-                  "Gagal memperbarui kata sandi di Firebase.",
-                ),
+                L10n.tr("Failed to update password in Firebase."),
               ),
               backgroundColor: Colors.redAccent,
             ),
@@ -303,19 +261,13 @@ class _ChangePassPageState extends State<ChangePassPage> {
       String errorMessage = e.toString().replaceAll(RegExp(r'\[.*?\]'), '');
       if (e.toString().contains("wrong-password") ||
           e.toString().contains("invalid-credential")) {
-        errorMessage = L10n.tr(
-          "Incorrect current password.",
-          "Kata sandi saat ini salah.",
-        );
+        errorMessage = L10n.tr("Incorrect current password.");
       }
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr(
-                "An error occurred: $errorMessage",
-                "Terjadi kesalahan: $errorMessage",
-              ),
+              L10n.tr("An error occurred: $errorMessage"),
             ),
             backgroundColor: Colors.redAccent,
           ),
@@ -406,7 +358,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          L10n.tr("Change Password", "Ubah Kata Sandi"),
+          L10n.tr("Change Password"),
           style: TextStyle(
             fontFamily: "Quicksand",
             fontWeight: FontWeight.bold,
@@ -428,7 +380,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
                   Image.asset(AppImage.mascotlogin, height: 180),
                   const SizedBox(height: 10),
                   Text(
-                    L10n.tr("Secure Your Account", "Amankan Akun Anda"),
+                    L10n.tr("Secure Your Account"),
                     style: TextStyle(
                       color: AppColors.button,
                       fontFamily: "Super",
@@ -438,10 +390,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    L10n.tr(
-                      "Update your password regularly for better security",
-                      "Perbarui kata sandi Anda secara berkala agar lebih aman",
-                    ),
+                    L10n.tr("Update your password regularly for better security"),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "Nunito",
@@ -458,14 +407,8 @@ class _ChangePassPageState extends State<ChangePassPage> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           _buildPasswordField(
-                            label: L10n.tr(
-                              "Current Password",
-                              "Kata Sandi Saat Ini",
-                            ),
-                            hint: L10n.tr(
-                              "Enter current password",
-                              "Masukkan kata sandi saat ini",
-                            ),
+                            label: L10n.tr("Current Password"),
+                            hint: L10n.tr("Enter current password"),
                             prefixIcon: Icons.lock_open,
                             controller: _currentPasswordController,
                             isObscured: _obscureCurrent,
@@ -476,21 +419,15 @@ class _ChangePassPageState extends State<ChangePassPage> {
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return L10n.tr(
-                                  "Please enter your current password",
-                                  "Silakan masukkan kata sandi saat ini",
-                                );
+                                return L10n.tr("Please enter your current password");
                               }
                               return null;
                             },
                           ),
                           const SizedBox(height: 20),
                           _buildPasswordField(
-                            label: L10n.tr("New Password", "Kata Sandi Baru"),
-                            hint: L10n.tr(
-                              "Minimum 8 characters",
-                              "Minimal 8 karakter",
-                            ),
+                            label: L10n.tr("New Password"),
+                            hint: L10n.tr("Minimum 8 characters"),
                             prefixIcon: Icons.lock_outline,
                             controller: _newPasswordController,
                             isObscured: _obscureNew,
@@ -507,14 +444,8 @@ class _ChangePassPageState extends State<ChangePassPage> {
                           ),
                           const SizedBox(height: 20),
                           _buildPasswordField(
-                            label: L10n.tr(
-                              "Confirm New Password",
-                              "Konfirmasi Kata Sandi Baru",
-                            ),
-                            hint: L10n.tr(
-                              "Retype new password",
-                              "Ketik ulang kata sandi baru",
-                            ),
+                            label: L10n.tr("Confirm New Password"),
+                            hint: L10n.tr("Retype new password"),
                             prefixIcon: Icons.lock,
                             controller: _confirmPasswordController,
                             isObscured: _obscureConfirm,
@@ -525,16 +456,10 @@ class _ChangePassPageState extends State<ChangePassPage> {
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return L10n.tr(
-                                  "Please confirm your new password",
-                                  "Silakan konfirmasi kata sandi baru",
-                                );
+                                return L10n.tr("Please confirm your new password");
                               }
                               if (value != _newPasswordController.text) {
-                                return L10n.tr(
-                                  "Passwords do not match!",
-                                  "Kata sandi tidak cocok!",
-                                );
+                                return L10n.tr("Passwords do not match!");
                               }
                               return null;
                             },
@@ -549,10 +474,7 @@ class _ChangePassPageState extends State<ChangePassPage> {
                                   ),
                                 )
                               : AccButton(
-                                  sign: L10n.tr(
-                                    "Update Password",
-                                    "Perbarui Kata Sandi",
-                                  ),
+                                  sign: L10n.tr("Update Password"),
                                   warnaBox: AppColors.button,
                                   destination:
                                       const SizedBox(), // Unused since we override onPressed

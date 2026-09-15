@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kinday/constant/app_colors.dart';
 import 'package:kinday/constant/app_image.dart';
 import 'package:kinday/constant/app_widget.dart';
+import 'package:kinday/constant/l10n.dart';
 import 'package:kinday/database/firebase_auth_service.dart';
 import 'package:kinday/database/preference_handler.dart';
 import 'package:kinday/pages/auth/login.dart';
@@ -59,8 +60,10 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
     await PreferenceHandler.setLogin(true);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Email verified! Welcome to Kinday 🎉"),
+      SnackBar(
+        content: Text(
+          L10n.tr("Email verified! Welcome to Kinday 🎉"),
+        ),
         backgroundColor: Colors.green,
       ),
     );
@@ -83,8 +86,10 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
       await _authService.sendEmailVerification();
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Verification email sent! Please check your inbox."),
+        SnackBar(
+          content: Text(
+            L10n.tr("Verification email sent! Please check your inbox."),
+          ),
           backgroundColor: Colors.green,
         ),
       );
@@ -157,7 +162,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                   const SizedBox(height: 20),
 
                   Text(
-                    "Check Your Email",
+                    L10n.tr("Check Your Email"),
                     style: TextStyle(
                       color: AppColors.button,
                       fontFamily: "Super",
@@ -167,7 +172,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "We've sent a verification link to",
+                    L10n.tr("We've sent a verification link to"),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: AppColors.button.withAlpha(180),
@@ -213,7 +218,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                             ),
                             const SizedBox(width: 10),
                             Text(
-                              "Waiting for verification...",
+                              L10n.tr("Waiting for verification..."),
                               style: TextStyle(
                                 color: AppColors.button,
                                 fontFamily: "Nunito",
@@ -226,7 +231,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                         const SizedBox(height: 12),
 
                         Text(
-                          "Open the link in your email to continue. This page will update automatically.",
+                          L10n.tr("Open the link in your email to continue. This page will update automatically."),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: AppColors.button.withAlpha(160),
@@ -246,8 +251,8 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                               )
                             : AccButton(
                                 sign: _isResendCooldown
-                                    ? "Resend in ${_cooldownSeconds}s"
-                                    : "Resend Verification Email",
+                                    ? L10n.tr("Resend in ${_cooldownSeconds}s")
+                                    : L10n.tr("Resend Verification Email"),
                                 warnaBox: _isResendCooldown
                                     ? AppColors.button.withAlpha(100)
                                     : AppColors.button,
@@ -264,7 +269,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                         TextButton(
                           onPressed: _cancelVerification,
                           child: Text(
-                            "Back to Login",
+                            L10n.tr("Back to Login"),
                             style: TextStyle(
                               color: AppColors.button,
                               fontFamily: "Nunito",

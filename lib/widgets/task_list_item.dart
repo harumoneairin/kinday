@@ -21,15 +21,15 @@ class TaskListItem extends StatelessWidget {
   String _getEnergyLabel(int level) {
     switch (level) {
       case 5:
-        return L10n.tr("High", "Tinggi");
+        return L10n.tr("High");
       case 4:
-        return L10n.tr("Mid-High", "Cukup Tinggi");
+        return L10n.tr("Mid-High");
       case 3:
-        return L10n.tr("Mid", "Sedang");
+        return L10n.tr("Mid");
       case 2:
-        return L10n.tr("Mid-Low", "Cukup Rendah");
+        return L10n.tr("Mid-Low");
       default:
-        return L10n.tr("Low", "Rendah");
+        return L10n.tr("Low");
     }
   }
 
@@ -284,7 +284,7 @@ class TaskListItem extends StatelessWidget {
                       size: 24,
                       color: AppColors.button,
                     ),
-                    tooltip: L10n.tr("Start Focus Session", "Mulai Sesi Fokus"),
+                    tooltip: L10n.tr("Start Focus Session"),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                     onPressed: () {

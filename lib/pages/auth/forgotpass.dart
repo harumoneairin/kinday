@@ -1,8 +1,9 @@
-﻿import 'package:flutter/gestures.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:kinday/constant/app_colors.dart';
 import 'package:kinday/constant/app_image.dart';
 import 'package:kinday/constant/app_widget.dart';
+import 'package:kinday/constant/l10n.dart';
 import 'package:kinday/database/firebase_auth_service.dart';
 import 'package:kinday/pages/auth/login.dart';
 
@@ -43,8 +44,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       if (firebaseUser == null) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("No account found with this email address."),
+            SnackBar(
+              content: Text(
+                L10n.tr("No account found with this email address."),
+              ),
               backgroundColor: Colors.redAccent,
             ),
           );
@@ -64,8 +67,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       } else {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Failed to send reset email. Please try again."),
+            SnackBar(
+              content: Text(
+                L10n.tr("Failed to send reset email. Please try again."),
+              ),
               backgroundColor: Colors.redAccent,
             ),
           );
@@ -103,7 +108,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 const SizedBox(height: 20),
                 Image(image: AssetImage(AppImage.mascotlogin), height: 280),
                 Text(
-                  "Reset Password",
+                  L10n.tr("Reset Password"),
                   style: TextStyle(
                     color: AppColors.button,
                     fontFamily: "Super",
@@ -113,8 +118,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ),
                 Text(
                   _resetEmailSent
-                      ? "Check your inbox!"
-                      : "Find your Kinday account",
+                      ? L10n.tr("Check your inbox!")
+                      : L10n.tr("Find your Kinday account"),
                   style: TextStyle(
                     color: AppColors.button.withAlpha(204),
                     letterSpacing: 1.5,
@@ -153,7 +158,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ),
         const SizedBox(height: 16),
         Text(
-          "Reset link sent!",
+          L10n.tr("Reset link sent!"),
           textAlign: TextAlign.center,
           style: TextStyle(
             color: AppColors.button,
@@ -164,7 +169,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ),
         const SizedBox(height: 12),
         Text(
-          "We sent a password reset link to:\n${_emailController.text.trim()}\n\nOpen the link in your email to create a new password, then come back and log in.",
+          "${L10n.tr("We sent a password reset link to:")}\n${_emailController.text.trim()}\n\n${L10n.tr("Open the link in your email to create a new password, then come back and log in.")}",
           textAlign: TextAlign.center,
           style: TextStyle(
             color: AppColors.button.withAlpha(180),
@@ -175,7 +180,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ),
         const SizedBox(height: 30),
         AccButton(
-          sign: "Back to Login",
+          sign: L10n.tr("Back to Login"),
           warnaBox: AppColors.button,
           destination: const SizedBox(),
           textbuttoncolor: Colors.white,
@@ -199,7 +204,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Email Address",
+            L10n.tr("Email Address"),
             style: TextStyle(
               color: AppColors.button,
               fontFamily: "Nunito",
@@ -208,23 +213,23 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           ),
           const SizedBox(height: 8),
           InputField(
-            hint: "Enter your email",
+            hint: L10n.tr("Enter your email"),
             icon: Icons.email,
             controller: _emailController,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
-                return "Please enter your email";
+                return L10n.tr("Please enter your email");
               }
               final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
               if (!emailRegex.hasMatch(value.trim())) {
-                return "Please enter a valid email address";
+                return L10n.tr("Please enter a valid email address");
               }
               return null;
             },
           ),
           const SizedBox(height: 8),
           Text(
-            "We will send a secure reset link to this email.",
+            L10n.tr("We will send a secure reset link to this email."),
             style: TextStyle(
               color: AppColors.button.withAlpha(160),
               fontFamily: "Nunito",
@@ -239,7 +244,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                 )
               : AccButton(
-                  sign: "Send Reset Link",
+                  sign: L10n.tr("Send Reset Link"),
                   warnaBox: AppColors.button,
                   destination: const SizedBox(),
                   textbuttoncolor: Colors.white,
@@ -249,7 +254,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           Center(
             child: Text.rich(
               TextSpan(
-                text: "Remembered your password? ",
+                text: "${L10n.tr("Remembered your password?")} ",
                 style: TextStyle(
                   color: AppColors.button,
                   fontFamily: "Nunito",
@@ -271,7 +276,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,
                     ),
-                    text: "Login",
+                    text: L10n.tr("Login"),
                   ),
                 ],
               ),

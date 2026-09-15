@@ -153,35 +153,35 @@ class RepeatTaskService {
     String timeStr = task.dueTime != null && task.dueTime!.isNotEmpty ? " ${task.dueTime}" : "";
     switch (task.repeatType) {
       case RepeatType.daily:
-        return L10n.tr("Daily$timeStr", "Setiap Hari$timeStr");
+        return "${L10n.tr("Every Day")}$timeStr";
       case RepeatType.selectedDays:
         final days = task.selectedWeekDays.map((d) {
           switch (d) {
             case 1:
-              return L10n.tr("Mon", "Sen");
+              return L10n.tr("Mon");
             case 2:
-              return L10n.tr("Tue", "Sel");
+              return L10n.tr("Tue");
             case 3:
-              return L10n.tr("Wed", "Rab");
+              return L10n.tr("Wed");
             case 4:
-              return L10n.tr("Thu", "Kam");
+              return L10n.tr("Thu");
             case 5:
-              return L10n.tr("Fri", "Jum");
+              return L10n.tr("Fri");
             case 6:
-              return L10n.tr("Sat", "Sab");
+              return L10n.tr("Sat");
             case 7:
-              return L10n.tr("Sun", "Min");
+              return L10n.tr("Sun");
             default:
               return "";
           }
         }).join(", ");
         return "${days.isEmpty ? L10n.tr('Repeat', 'Ulang') : days}$timeStr";
       case RepeatType.weekly:
-        return L10n.tr("Weekly$timeStr", "Setiap Minggu$timeStr");
+        return "${L10n.tr("Every Week")}$timeStr";
       case RepeatType.monthly:
-        return L10n.tr("Monthly$timeStr", "Setiap Bulan$timeStr");
+        return "${L10n.tr("Every Month")}$timeStr";
       case RepeatType.yearly:
-        return L10n.tr("Yearly$timeStr", "Setiap Tahun$timeStr");
+        return "${L10n.tr("Every Year")}$timeStr";
       case RepeatType.none:
         return "";
     }

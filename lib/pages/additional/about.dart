@@ -18,7 +18,7 @@ class AboutPage extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          L10n.tr("About Kinday", "Tentang Kinday"),
+          L10n.tr("About Kinday"),
           style: TextStyle(
             fontFamily: "Quicksand",
             fontWeight: FontWeight.bold,
@@ -65,7 +65,7 @@ class AboutPage extends StatelessWidget {
                   const SizedBox(height: 2),
                   // Tagline
                   Text(
-                    L10n.tr("Let's make today manageable", "Mari kelola hari Anda dengan baik"),
+                    L10n.tr("Let's make today manageable"),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: "Quicksand",
@@ -95,7 +95,7 @@ class AboutPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          L10n.tr("What is Kinday?", "Apa itu Kinday?"),
+                          L10n.tr("What is Kinday?"),
                           style: TextStyle(
                             fontFamily: "Quicksand",
                             fontSize: 18,
@@ -105,10 +105,7 @@ class AboutPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          L10n.tr(
-                            "Kinday is a mindful task management application designed to help you balance your energy levels and boost daily focus. Instead of piling up infinite lists, Kinday guides you to plan based on actual capacity, break down intimidating goals with AI, and complete tasks in structured Pomodoro sessions.",
-                            "Kinday adalah aplikasi manajemen tugas sadar yang dirancang untuk membantu Anda menyeimbangkan tingkat energi dan meningkatkan fokus harian. Alih-alih menumpuk daftar tugas tak terbatas, Kinday memandu Anda merencanakan berdasarkan kapasitas nyata, memecah tugas berat dengan bantuan AI, dan menyelesaikan tugas dalam sesi Pomodoro terstruktur."
-                          ),
+                          L10n.tr("Kinday is a mindful task management application designed to help you balance your energy levels and boost daily focus. Instead of piling up infinite lists, Kinday guides you to plan based on actual capacity, break down intimidating goals with AI, and complete tasks in structured Pomodoro sessions."),
                           style: const TextStyle(
                             fontFamily: "Nunito",
                             fontSize: 14,
@@ -127,7 +124,7 @@ class AboutPage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
                       child: Text(
-                        L10n.tr("Key Features", "Fitur Utama"),
+                        L10n.tr("Key Features"),
                         style: TextStyle(
                           fontFamily: "Quicksand",
                           fontSize: 18,
@@ -155,7 +152,7 @@ class AboutPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                L10n.tr("Energy-based Scheduling", "Penjadwalan Berbasis Energi"),
+                                L10n.tr("Energy-based Scheduling"),
                                 style: TextStyle(
                                   fontFamily: "Quicksand",
                                   fontSize: 15,
@@ -165,10 +162,7 @@ class AboutPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                L10n.tr(
-                                  "Assign energy points (Low to High) to matches your real-life mental and physical focus capacity.",
-                                  "Berikan poin energi (Rendah ke Tinggi) untuk mencocokkan tugas dengan kapasitas fokus mental dan fisik Anda."
-                                ),
+                                L10n.tr("Assign energy points (Low to High) to matches your real-life mental and physical focus capacity."),
                                 style: const TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 13,
@@ -199,7 +193,7 @@ class AboutPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                L10n.tr("AI Task Breakdown", "Pemecahan Tugas AI"),
+                                L10n.tr("AI Task Breakdown"),
                                 style: TextStyle(
                                   fontFamily: "Quicksand",
                                   fontSize: 15,
@@ -209,10 +203,7 @@ class AboutPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                L10n.tr(
-                                  "Overwhelmed by huge tasks? Let the built-in AI assistant automatically suggest manageable subtasks.",
-                                  "Kewalahan dengan tugas besar? Biarkan asisten AI bawaan otomatis menyarankan sub-tugas yang mudah dikelola."
-                                ),
+                                L10n.tr("Overwhelmed by huge tasks? Let the built-in AI assistant automatically suggest manageable subtasks."),
                                 style: const TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 13,
@@ -243,7 +234,7 @@ class AboutPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                L10n.tr("Pomodoro Focus Timer", "Timer Fokus Pomodoro"),
+                                L10n.tr("Pomodoro Focus Timer"),
                                 style: TextStyle(
                                   fontFamily: "Quicksand",
                                   fontSize: 15,
@@ -253,10 +244,7 @@ class AboutPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                L10n.tr(
-                                  "Block distractions with an immersive focus timer complete with customizable background soundscapes.",
-                                  "Blokir gangguan dengan timer fokus imersif lengkap dengan audio latar belakang yang dapat disesuaikan."
-                                ),
+                                L10n.tr("Block distractions with an immersive focus timer complete with customizable background soundscapes."),
                                 style: const TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 13,
@@ -274,7 +262,7 @@ class AboutPage extends StatelessWidget {
                   const SizedBox(height: 25),
                   // Footer section
                   Text(
-                    L10n.tr("Designed and developed with ❤️", "Didesain dan dikembangkan dengan ❤️"),
+                    L10n.tr("Designed and developed with ❤️"),
                     style: const TextStyle(
                       fontFamily: "Nunito",
                       fontSize: 12,

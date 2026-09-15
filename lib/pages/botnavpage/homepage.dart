@@ -178,15 +178,15 @@ class _HomepageState extends State<Homepage> {
   String _getEnergyLabel(int level) {
     switch (level) {
       case 5:
-        return L10n.tr("High", "Tinggi");
+        return L10n.tr("High");
       case 4:
-        return L10n.tr("Mid-High", "Cukup Tinggi");
+        return L10n.tr("Mid-High");
       case 3:
-        return L10n.tr("Medium", "Sedang");
+        return L10n.tr("Medium");
       case 2:
-        return L10n.tr("Mid-Low", "Cukup Rendah");
+        return L10n.tr("Mid-Low");
       default:
-        return L10n.tr("Low", "Rendah");
+        return L10n.tr("Low");
     }
   }
 
@@ -196,10 +196,7 @@ class _HomepageState extends State<Homepage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            L10n.tr(
-              "Please write what you want to do today first!",
-              "Silakan tulis apa yang ingin Anda lakukan hari ini terlebih dahulu!",
-            ),
+            L10n.tr("Please write what you want to do today first!"),
           ),
         ),
       );
@@ -210,10 +207,7 @@ class _HomepageState extends State<Homepage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            L10n.tr(
-              "Your daily AI limit of ${PreferenceHandler.maxAiUsagePerDay} breakdowns has been reached! Try again tomorrow.",
-              "Batas harian ${PreferenceHandler.maxAiUsagePerDay} kali pemecahan AI Anda telah tercapai! Coba lagi besok.",
-            ),
+            L10n.tr("Your daily AI limit of ${PreferenceHandler.maxAiUsagePerDay} breakdowns has been reached! Try again tomorrow."),
           ),
         ),
       );
@@ -285,10 +279,7 @@ class _HomepageState extends State<Homepage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr(
-                "Failed to break down task: $e",
-                "Gagal memecah tugas: $e",
-              ),
+              L10n.tr("Failed to break down task: $e"),
             ),
           ),
         );
@@ -352,20 +343,11 @@ class _HomepageState extends State<Homepage> {
                               () {
                                 final hour = DateTime.now().hour;
                                 if (hour < 12) {
-                                  return L10n.tr(
-                                    "Let's start a new day!",
-                                    "Mari mulai hari yang baru!",
-                                  );
+                                  return L10n.tr("Let's start a new day!");
                                 } else if (hour < 17) {
-                                  return L10n.tr(
-                                    "Don't forget to take a break",
-                                    "Jangan lupa untuk istirahat",
-                                  );
+                                  return L10n.tr("Don't forget to take a break");
                                 } else {
-                                  return L10n.tr(
-                                    "You've done your best today!",
-                                    "Kamu telah melakukan yang terbaik hari ini!",
-                                  );
+                                  return L10n.tr("You've done your best today!");
                                 }
                               }(),
                               style: AppTextStyles.affirmation,
@@ -393,7 +375,7 @@ class _HomepageState extends State<Homepage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                L10n.tr("Current Energy", "Energi Saat Ini"),
+                                L10n.tr("Current Energy"),
                                 style: TextStyle(
                                   fontFamily: "Quicksand",
                                   fontWeight: FontWeight.bold,
@@ -414,10 +396,10 @@ class _HomepageState extends State<Homepage> {
                               const SizedBox(height: 2),
                               Text(
                                 !_hasLogs
-                                    ? L10n.tr("No logs yet", "Belum ada log")
+                                    ? L10n.tr("No logs yet")
                                     : _lastUpdatedTime != null
-                                        ? "${L10n.tr("Last Updated", "Terakhir Diperbarui")} ${_lastUpdatedTime!.hour.toString().padLeft(2, '0')}:${_lastUpdatedTime!.minute.toString().padLeft(2, '0')}"
-                                        : L10n.tr("Last Updated", "Terakhir Diperbarui"),
+                                        ? "${L10n.tr("Last Updated")} ${_lastUpdatedTime!.hour.toString().padLeft(2, '0')}:${_lastUpdatedTime!.minute.toString().padLeft(2, '0')}"
+                                        : L10n.tr("Last Updated"),
                                 style: TextStyle(
                                   fontSize: 11,
                                   color: AppColors.button.withValues(
@@ -440,10 +422,7 @@ class _HomepageState extends State<Homepage> {
                                     borderRadius: BorderRadius.circular(24),
                                   ),
                                   title: Text(
-                                    L10n.tr(
-                                      "What's your energy level?",
-                                      "Berapa tingkat energimu?",
-                                    ),
+                                    L10n.tr("What's your energy level?"),
                                     style: TextStyle(
                                       fontFamily: "Quicksand",
                                       fontWeight: FontWeight.bold,
@@ -491,7 +470,7 @@ class _HomepageState extends State<Homepage> {
                                     TextButton(
                                       onPressed: () => Navigator.pop(context),
                                       child: Text(
-                                        L10n.tr("Cancel", "Batal"),
+                                        L10n.tr("Cancel"),
                                         style: const TextStyle(
                                           color: Colors.grey,
                                         ),
@@ -521,7 +500,7 @@ class _HomepageState extends State<Homepage> {
                                         ),
                                       ),
                                       child: Text(
-                                        L10n.tr("Save", "Simpan"),
+                                        L10n.tr("Save"),
                                         style: const TextStyle(
                                           color: Colors.white,
                                         ),
@@ -548,7 +527,7 @@ class _HomepageState extends State<Homepage> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                L10n.tr("Log", "Catat"),
+                                L10n.tr("Log"),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -594,10 +573,7 @@ class _HomepageState extends State<Homepage> {
                                 ),
                                 const SizedBox(width: 6),
                                 Text(
-                                  L10n.tr(
-                                    "Suggested for now",
-                                    "Disarankan saat ini",
-                                  ),
+                                  L10n.tr("Suggested for now"),
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
@@ -640,10 +616,7 @@ class _HomepageState extends State<Homepage> {
                                 children: [
                                   Text(
                                     _suggestedTask?.title ??
-                                        L10n.tr(
-                                          "No Suggested Task",
-                                          "Tidak Ada Tugas Disarankan",
-                                        ),
+                                        L10n.tr("No Suggested Task"),
                                     style: TextStyle(
                                       fontFamily: "Quicksand",
                                       fontWeight: FontWeight.bold,
@@ -656,10 +629,7 @@ class _HomepageState extends State<Homepage> {
                                   const SizedBox(height: 4),
                                   Text(
                                     _suggestedTask?.description ??
-                                        L10n.tr(
-                                          "No description",
-                                          "Tidak ada deskripsi",
-                                        ),
+                                        L10n.tr("No description"),
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -691,10 +661,7 @@ class _HomepageState extends State<Homepage> {
                                             const SizedBox(width: 6),
                                             Expanded(
                                               child: Text(
-                                                L10n.tr(
-                                                  "Your energy is low, but this task is urgent!",
-                                                  "Energi Anda rendah, tetapi tugas ini sangat mendesak!",
-                                                ),
+                                                L10n.tr("Your energy is low, but this task is urgent!"),
                                                 style: TextStyle(
                                                   fontSize: 11,
                                                   fontWeight: FontWeight.bold,
@@ -841,10 +808,7 @@ class _HomepageState extends State<Homepage> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    L10n.tr(
-                                      "No suggested task available.",
-                                      "Tidak ada tugas yang disarankan.",
-                                    ),
+                                    L10n.tr("No suggested task available."),
                                     style: TextStyle(color: AppColors.button),
                                   ),
                                 ),
@@ -866,10 +830,7 @@ class _HomepageState extends State<Homepage> {
                               const Icon(Icons.timer_outlined, size: 20),
                               const SizedBox(width: 8),
                               Text(
-                                L10n.tr(
-                                  "Start Focus Session",
-                                  "Mulai Sesi Fokus",
-                                ),
+                                L10n.tr("Start Focus Session"),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
@@ -899,10 +860,7 @@ class _HomepageState extends State<Homepage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    L10n.tr(
-                                      "Today's Progress",
-                                      "Kemajuan Hari Ini",
-                                    ),
+                                    L10n.tr("Today's Progress"),
                                     style: TextStyle(
                                       fontFamily: "Quicksand",
                                       fontWeight: FontWeight.bold,
@@ -912,10 +870,7 @@ class _HomepageState extends State<Homepage> {
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
-                                    L10n.tr(
-                                      "$_completedTasksCount out of $_totalTasks tasks",
-                                      "$_completedTasksCount dari $_totalTasks tugas",
-                                    ),
+                                    L10n.tr("$_completedTasksCount out of $_totalTasks tasks"),
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: AppColors.normaltext,
@@ -952,10 +907,7 @@ class _HomepageState extends State<Homepage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          L10n.tr(
-                            "Turn big tasks into small, doable steps",
-                            "Ubah tugas besar menjadi langkah kecil yang bisa dilakukan",
-                          ),
+                          L10n.tr("Turn big tasks into small, doable steps"),
                           style: TextStyle(
                             fontFamily: "Quicksand",
                             fontWeight: FontWeight.bold,
@@ -973,10 +925,7 @@ class _HomepageState extends State<Homepage> {
                             fontSize: 14,
                           ),
                           decoration: InputDecoration(
-                            hintText: L10n.tr(
-                              "Let AI break down your task...",
-                              "Biar AI memecah tugas Anda...",
-                            ),
+                            hintText: L10n.tr("Let AI break down your task..."),
                             hintStyle: TextStyle(
                               color: AppColors.button.withValues(alpha: 0.4),
                             ),
@@ -1035,7 +984,7 @@ class _HomepageState extends State<Homepage> {
                                     color: Colors.white,
                                   ),
                                   label: Text(
-                                    L10n.tr("Break down task", "Pecah Tugas"),
+                                    L10n.tr("Break down task"),
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14,
@@ -1076,10 +1025,7 @@ class _HomepageState extends State<Homepage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      L10n.tr(
-                                        "Schedule & Calendar",
-                                        "Jadwal & Kalender",
-                                      ),
+                                      L10n.tr("Schedule & Calendar"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -1088,10 +1034,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     Text(
-                                      L10n.tr(
-                                        "Plan your days gently",
-                                        "Rencanakan harimu dengan tenang",
-                                      ),
+                                      L10n.tr("Plan your days gently"),
                                       style: TextStyle(
                                         fontFamily: "Nunito",
                                         fontSize: 12,
@@ -1105,14 +1048,8 @@ class _HomepageState extends State<Homepage> {
                               ),
                               IconButton(
                                 tooltip: _isCalendarMonthly
-                                    ? L10n.tr(
-                                        "Switch to Weekly View",
-                                        "Ubah ke Tampilan Mingguan",
-                                      )
-                                    : L10n.tr(
-                                        "Switch to Monthly View",
-                                        "Ubah ke Tampilan Bulanan",
-                                      ),
+                                    ? L10n.tr("Switch to Weekly View")
+                                    : L10n.tr("Switch to Monthly View"),
                                 icon: Icon(
                                   _isCalendarMonthly
                                       ? Icons.view_week_rounded
@@ -1176,7 +1113,7 @@ class _HomepageState extends State<Homepage> {
                                   const SizedBox(width: 6),
                                   Expanded(
                                     child: Text(
-                                      "${L10n.tr("Agenda for", "Agenda")} ${_dashboardSelectedDate.day}/${_dashboardSelectedDate.month}/${_dashboardSelectedDate.year}",
+                                      "${L10n.tr("Agenda for")} ${_dashboardSelectedDate.day}/${_dashboardSelectedDate.month}/${_dashboardSelectedDate.year}",
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -1188,7 +1125,7 @@ class _HomepageState extends State<Homepage> {
                                   ),
                                   const SizedBox(width: 6),
                                   Text(
-                                    "${selectedDateTasks.length + _gcalEvents.length} ${L10n.tr("items", "item")}",
+                                    "${selectedDateTasks.length + _gcalEvents.length} ${L10n.tr("items")}",
                                     style: TextStyle(
                                       fontFamily: "Nunito",
                                       fontWeight: FontWeight.bold,
@@ -1249,10 +1186,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                       const SizedBox(height: 6),
                                       Text(
-                                        L10n.tr(
-                                          "No tasks or events on this date!",
-                                          "Tidak ada tugas atau agenda di tanggal ini!",
-                                        ),
+                                        L10n.tr("No tasks or events on this date!"),
                                         style: TextStyle(
                                           fontFamily: "Nunito",
                                           fontSize: 12,
@@ -1376,7 +1310,7 @@ class _HomepageState extends State<Homepage> {
               color: AppColors.button,
               size: 26,
             ),
-            tooltip: L10n.tr("Start Focus", "Mulai Fokus"),
+            tooltip: L10n.tr("Start Focus"),
             onPressed: () {
               TaskCard.activePomodoroTask = task;
               final mainState = context.findAncestorStateOfType<MainpageState>();

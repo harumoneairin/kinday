@@ -126,7 +126,7 @@ class _EnergyPageState extends State<EnergyPage> {
 
     // --- 2. Productivity drop day calculation ---
     final dbTasks = await dbHelper.getTasksForUser(userId);
-    String worstProductivityDay = L10n.tr("Friday", "Jumat");
+    String worstProductivityDay = L10n.tr("Friday");
     bool hasProductivityData = false;
     if (dbTasks.isNotEmpty) {
       final Map<int, List<TaskCard>> tasksByDay = {};
@@ -152,16 +152,16 @@ class _EnergyPageState extends State<EnergyPage> {
 
         if (worstDay != -1) {
           final dayNames = {
-            1: L10n.tr("Monday", "Senin"),
-            2: L10n.tr("Tuesday", "Selasa"),
-            3: L10n.tr("Wednesday", "Rabu"),
-            4: L10n.tr("Thursday", "Kamis"),
-            5: L10n.tr("Friday", "Jumat"),
-            6: L10n.tr("Saturday", "Sabtu"),
-            7: L10n.tr("Sunday", "Minggu"),
+            1: L10n.tr("Monday"),
+            2: L10n.tr("Tuesday"),
+            3: L10n.tr("Wednesday"),
+            4: L10n.tr("Thursday"),
+            5: L10n.tr("Friday"),
+            6: L10n.tr("Saturday"),
+            7: L10n.tr("Sunday"),
           };
           worstProductivityDay =
-              dayNames[worstDay] ?? L10n.tr("Friday", "Jumat");
+              dayNames[worstDay] ?? L10n.tr("Friday");
           hasProductivityData = true;
         }
       }
@@ -212,22 +212,13 @@ class _EnergyPageState extends State<EnergyPage> {
     }
 
     final double diff = thisWeekAvg - lastWeekAvg;
-    String comparisonStr = L10n.tr("stable", "stabil");
+    String comparisonStr = L10n.tr("stable");
     if (diff > 0) {
-      comparisonStr = L10n.tr(
-        "increased by ${diff.toStringAsFixed(1)} levels from last week",
-        "naik ${diff.toStringAsFixed(1)} tingkat dari minggu lalu",
-      );
+      comparisonStr = L10n.tr("increased by ${diff.toStringAsFixed(1)} levels from last week");
     } else if (diff < 0) {
-      comparisonStr = L10n.tr(
-        "decreased by ${diff.abs().toStringAsFixed(1)} levels from last week",
-        "turun ${diff.abs().toStringAsFixed(1)} tingkat dari minggu lalu",
-      );
+      comparisonStr = L10n.tr("decreased by ${diff.abs().toStringAsFixed(1)} levels from last week");
     } else {
-      comparisonStr = L10n.tr(
-        "stable same as last week",
-        "stabil sama dengan minggu lalu",
-      );
+      comparisonStr = L10n.tr("stable same as last week");
     }
 
     if (!mounted) return;
@@ -253,15 +244,15 @@ class _EnergyPageState extends State<EnergyPage> {
   String _getEnergyLabel(int level) {
     switch (level) {
       case 5:
-        return L10n.tr("High", "Tinggi");
+        return L10n.tr("High");
       case 4:
-        return L10n.tr("Mid-High", "Cukup Tinggi");
+        return L10n.tr("Mid-High");
       case 3:
-        return L10n.tr("Medium", "Sedang");
+        return L10n.tr("Medium");
       case 2:
-        return L10n.tr("Mid-Low", "Cukup Rendah");
+        return L10n.tr("Mid-Low");
       default:
-        return L10n.tr("Low", "Rendah");
+        return L10n.tr("Low");
     }
   }
 
@@ -342,13 +333,13 @@ class _EnergyPageState extends State<EnergyPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          L10n.tr("Energy Log", "Log Energi"),
+                          L10n.tr("Energy Log"),
                           style: AppTextStyles.greeting,
                         ),
                         Transform.translate(
                           offset: const Offset(0, -5),
                           child: Text(
-                            L10n.tr("Understand your rhythm", "Pahami ritme harianmu"),
+                            L10n.tr("Understand your rhythm"),
                             style: AppTextStyles.affirmation,
                           ),
                         ),
@@ -372,7 +363,7 @@ class _EnergyPageState extends State<EnergyPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                L10n.tr("Current Energy", "Energi Saat Ini"),
+                                L10n.tr("Current Energy"),
                                 style: TextStyle(
                                   color: AppColors.button,
                                   fontWeight: FontWeight.bold,
@@ -415,7 +406,7 @@ class _EnergyPageState extends State<EnergyPage> {
                                 borderRadius: BorderRadius.circular(24),
                               ),
                               title: Text(
-                                L10n.tr("What's your energy level?", "Berapa tingkat energimu?"),
+                                L10n.tr("What's your energy level?"),
                                 style: TextStyle(
                                   fontFamily: "Quicksand",
                                   fontWeight: FontWeight.bold,
@@ -460,7 +451,7 @@ class _EnergyPageState extends State<EnergyPage> {
                                 TextButton(
                                   onPressed: () => Navigator.pop(context),
                                   child: Text(
-                                    L10n.tr("Cancel", "Batal"),
+                                    L10n.tr("Cancel"),
                                     style: const TextStyle(color: Colors.grey),
                                   ),
                                 ),
@@ -486,7 +477,7 @@ class _EnergyPageState extends State<EnergyPage> {
                                     ),
                                   ),
                                   child: Text(
-                                    L10n.tr("Save", "Simpan"),
+                                    L10n.tr("Save"),
                                     style: const TextStyle(color: Colors.white),
                                   ),
                                 ),
@@ -506,7 +497,7 @@ class _EnergyPageState extends State<EnergyPage> {
                       ),
                       icon: const Icon(Icons.edit_rounded, size: 18),
                       label: Text(
-                        L10n.tr("Update Energy Log", "Perbarui Log Energi"),
+                        L10n.tr("Update Energy Log"),
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -527,7 +518,7 @@ class _EnergyPageState extends State<EnergyPage> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          L10n.tr("Daily Energy Rhythm", "Ritme Energi Harian"),
+                          L10n.tr("Daily Energy Rhythm"),
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -651,7 +642,7 @@ class _EnergyPageState extends State<EnergyPage> {
                               dataSource: averageCurveData,
                               xValueMapper: (data, _) => data.hour,
                               yValueMapper: (data, _) => data.energy,
-                              name: L10n.tr("Average Rhythm", "Rata-rata Ritme"),
+                              name: L10n.tr("Average Rhythm"),
                               gradient: LinearGradient(
                                 colors: [
                                   AppColors.button.withValues(alpha: 0.35),
@@ -667,7 +658,7 @@ class _EnergyPageState extends State<EnergyPage> {
                             dataSource: scatterData,
                             xValueMapper: (data, _) => data.hour,
                             yValueMapper: (data, _) => data.energy,
-                            name: L10n.tr("Logs", "Log"),
+                            name: L10n.tr("Logs"),
                             markerSettings: MarkerSettings(
                               isVisible: true,
                               shape: DataMarkerType.circle,
@@ -695,7 +686,7 @@ class _EnergyPageState extends State<EnergyPage> {
                         Icon(Icons.insights, color: AppColors.button, size: 22),
                         const SizedBox(width: 8),
                         Text(
-                          L10n.tr("Energy & Productivity Insights", "Wawasan Energi & Produktivitas"),
+                          L10n.tr("Energy & Productivity Insights"),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -709,44 +700,26 @@ class _EnergyPageState extends State<EnergyPage> {
                     _buildInsightRow(
                       icon: Icons.access_time_filled_rounded,
                       iconColor: Colors.orangeAccent,
-                      title: L10n.tr(
-                        "Highest & Lowest Energy Hours",
-                        "Jam Energi Tertinggi & Terendah",
-                      ),
+                      title: L10n.tr("Highest & Lowest Energy Hours"),
                       description: _hasHourlyEnergyData
-                          ? L10n.tr(
-                              "Your energy tends to peak at $_highestEnergyHourStr and reach its lowest point at $_lowestEnergyHourStr.",
-                              "Energi Anda cenderung berada di puncak pada pukul $_highestEnergyHourStr dan di titik terendah pada pukul $_lowestEnergyHourStr.",
-                            )
-                          : L10n.tr("No data yet", "Belum ada data"),
+                          ? L10n.tr("Your energy tends to peak at $_highestEnergyHourStr and reach its lowest point at $_lowestEnergyHourStr.")
+                          : L10n.tr("No data yet"),
                     ),
                     _buildInsightRow(
                       icon: Icons.trending_down_rounded,
                       iconColor: Colors.redAccent,
-                      title: L10n.tr(
-                        "Productivity Drop",
-                        "Penurunan Produktivitas",
-                      ),
+                      title: L10n.tr("Productivity Drop"),
                       description: _hasProductivityData
-                          ? L10n.tr(
-                              "Based on your daily task completion rate, your productivity tends to drop on $_productivityDropDay.",
-                              "Berdasarkan tingkat penyelesaian tugas harian, produktivitas Anda cenderung menurun pada hari $_productivityDropDay.",
-                            )
-                          : L10n.tr("No data yet", "Belum ada data"),
+                          ? L10n.tr("Based on your daily task completion rate, your productivity tends to drop on $_productivityDropDay.")
+                          : L10n.tr("No data yet"),
                     ),
                     _buildInsightRow(
                       icon: Icons.compare_arrows_rounded,
                       iconColor: Colors.blueAccent,
-                      title: L10n.tr(
-                        "Weekly Energy Trend",
-                        "Tren Energi Mingguan",
-                      ),
+                      title: L10n.tr("Weekly Energy Trend"),
                       description: _hasWeeklyEnergyData
-                          ? L10n.tr(
-                              "Your average energy level this week (${_avgEnergyThisWeek.toStringAsFixed(1)}) is $_energyComparisonStr compared to last week (${_avgEnergyLastWeek.toStringAsFixed(1)}).",
-                              "Rata-rata level energi Anda minggu ini (${_avgEnergyThisWeek.toStringAsFixed(1)}) $_energyComparisonStr dibanding minggu lalu (${_avgEnergyLastWeek.toStringAsFixed(1)}).",
-                            )
-                          : L10n.tr("No data yet", "Belum ada data"),
+                          ? L10n.tr("Your average energy level this week (${_avgEnergyThisWeek.toStringAsFixed(1)}) is $_energyComparisonStr compared to last week (${_avgEnergyLastWeek.toStringAsFixed(1)}).")
+                          : L10n.tr("No data yet"),
                     ),
                   ],
                 ),

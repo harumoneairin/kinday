@@ -181,7 +181,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                 borderRadius: BorderRadius.circular(20),
               ),
               title: Text(
-                L10n.tr("Restore Draft?", "Pulihkan Draf?"),
+                L10n.tr("Restore Draft?"),
                 style: TextStyle(
                   fontFamily: "Quicksand",
                   fontWeight: FontWeight.bold,
@@ -189,10 +189,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                 ),
               ),
               content: Text(
-                L10n.tr(
-                  "You have an unsaved task draft. Would you like to restore it?",
-                  "Anda memiliki draf tugas yang belum disimpan. Apakah Anda ingin memulihkannya?",
-                ),
+                L10n.tr("You have an unsaved task draft. Would you like to restore it?"),
               ),
               actions: [
                 TextButton(
@@ -201,7 +198,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    L10n.tr("Discard", "Buang"),
+                    L10n.tr("Discard"),
                     style: const TextStyle(color: Colors.redAccent),
                   ),
                 ),
@@ -217,7 +214,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                     ),
                   ),
                   child: Text(
-                    L10n.tr("Restore", "Pulihkan"),
+                    L10n.tr("Restore"),
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),
@@ -368,7 +365,9 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
         });
         messenger.showSnackBar(
           SnackBar(
-            content: Text("Speech recognition error: ${error.errorMsg}"),
+            content: Text(
+              L10n.tr("Speech recognition error: ${error.errorMsg}"),
+            ),
           ),
         );
       },
@@ -463,10 +462,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            L10n.tr(
-              "Please write what you want to do today first!",
-              "Silakan tulis apa yang ingin Anda lakukan hari ini terlebih dahulu!",
-            ),
+            L10n.tr("Please write what you want to do today first!"),
           ),
         ),
       );
@@ -477,10 +473,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            L10n.tr(
-              "Your daily AI limit of ${PreferenceHandler.maxAiUsagePerDay} breakdowns has been reached! Try again tomorrow.",
-              "Batas harian ${PreferenceHandler.maxAiUsagePerDay} kali pemecahan AI Anda telah tercapai! Coba lagi besok.",
-            ),
+            L10n.tr("Your daily AI limit of ${PreferenceHandler.maxAiUsagePerDay} breakdowns has been reached! Try again tomorrow."),
           ),
         ),
       );
@@ -537,10 +530,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  L10n.tr(
-                    "AI could not generate subtasks. Try a more descriptive task.",
-                    "AI tidak dapat menghasilkan sub-tugas. Coba tugas yang lebih deskriptif.",
-                  ),
+                  L10n.tr("AI could not generate subtasks. Try a more descriptive task."),
                 ),
               ),
             );
@@ -558,10 +548,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr(
-                "Failed to break down task: $e",
-                "Gagal memecah tugas: $e",
-              ),
+              L10n.tr("Failed to break down task: $e"),
             ),
           ),
         );
@@ -613,7 +600,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          L10n.tr("AI Subtasks", "Sub-tugas AI"),
+                          L10n.tr("AI Subtasks"),
                           style: TextStyle(
                             fontFamily: "Quicksand",
                             fontWeight: FontWeight.bold,
@@ -622,10 +609,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           ),
                         ),
                         Text(
-                          L10n.tr(
-                            "$selectedCount of ${aiSubtasks.length} selected",
-                            "$selectedCount dari ${aiSubtasks.length} dipilih",
-                          ),
+                          L10n.tr("$selectedCount of ${aiSubtasks.length} selected"),
                           style: TextStyle(
                             fontFamily: "Nunito",
                             fontSize: 12,
@@ -744,7 +728,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
                         child: Text(
-                          L10n.tr("Cancel", "Batal"),
+                          L10n.tr("Cancel"),
                           style: TextStyle(
                             fontFamily: "Quicksand",
                             fontWeight: FontWeight.bold,
@@ -770,10 +754,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           elevation: 0,
                         ),
                         child: Text(
-                          L10n.tr(
-                            "Add ($selectedCount)",
-                            "Tambah ($selectedCount)",
-                          ),
+                          L10n.tr("Add ($selectedCount)"),
                           style: const TextStyle(
                             fontFamily: "Quicksand",
                             fontWeight: FontWeight.bold,
@@ -806,10 +787,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr(
-                "$addedCount subtask(s) added successfully!",
-                "$addedCount sub-tugas berhasil ditambahkan!",
-              ),
+              L10n.tr("$addedCount subtask(s) added successfully!"),
             ),
           ),
         );
@@ -868,12 +846,12 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                            Text(
-                            L10n.tr("Create New Task", "Buat Tugas Baru"),
+                            L10n.tr("Create New Task"),
                             style: AppTextStyles.greeting,
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            L10n.tr("Tiny progress is still progress", "Kemajuan kecil tetaplah kemajuan"),
+                            L10n.tr("Tiny progress is still progress"),
                             style: AppTextStyles.affirmation,
                           ),
                         ],
@@ -906,7 +884,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              L10n.tr("What do you want to do today?", "Apa yang ingin Anda lakukan hari ini?"),
+                              L10n.tr("What do you want to do today?"),
                               style: TextStyle(
                                 fontFamily: "Quicksand",
                                 fontWeight: FontWeight.bold,
@@ -938,7 +916,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           fontWeight: FontWeight.w600,
                         ),
                         decoration: InputDecoration(
-                          hintText: L10n.tr("eg. Study for Exam", "misal: Belajar untuk Ujian"),
+                          hintText: L10n.tr("eg. Study for Exam"),
                           hintStyle: TextStyle(
                             color: AppColors.button.withValues(alpha: 0.5),
                             fontFamily: "Nunito",
@@ -985,7 +963,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           ),
                           const SizedBox(width: 10),
                            Text(
-                            L10n.tr("Description (Optional)", "Deskripsi (Opsional)"),
+                            L10n.tr("Description (Optional)"),
                             style: TextStyle(
                               fontFamily: "Quicksand",
                               fontWeight: FontWeight.bold,
@@ -1016,7 +994,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           fontWeight: FontWeight.w600,
                         ),
                         decoration: InputDecoration(
-                          hintText: L10n.tr("Add details about this task...", "Tambahkan detail tentang tugas ini..."),
+                          hintText: L10n.tr("Add details about this task..."),
                           hintStyle: TextStyle(
                             color: AppColors.button.withValues(alpha: 0.5),
                             fontFamily: "Nunito",
@@ -1065,7 +1043,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                 ),
                               )
                             : SmallButton(
-                                sign: L10n.tr("Break down task", "Pecah Tugas"),
+                                sign: L10n.tr("Break down task"),
                                 warnaBox: AppColors.button,
                                 textbuttoncolor: Colors.white,
                                 leadImage: AppImage.iconsubtask,
@@ -1110,7 +1088,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                         initialValue: _taskScheduleMode,
                         children: {
                           0: Text(
-                            L10n.tr("Single Task", "Tugas Sekali"),
+                            L10n.tr("Single Task"),
                             style: TextStyle(
                               fontFamily: "Quicksand",
                               fontWeight: FontWeight.bold,
@@ -1122,7 +1100,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                             textAlign: TextAlign.center,
                           ),
                           1: Text(
-                            L10n.tr("Repeated Task", "Tugas Berulang"),
+                            L10n.tr("Repeated Task"),
                             style: TextStyle(
                               fontFamily: "Quicksand",
                               fontWeight: FontWeight.bold,
@@ -1169,7 +1147,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: Text(
-                                      L10n.tr("Start Date", "Tanggal Mulai"),
+                                      L10n.tr("Start Date"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -1217,7 +1195,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                               },
                               label: Text(
                                 selectedStartDate == null
-                                    ? L10n.tr("Today", "Hari Ini")
+                                    ? L10n.tr("Today")
                                     : "${selectedStartDate!.day}/${selectedStartDate!.month}/${selectedStartDate!.year}",
                                 style: TextStyle(
                                   color: AppColors.button,
@@ -1251,7 +1229,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: Text(
-                                      L10n.tr("Due Date", "Batas Waktu"),
+                                      L10n.tr("Due Date"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -1317,7 +1295,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   },
                                   label: Text(
                                     selectedDate == null
-                                        ? L10n.tr("Choose Date", "Pilih Tanggal")
+                                        ? L10n.tr("Choose Date")
                                         : "${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}",
                                     style: TextStyle(
                                       color: AppColors.button,
@@ -1354,7 +1332,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Text(
-                                        L10n.tr("Due Time (Opt)", "Waktu Tenggat (Opsional)"),
+                                        L10n.tr("Due Time (Opt)"),
                                         style: TextStyle(
                                           fontFamily: "Quicksand",
                                           fontWeight: FontWeight.bold,
@@ -1418,7 +1396,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                     },
                                     label: Text(
                                       selectedTime == null
-                                          ? L10n.tr("Choose Time", "Pilih Jam")
+                                          ? L10n.tr("Choose Time")
                                           : selectedTime!.format(context),
                                       style: TextStyle(
                                         color: AppColors.button,
@@ -1453,7 +1431,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                     const SizedBox(width: 10),
                                     Expanded(
                                       child: Text(
-                                        L10n.tr("Reminder", "Pengingat"),
+                                        L10n.tr("Reminder"),
                                         style: TextStyle(
                                           fontFamily: "Quicksand",
                                           fontWeight: FontWeight.bold,
@@ -1503,56 +1481,56 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                         DropdownMenuItem(
                                           value: null,
                                           child: Text(
-                                            L10n.tr("No reminder", "Tanpa pengingat"),
+                                            L10n.tr("No reminder"),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         DropdownMenuItem(
                                           value: 0,
                                           child: Text(
-                                            L10n.tr("At due time", "Pada batas waktu"),
+                                            L10n.tr("At due time"),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         DropdownMenuItem(
                                           value: 5,
                                           child: Text(
-                                            L10n.tr("5 minutes before", "5 menit sebelum"),
+                                            L10n.tr("5 minutes before"),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         DropdownMenuItem(
                                           value: 10,
                                           child: Text(
-                                            L10n.tr("10 minutes before", "10 menit sebelum"),
+                                            L10n.tr("10 minutes before"),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         DropdownMenuItem(
                                           value: 15,
                                           child: Text(
-                                            L10n.tr("15 minutes before", "15 menit sebelum"),
+                                            L10n.tr("15 minutes before"),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         DropdownMenuItem(
                                           value: 30,
                                           child: Text(
-                                            L10n.tr("30 minutes before", "30 menit sebelum"),
+                                            L10n.tr("30 minutes before"),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         DropdownMenuItem(
                                           value: 60,
                                           child: Text(
-                                            L10n.tr("1 hour before", "1 jam sebelum"),
+                                            L10n.tr("1 hour before"),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         DropdownMenuItem(
                                           value: 1440,
                                           child: Text(
-                                            L10n.tr("1 day before", "1 hari sebelum"),
+                                            L10n.tr("1 day before"),
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
@@ -1587,7 +1565,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: Text(
-                                      L10n.tr("Repeat", "Ulang"),
+                                      L10n.tr("Repeat"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -1639,35 +1617,35 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                       DropdownMenuItem(
                                         value: RepeatType.daily,
                                         child: Text(
-                                          L10n.tr("Every Day", "Setiap Hari"),
+                                          L10n.tr("Every Day"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: RepeatType.selectedDays,
                                         child: Text(
-                                          L10n.tr("Every Few Days", "Setiap Beberapa Hari"),
+                                          L10n.tr("Every Few Days"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: RepeatType.weekly,
                                         child: Text(
-                                          L10n.tr("Every Week", "Setiap Minggu"),
+                                          L10n.tr("Every Week"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: RepeatType.monthly,
                                         child: Text(
-                                          L10n.tr("Every Month", "Setiap Bulan"),
+                                          L10n.tr("Every Month"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: RepeatType.yearly,
                                         child: Text(
-                                          L10n.tr("Every Year", "Setiap Tahun"),
+                                          L10n.tr("Every Year"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
@@ -1769,7 +1747,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: Text(
-                                      L10n.tr("Start Date", "Tanggal Mulai"),
+                                      L10n.tr("Start Date"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -1817,7 +1795,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                               },
                               label: Text(
                                 selectedStartDate == null
-                                    ? L10n.tr("Today", "Hari Ini")
+                                    ? L10n.tr("Today")
                                     : "${selectedStartDate!.day}/${selectedStartDate!.month}/${selectedStartDate!.year}",
                                 style: TextStyle(
                                   color: AppColors.button,
@@ -1851,7 +1829,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: Text(
-                                      L10n.tr("Time (Opt)", "Jam Pelaksanaan (Opsional)"),
+                                      L10n.tr("Time (Opt)"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -1915,7 +1893,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   },
                                   label: Text(
                                     selectedTime == null
-                                        ? L10n.tr("Choose Time", "Pilih Jam")
+                                        ? L10n.tr("Choose Time")
                                         : selectedTime!.format(context),
                                     style: TextStyle(
                                       color: AppColors.button,
@@ -1950,7 +1928,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: Text(
-                                      L10n.tr("Finish Date (opt.)", "Ulang Sampai (opsional)"),
+                                      L10n.tr("Finish Date (opt.)"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -2016,10 +1994,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   },
                                   label: Text(
                                     _finishDate == null
-                                        ? L10n.tr(
-                                            "Choose Date",
-                                            "Pilih Tanggal",
-                                          )
+                                        ? L10n.tr("Choose Date")
                                         : "${_finishDate!.day}/${_finishDate!.month}/${_finishDate!.year}",
                                     style: TextStyle(
                                       color: AppColors.button,
@@ -2054,7 +2029,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: Text(
-                                      L10n.tr("Reminder", "Pengingat"),
+                                      L10n.tr("Reminder"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -2104,56 +2079,56 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                       DropdownMenuItem(
                                         value: null,
                                         child: Text(
-                                          L10n.tr("No reminder", "Tanpa pengingat"),
+                                          L10n.tr("No reminder"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 0,
                                         child: Text(
-                                          L10n.tr("At task time", "Pada jam tugas"),
+                                          L10n.tr("At task time"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 5,
                                         child: Text(
-                                          L10n.tr("5 minutes before", "5 menit sebelum"),
+                                          L10n.tr("5 minutes before"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 10,
                                         child: Text(
-                                          L10n.tr("10 minutes before", "10 menit sebelum"),
+                                          L10n.tr("10 minutes before"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 15,
                                         child: Text(
-                                          L10n.tr("15 minutes before", "15 menit sebelum"),
+                                          L10n.tr("15 minutes before"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 30,
                                         child: Text(
-                                          L10n.tr("30 minutes before", "30 menit sebelum"),
+                                          L10n.tr("30 minutes before"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 60,
                                         child: Text(
-                                          L10n.tr("1 hour before", "1 jam sebelum"),
+                                          L10n.tr("1 hour before"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       DropdownMenuItem(
                                         value: 1440,
                                         child: Text(
-                                          L10n.tr("1 day before", "1 hari sebelum"),
+                                          L10n.tr("1 day before"),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
@@ -2202,7 +2177,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                 const SizedBox(width: 10),
                                 Expanded(
                                   child: Text(
-                                    L10n.tr("Priority", "Prioritas"),
+                                    L10n.tr("Priority"),
                                     style: TextStyle(
                                       fontFamily: "Quicksand",
                                       fontWeight: FontWeight.bold,
@@ -2300,7 +2275,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  L10n.tr("Energy level required", "Tingkat energi yang dibutuhkan"),
+                                  L10n.tr("Energy level required"),
                                   style: TextStyle(
                                     fontFamily: "Quicksand",
                                     fontWeight: FontWeight.bold,
@@ -2411,7 +2386,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                               ),
                               const SizedBox(width: 8),
                               Text(
-                                L10n.tr("Subtasks", "Sub-tugas"),
+                                L10n.tr("Subtasks"),
                                 style: TextStyle(
                                   fontFamily: "Quicksand",
                                   fontWeight: FontWeight.bold,
@@ -2460,10 +2435,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                     minWidth: 32,
                                     minHeight: 32,
                                   ),
-                                  tooltip: L10n.tr(
-                                    "Sort subtasks",
-                                    "Urutkan sub-tugas",
-                                  ),
+                                  tooltip: L10n.tr("Sort subtasks"),
                                   onSelected: _sortSubtasks,
                                   color: isDark
                                       ? Colors.grey.shade900
@@ -2528,7 +2500,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                 ),
                                 icon: const Icon(Icons.add_rounded, size: 15),
                                 label: Text(
-                                  L10n.tr("Add", "Tambah"),
+                                  L10n.tr("Add"),
                                   style: const TextStyle(
                                     fontFamily: "Quicksand",
                                     fontWeight: FontWeight.bold,
@@ -2574,10 +2546,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   ),
                                   const SizedBox(height: 12),
                                   Text(
-                                    L10n.tr(
-                                      "No subtasks yet",
-                                      "Belum ada sub-tugas",
-                                    ),
+                                    L10n.tr("No subtasks yet"),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontFamily: "Quicksand",
@@ -2588,10 +2557,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                   ),
                                   const SizedBox(height: 6),
                                   Text(
-                                    L10n.tr(
-                                      "Break this task down or keep it simple!",
-                                      "Pecah tugas ini atau biarkan sederhana!",
-                                    ),
+                                    L10n.tr("Break this task down or keep it simple!"),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily: "Nunito",
@@ -2735,10 +2701,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                                 .withValues(alpha: 0.7),
                                             size: 18,
                                           ),
-                                          tooltip: L10n.tr(
-                                            "Edit",
-                                            "Ubah",
-                                          ),
+                                          tooltip: L10n.tr("Edit"),
                                           onPressed: () =>
                                               _showEditSubtaskDialog(index),
                                         ),
@@ -2755,10 +2718,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                             color: Colors.redAccent,
                                             size: 18,
                                           ),
-                                          tooltip: L10n.tr(
-                                            "Delete",
-                                            "Hapus",
-                                          ),
+                                          tooltip: L10n.tr("Delete"),
                                           onPressed: () {
                                             setState(() {
                                               subtasks.removeAt(index);
@@ -2791,7 +2751,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                       if (title.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(L10n.tr("Task title cannot be empty", "Judul tugas tidak boleh kosong")),
+                            content: Text(L10n.tr("Task title cannot be empty")),
                           ),
                         );
                         return;
@@ -2882,7 +2842,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                       ),
                     ),
                     label: Text(
-                      L10n.tr("Save Task", "Simpan Tugas"),
+                      L10n.tr("Save Task"),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -2911,7 +2871,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
             return AlertDialog(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               title: Text(
-                L10n.tr("Add Subtask", "Tambah Sub-tugas"),
+                L10n.tr("Add Subtask"),
                 style: TextStyle(
                   fontFamily: "Quicksand",
                   fontWeight: FontWeight.bold,
@@ -2933,7 +2893,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                 },
                 style: TextStyle(color: AppColors.button, fontFamily: "Nunito"),
                 decoration: InputDecoration(
-                  hintText: L10n.tr("Eg. Read Chapter 1", "Misal: Baca Bab 1"),
+                  hintText: L10n.tr("Eg. Read Chapter 1"),
                   hintStyle: TextStyle(color: AppColors.button.withValues(alpha: 0.5)),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                   focusedBorder: OutlineInputBorder(
@@ -2947,7 +2907,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                 TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text(
-                    L10n.tr("Done", "Selesai"),
+                    L10n.tr("Done"),
                     style: TextStyle(color: AppColors.button.withValues(alpha: 0.7)),
                   ),
                 ),
@@ -2972,7 +2932,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: Text(L10n.tr("Add", "Tambah"), style: const TextStyle(color: Colors.white)),
+                  child: Text(L10n.tr("Add"), style: const TextStyle(color: Colors.white)),
                 ),
               ],
             );
@@ -2995,7 +2955,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
             borderRadius: BorderRadius.circular(20),
           ),
           title: Text(
-            L10n.tr("Edit Subtask", "Ubah Sub-tugas"),
+            L10n.tr("Edit Subtask"),
             style: TextStyle(
               fontFamily: "Quicksand",
               fontWeight: FontWeight.bold,
@@ -3020,7 +2980,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
               fontFamily: "Nunito",
             ),
             decoration: InputDecoration(
-              hintText: L10n.tr("Edit subtask title", "Ubah judul sub-tugas"),
+              hintText: L10n.tr("Edit subtask title"),
               hintStyle: TextStyle(
                 color: AppColors.button.withValues(alpha: 0.5),
               ),
@@ -3041,7 +3001,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text(
-                L10n.tr("Cancel", "Batal"),
+                L10n.tr("Cancel"),
                 style: TextStyle(
                   color: AppColors.button.withValues(alpha: 0.7),
                 ),
@@ -3065,7 +3025,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                 ),
               ),
               child: Text(
-                L10n.tr("Save", "Simpan"),
+                L10n.tr("Save"),
                 style: const TextStyle(color: Colors.white),
               ),
             ),

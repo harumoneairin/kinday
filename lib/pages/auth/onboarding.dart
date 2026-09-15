@@ -101,7 +101,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       TextButton(
                         onPressed: () => _finishOnboarding(context),
                         child: Text(
-                          L10n.tr("Skip", "Lewati"),
+                          L10n.tr("Skip"),
                           style: TextStyle(
                             fontFamily: "Quicksand",
                             fontWeight: FontWeight.bold,
@@ -257,8 +257,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         children: [
                           Text(
                             _currentPage == _slides.length - 1
-                                ? L10n.tr("Get Started", "Mulai")
-                                : L10n.tr("Next", "Lanjut"),
+                                ? L10n.tr("Get Started")
+                                : L10n.tr("Next"),
                             style: const TextStyle(
                               fontFamily: "Quicksand",
                               fontSize: 16,

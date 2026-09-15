@@ -95,7 +95,7 @@ class _SettingProfileState extends State<SettingProfile> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr("Successfully backed up!", "Berhasil di backup!"),
+              L10n.tr("Successfully backed up!"),
             ),
             duration: const Duration(seconds: 2),
           ),
@@ -106,10 +106,7 @@ class _SettingProfileState extends State<SettingProfile> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr(
-                "Backup failed! Make sure you are logged in to Firebase.",
-                "Gagal mencadangkan! Pastikan Anda masuk ke Firebase.",
-              ),
+              L10n.tr("Backup failed! Make sure you are logged in to Firebase."),
             ),
             duration: const Duration(seconds: 2),
           ),
@@ -136,7 +133,7 @@ class _SettingProfileState extends State<SettingProfile> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr("Successfully restored!", "Berhasil di restore!"),
+              L10n.tr("Successfully restored!"),
             ),
             duration: const Duration(seconds: 2),
           ),
@@ -147,10 +144,7 @@ class _SettingProfileState extends State<SettingProfile> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr(
-                "Restore failed! No backup found or not logged in.",
-                "Gagal memulihkan! Pencadangan tidak ditemukan atau belum masuk.",
-              ),
+              L10n.tr("Restore failed! No backup found or not logged in."),
             ),
             duration: const Duration(seconds: 2),
           ),
@@ -276,7 +270,7 @@ class _SettingProfileState extends State<SettingProfile> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr("Google Calendar disconnected", "Google Calendar terputus"),
+              L10n.tr("Google Calendar disconnected"),
             ),
           ),
         );
@@ -288,10 +282,7 @@ class _SettingProfileState extends State<SettingProfile> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                L10n.tr(
-                  "Google Calendar connected successfully!",
-                  "Google Calendar berhasil terhubung!",
-                ),
+                L10n.tr("Google Calendar connected successfully!"),
               ),
               backgroundColor: AppColors.button,
             ),
@@ -300,7 +291,7 @@ class _SettingProfileState extends State<SettingProfile> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                "${L10n.tr("Failed to connect Google Calendar", "Gagal menghubungkan Google Calendar")}: $error",
+                "${L10n.tr("Failed to connect Google Calendar")}: $error",
               ),
               duration: const Duration(seconds: 5),
             ),
@@ -432,7 +423,7 @@ class _SettingProfileState extends State<SettingProfile> {
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                                 child: Text(
-                                  L10n.tr("Select Image Source", "Pilih Sumber Gambar"),
+                                  L10n.tr("Select Image Source"),
                                   style: TextStyle(
                                     fontFamily: "Quicksand",
                                     fontWeight: FontWeight.bold,
@@ -445,7 +436,7 @@ class _SettingProfileState extends State<SettingProfile> {
                               ListTile(
                                 leading: Icon(Icons.camera_alt_rounded, color: AppColors.button),
                                 title: Text(
-                                  L10n.tr("Take Photo", "Ambil Foto"),
+                                  L10n.tr("Take Photo"),
                                   style: TextStyle(
                                     fontFamily: "Quicksand",
                                     fontWeight: FontWeight.bold,
@@ -457,7 +448,7 @@ class _SettingProfileState extends State<SettingProfile> {
                               ListTile(
                                 leading: Icon(Icons.photo_library_rounded, color: AppColors.button),
                                 title: Text(
-                                  L10n.tr("Choose from Gallery", "Pilih dari Galeri"),
+                                  L10n.tr("Choose from Gallery"),
                                   style: TextStyle(
                                     fontFamily: "Quicksand",
                                     fontWeight: FontWeight.bold,
@@ -529,7 +520,7 @@ class _SettingProfileState extends State<SettingProfile> {
                 borderRadius: BorderRadius.circular(20),
               ),
               title: Text(
-                L10n.tr("Edit Profile", "Ubah Profil"),
+                L10n.tr("Edit Profile"),
                 style: TextStyle(
                   fontFamily: "Quicksand",
                   fontWeight: FontWeight.bold,
@@ -544,7 +535,7 @@ class _SettingProfileState extends State<SettingProfile> {
                     TextField(
                       controller: nameController,
                       decoration: InputDecoration(
-                        labelText: L10n.tr("Name", "Nama"),
+                        labelText: L10n.tr("Name"),
                         labelStyle: TextStyle(color: AppColors.button),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: AppColors.background),
@@ -559,7 +550,7 @@ class _SettingProfileState extends State<SettingProfile> {
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        labelText: "Email",
+                        labelText: L10n.tr("Email"),
                         labelStyle: TextStyle(color: AppColors.button),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: AppColors.background),
@@ -571,7 +562,7 @@ class _SettingProfileState extends State<SettingProfile> {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      L10n.tr("Choose Avatar", "Pilih Avatar"),
+                      L10n.tr("Choose Avatar"),
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
@@ -652,7 +643,7 @@ class _SettingProfileState extends State<SettingProfile> {
                 TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text(
-                    L10n.tr("Cancel", "Batal"),
+                    L10n.tr("Cancel"),
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ),
@@ -665,10 +656,7 @@ class _SettingProfileState extends State<SettingProfile> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            L10n.tr(
-                              "Name cannot be empty.",
-                              "Nama tidak boleh kosong.",
-                            ),
+                            L10n.tr("Name cannot be empty."),
                           ),
                         ),
                       );
@@ -678,10 +666,7 @@ class _SettingProfileState extends State<SettingProfile> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            L10n.tr(
-                              "Email cannot be empty.",
-                              "Email tidak boleh kosong.",
-                            ),
+                            L10n.tr("Email cannot be empty."),
                           ),
                         ),
                       );
@@ -692,10 +677,7 @@ class _SettingProfileState extends State<SettingProfile> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            L10n.tr(
-                              "Please enter a valid email.",
-                              "Silakan masukkan email yang valid.",
-                            ),
+                            L10n.tr("Please enter a valid email."),
                           ),
                         ),
                       );
@@ -716,10 +698,7 @@ class _SettingProfileState extends State<SettingProfile> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              L10n.tr(
-                                "Email is already taken by another account.",
-                                "Email sudah digunakan oleh akun lain.",
-                              ),
+                              L10n.tr("Email is already taken by another account."),
                             ),
                             backgroundColor: Colors.redAccent,
                           ),
@@ -769,10 +748,7 @@ class _SettingProfileState extends State<SettingProfile> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              L10n.tr(
-                                "Profile updated successfully!",
-                                "Profil berhasil diperbarui!",
-                              ),
+                              L10n.tr("Profile updated successfully!"),
                             ),
                             backgroundColor: Colors.green,
                           ),
@@ -783,10 +759,7 @@ class _SettingProfileState extends State<SettingProfile> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              L10n.tr(
-                                "Failed to update profile.",
-                                "Gagal memperbarui profil.",
-                              ),
+                              L10n.tr("Failed to update profile."),
                             ),
                             backgroundColor: Colors.redAccent,
                           ),
@@ -801,7 +774,7 @@ class _SettingProfileState extends State<SettingProfile> {
                     ),
                   ),
                   child: Text(
-                    L10n.tr("Save", "Simpan"),
+                    L10n.tr("Save"),
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),
@@ -821,19 +794,24 @@ class _SettingProfileState extends State<SettingProfile> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          title: const Text(
-            "Log Out",
-            style: TextStyle(
+          title: Text(
+            L10n.tr("Log Out"),
+            style: const TextStyle(
               fontFamily: "Quicksand",
               fontWeight: FontWeight.bold,
               color: Colors.redAccent,
             ),
           ),
-          content: const Text("Are you sure you want to log out from Kinday?"),
+          content: Text(
+            L10n.tr("Are you sure you want to log out from Kinday?"),
+          ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text("Cancel", style: TextStyle(color: Colors.grey)),
+              child: Text(
+                L10n.tr("Cancel"),
+                style: const TextStyle(color: Colors.grey),
+              ),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -841,7 +819,11 @@ class _SettingProfileState extends State<SettingProfile> {
                 if (context.mounted) {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Logged out successfully!")),
+                    SnackBar(
+                      content: Text(
+                        L10n.tr("Logged out successfully!"),
+                      ),
+                    ),
                   );
                   Navigator.pushAndRemoveUntil(
                     context,
@@ -856,9 +838,9 @@ class _SettingProfileState extends State<SettingProfile> {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              child: const Text(
-                "Log Out",
-                style: TextStyle(color: Colors.white),
+              child: Text(
+                L10n.tr("Log Out"),
+                style: const TextStyle(color: Colors.white),
               ),
             ),
           ],
@@ -881,7 +863,7 @@ class _SettingProfileState extends State<SettingProfile> {
                 borderRadius: BorderRadius.circular(20),
               ),
               title: Text(
-                L10n.tr("Delete Account?", "Hapus Akun?"),
+                L10n.tr("Delete Account?"),
                 style: const TextStyle(
                   fontFamily: "Quicksand",
                   fontWeight: FontWeight.bold,
@@ -893,10 +875,7 @@ class _SettingProfileState extends State<SettingProfile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    L10n.tr(
-                      "This action is permanent and cannot be undone. To confirm, please type \"DELETE\" below:",
-                      "Tindakan ini permanen dan tidak dapat dibatalkan. Untuk mengonfirmasi, silakan ketik \"DELETE\" di bawah:",
-                    ),
+                    L10n.tr("This action is permanent and cannot be undone. To confirm, please type \"DELETE\" below:"),
                     style: const TextStyle(fontFamily: "Nunito"),
                   ),
                   const SizedBox(height: 16),
@@ -925,7 +904,7 @@ class _SettingProfileState extends State<SettingProfile> {
                 TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text(
-                    L10n.tr("Cancel", "Batal"),
+                    L10n.tr("Cancel"),
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ),
@@ -943,7 +922,7 @@ class _SettingProfileState extends State<SettingProfile> {
                     ),
                   ),
                   child: Text(
-                    L10n.tr("Delete Permanently", "Hapus Permanen"),
+                    L10n.tr("Delete Permanently"),
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),
@@ -982,10 +961,7 @@ class _SettingProfileState extends State<SettingProfile> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr(
-                "Account deleted successfully.",
-                "Akun berhasil dihapus.",
-              ),
+              L10n.tr("Account deleted successfully."),
             ),
           ),
         );
@@ -999,15 +975,12 @@ class _SettingProfileState extends State<SettingProfile> {
       if (mounted) {
         String errorMsg = e.toString().replaceAll(RegExp(r'\[.*?\]'), '');
         if (e.toString().contains("requires-recent-login")) {
-          errorMsg = L10n.tr(
-            "This action is sensitive and requires recent authentication. Please log out, log back in, and try again.",
-            "Tindakan ini sensitif dan memerlukan autentikasi baru. Silakan keluar, masuk kembali, dan coba lagi.",
-          );
+          errorMsg = L10n.tr("This action is sensitive and requires recent authentication. Please log out, log back in, and try again.");
         }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr("Delete failed: $errorMsg", "Gagal menghapus: $errorMsg"),
+              L10n.tr("Delete failed: $errorMsg"),
             ),
             backgroundColor: Colors.redAccent,
           ),
@@ -1035,10 +1008,7 @@ class _SettingProfileState extends State<SettingProfile> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                L10n.tr(
-                  "Google account successfully linked!",
-                  "Akun Google berhasil dihubungkan!",
-                ),
+                L10n.tr("Google account successfully linked!"),
               ),
               backgroundColor: Colors.green,
             ),
@@ -1051,28 +1021,16 @@ class _SettingProfileState extends State<SettingProfile> {
         String errorMsg = e.toString().replaceAll(RegExp(r'\[.*?\]'), '');
         if (e.toString().contains("credential-already-in-use") || 
             e.toString().contains("email-already-in-use")) {
-          errorMsg = L10n.tr(
-            "This Google account is already linked to another Kinday account.",
-            "Akun Google ini sudah terhubung dengan akun Kinday lain.",
-          );
+          errorMsg = L10n.tr("This Google account is already linked to another Kinday account.");
         } else if (e.toString().contains("provider-already-linked")) {
-          errorMsg = L10n.tr(
-            "This account is already linked.",
-            "Akun ini sudah terhubung.",
-          );
+          errorMsg = L10n.tr("This account is already linked.");
         } else if (e.toString().contains("requires-recent-login")) {
-          errorMsg = L10n.tr(
-            "This action is sensitive and requires recent authentication. Please log out, log back in, and try again.",
-            "Tindakan ini sensitif dan memerlukan autentikasi baru. Silakan keluar, masuk kembali, dan coba lagi.",
-          );
+          errorMsg = L10n.tr("This action is sensitive and requires recent authentication. Please log out, log back in, and try again.");
         }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr(
-                "Failed to link Google: $errorMsg",
-                "Gagal menghubungkan Google: $errorMsg",
-              ),
+              L10n.tr("Failed to link Google: $errorMsg"),
             ),
             backgroundColor: Colors.redAccent,
           ),
@@ -1124,10 +1082,7 @@ class _SettingProfileState extends State<SettingProfile> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                L10n.tr(
-                  "Email successfully linked!",
-                  "Email berhasil dihubungkan!",
-                ),
+                L10n.tr("Email successfully linked!"),
               ),
               backgroundColor: Colors.green,
             ),
@@ -1140,28 +1095,16 @@ class _SettingProfileState extends State<SettingProfile> {
         String errorMsg = e.toString().replaceAll(RegExp(r'\[.*?\]'), '');
         if (e.toString().contains("credential-already-in-use") || 
             e.toString().contains("email-already-in-use")) {
-          errorMsg = L10n.tr(
-            "This email is already in use by another Kinday account.",
-            "Email ini sudah digunakan oleh akun Kinday lain.",
-          );
+          errorMsg = L10n.tr("This email is already in use by another Kinday account.");
         } else if (e.toString().contains("provider-already-linked")) {
-          errorMsg = L10n.tr(
-            "This account is already linked.",
-            "Akun ini sudah terhubung.",
-          );
+          errorMsg = L10n.tr("This account is already linked.");
         } else if (e.toString().contains("requires-recent-login")) {
-          errorMsg = L10n.tr(
-            "This action is sensitive and requires recent authentication. Please log out, log back in, and try again.",
-            "Tindakan ini sensitif dan memerlukan autentikasi baru. Silakan keluar, masuk kembali, dan coba lagi.",
-          );
+          errorMsg = L10n.tr("This action is sensitive and requires recent authentication. Please log out, log back in, and try again.");
         }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr(
-                "Failed to link Email: $errorMsg",
-                "Gagal menghubungkan Email: $errorMsg",
-              ),
+              L10n.tr("Failed to link Email: $errorMsg"),
             ),
             backgroundColor: Colors.redAccent,
           ),
@@ -1189,7 +1132,7 @@ class _SettingProfileState extends State<SettingProfile> {
             borderRadius: BorderRadius.circular(20),
           ),
           title: Text(
-            L10n.tr("Cannot Disconnect", "Tidak Dapat Memutuskan"),
+            L10n.tr("Cannot Disconnect"),
             style: TextStyle(
               fontFamily: "Quicksand",
               fontWeight: FontWeight.bold,
@@ -1197,17 +1140,14 @@ class _SettingProfileState extends State<SettingProfile> {
             ),
           ),
           content: Text(
-            L10n.tr(
-              "You cannot disconnect this account because it is your only way to log in. Please connect another method first.",
-              "Anda tidak dapat memutuskan akun ini karena ini adalah satu-satunya metode login Anda. Harap hubungkan metode lain terlebih dahulu.",
-            ),
+            L10n.tr("You cannot disconnect this account because it is your only way to log in. Please connect another method first."),
             style: const TextStyle(fontFamily: "Nunito"),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text(
-                L10n.tr("OK", "OK"),
+                L10n.tr("OK"),
                 style: TextStyle(color: AppColors.button),
               ),
             ),
@@ -1225,7 +1165,7 @@ class _SettingProfileState extends State<SettingProfile> {
           borderRadius: BorderRadius.circular(20),
         ),
         title: Text(
-          L10n.tr("Disconnect Account", "Putuskan Hubungan Akun"),
+          L10n.tr("Disconnect Account"),
           style: TextStyle(
             fontFamily: "Quicksand",
             fontWeight: FontWeight.bold,
@@ -1234,21 +1174,15 @@ class _SettingProfileState extends State<SettingProfile> {
         ),
         content: Text(
           providerId == 'google.com'
-              ? L10n.tr(
-                  "Are you sure you want to disconnect your Google account?",
-                  "Apakah Anda yakin ingin memutuskan hubungan akun Google Anda?",
-                )
-              : L10n.tr(
-                  "Are you sure you want to disconnect your Email/Password?",
-                  "Apakah Anda yakin ingin memutuskan hubungan Email/Password Anda?",
-                ),
+              ? L10n.tr("Are you sure you want to disconnect your Google account?")
+              : L10n.tr("Are you sure you want to disconnect your Email/Password?"),
           style: const TextStyle(fontFamily: "Nunito"),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
             child: Text(
-              L10n.tr("Cancel", "Batal"),
+              L10n.tr("Cancel"),
               style: const TextStyle(color: Colors.grey),
             ),
           ),
@@ -1261,7 +1195,7 @@ class _SettingProfileState extends State<SettingProfile> {
               ),
             ),
             child: Text(
-              L10n.tr("Disconnect", "Putuskan"),
+              L10n.tr("Disconnect"),
               style: const TextStyle(color: Colors.white),
             ),
           ),
@@ -1282,10 +1216,7 @@ class _SettingProfileState extends State<SettingProfile> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr(
-                "Account disconnected successfully!",
-                "Hubungan akun berhasil diputuskan!",
-              ),
+              L10n.tr("Account disconnected successfully!"),
             ),
             backgroundColor: Colors.green,
           ),
@@ -1296,18 +1227,12 @@ class _SettingProfileState extends State<SettingProfile> {
       if (mounted) {
         String errorMsg = e.toString().replaceAll(RegExp(r'\[.*?\]'), '');
         if (e.toString().contains("requires-recent-login")) {
-          errorMsg = L10n.tr(
-            "This action is sensitive and requires recent authentication. Please log out, log back in, and try again.",
-            "Tindakan ini sensitif dan memerlukan autentikasi baru. Silakan keluar, masuk kembali, dan coba lagi.",
-          );
+          errorMsg = L10n.tr("This action is sensitive and requires recent authentication. Please log out, log back in, and try again.");
         }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              L10n.tr(
-                "Failed to disconnect: $errorMsg",
-                "Gagal memutuskan hubungan: $errorMsg",
-              ),
+              L10n.tr("Failed to disconnect: $errorMsg"),
             ),
             backgroundColor: Colors.redAccent,
           ),
@@ -1339,7 +1264,7 @@ class _SettingProfileState extends State<SettingProfile> {
                 borderRadius: BorderRadius.circular(20),
               ),
               title: Text(
-                L10n.tr("Bind Email Account", "Hubungkan Akun Email"),
+                L10n.tr("Bind Email Account"),
                 style: TextStyle(
                   fontFamily: "Quicksand",
                   fontWeight: FontWeight.bold,
@@ -1353,10 +1278,7 @@ class _SettingProfileState extends State<SettingProfile> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        L10n.tr(
-                          "Link an email and password to log in using this method in the future.",
-                          "Hubungkan email dan kata sandi untuk masuk menggunakan metode ini di masa mendatang.",
-                        ),
+                        L10n.tr("Link an email and password to log in using this method in the future."),
                         style: const TextStyle(
                           fontFamily: "Nunito",
                           fontSize: 13,
@@ -1369,7 +1291,7 @@ class _SettingProfileState extends State<SettingProfile> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email_outlined, color: AppColors.button),
-                          labelText: L10n.tr("Email Address", "Alamat Email"),
+                          labelText: L10n.tr("Email Address"),
                           labelStyle: TextStyle(color: AppColors.button),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -1382,10 +1304,10 @@ class _SettingProfileState extends State<SettingProfile> {
                         ),
                         validator: (val) {
                           if (val == null || val.isEmpty) {
-                            return L10n.tr("Please enter email", "Harap masukkan email");
+                            return L10n.tr("Please enter email");
                           }
                           if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(val)) {
-                            return L10n.tr("Invalid email format", "Format email tidak valid");
+                            return L10n.tr("Invalid email format");
                           }
                           return null;
                         },
@@ -1396,7 +1318,7 @@ class _SettingProfileState extends State<SettingProfile> {
                         obscureText: obscureText,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock_outline, color: AppColors.button),
-                          labelText: L10n.tr("Password", "Kata Sandi"),
+                          labelText: L10n.tr("Password"),
                           labelStyle: TextStyle(color: AppColors.button),
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -1420,10 +1342,10 @@ class _SettingProfileState extends State<SettingProfile> {
                         ),
                         validator: (val) {
                           if (val == null || val.isEmpty) {
-                            return L10n.tr("Please enter password", "Harap masukkan kata sandi");
+                            return L10n.tr("Please enter password");
                           }
                           if (val.length < 6) {
-                            return L10n.tr("Password must be at least 6 characters", "Kata sandi minimal 6 karakter");
+                            return L10n.tr("Password must be at least 6 characters");
                           }
                           return null;
                         },
@@ -1436,7 +1358,7 @@ class _SettingProfileState extends State<SettingProfile> {
                 TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text(
-                    L10n.tr("Cancel", "Batal"),
+                    L10n.tr("Cancel"),
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ),
@@ -1454,7 +1376,7 @@ class _SettingProfileState extends State<SettingProfile> {
                     ),
                   ),
                   child: Text(
-                    L10n.tr("Connect", "Hubungkan"),
+                    L10n.tr("Connect"),
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),
@@ -1531,16 +1453,13 @@ class _SettingProfileState extends State<SettingProfile> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        L10n.tr("Settings & Profile", "Pengaturan & Profil"),
+                        L10n.tr("Settings & Profile"),
                         style: AppTextStyles.greeting,
                       ),
                       Transform.translate(
                         offset: const Offset(0, -5),
                         child: Text(
-                          L10n.tr(
-                            "Customize your Kinday experience",
-                            "Sesuaikan pengalaman Kinday-mu",
-                          ),
+                          L10n.tr("Customize your Kinday experience"),
                           style: AppTextStyles.affirmation,
                         ),
                       ),
@@ -1554,7 +1473,7 @@ class _SettingProfileState extends State<SettingProfile> {
                       color: AppColors.button,
                       size: 24,
                     ),
-                    tooltip: L10n.tr("Log Out", "Keluar"),
+                    tooltip: L10n.tr("Log Out"),
                   ),
                 ],
               ),
@@ -1673,7 +1592,7 @@ class _SettingProfileState extends State<SettingProfile> {
                             children: [
                               _buildStatItem(
                                 "$_completedTasksCount",
-                                L10n.tr("Completed", "Selesai"),
+                                L10n.tr("Completed"),
                               ),
                               Container(
                                 width: 1,
@@ -1683,11 +1602,8 @@ class _SettingProfileState extends State<SettingProfile> {
                                 ),
                               ),
                               _buildStatItem(
-                                L10n.tr(
-                                  "$_streakDays Days",
-                                  "$_streakDays Hari",
-                                ),
-                                L10n.tr("Streak", "Beruntun"),
+                                L10n.tr("$_streakDays Days"),
+                                L10n.tr("Streak"),
                               ),
                               Container(
                                 width: 1,
@@ -1698,7 +1614,7 @@ class _SettingProfileState extends State<SettingProfile> {
                               ),
                               _buildStatItem(
                                 _formatFocusTime(_totalFocusMinutes),
-                                L10n.tr("Focus Time", "Waktu Fokus"),
+                                L10n.tr("Focus Time"),
                               ),
                             ],
                           ),
@@ -1707,7 +1623,7 @@ class _SettingProfileState extends State<SettingProfile> {
                     ),
 
                     _buildSectionHeader(
-                      L10n.tr("App Preferences", "Preferensi Aplikasi"),
+                      L10n.tr("App Preferences"),
                     ),
 
                     // Preferences Container (Container 3: Leaning pink/purple)
@@ -1730,10 +1646,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: Text(
-                                        L10n.tr(
-                                          "Enable Notifications",
-                                          "Aktifkan Notifikasi",
-                                        ),
+                                        L10n.tr("Enable Notifications"),
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: AppColors.button,
@@ -1784,7 +1697,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: Text(
-                                        L10n.tr("App Theme", "Tema Aplikasi"),
+                                        L10n.tr("App Theme"),
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: AppColors.button,
@@ -1921,10 +1834,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: Text(
-                                        L10n.tr(
-                                          "AI Breakdown Level",
-                                          "Tingkat Detail AI",
-                                        ),
+                                        L10n.tr("AI Breakdown Level"),
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: AppColors.button,
@@ -2021,10 +1931,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: Text(
-                                        L10n.tr(
-                                          "App Language",
-                                          "Bahasa Aplikasi",
-                                        ),
+                                        L10n.tr("App Language"),
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: AppColors.button,
@@ -2108,7 +2015,7 @@ class _SettingProfileState extends State<SettingProfile> {
                     ),
 
                     _buildSectionHeader(
-                      L10n.tr("Google Calendar Awareness", "Integrasi Google Calendar"),
+                      L10n.tr("Google Calendar Sync (Read-only)"),
                     ),
 
                     Container1(
@@ -2136,7 +2043,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Google Calendar & Tasks",
+                                      L10n.tr("Google Calendar & Tasks"),
                                       style: TextStyle(
                                         fontFamily: "Quicksand",
                                         fontWeight: FontWeight.bold,
@@ -2148,12 +2055,9 @@ class _SettingProfileState extends State<SettingProfile> {
                                     Text(
                                       _isGcalConnected
                                           ? (_gcalEmail != null && _gcalEmail!.isNotEmpty
-                                              ? "${L10n.tr("Connected as", "Terhubung sebagai")} $_gcalEmail"
-                                              : L10n.tr("Connected (Read-Only)", "Terhubung (Hanya Baca)"))
-                                          : L10n.tr(
-                                              "Sync your schedule & to-do tasks gently",
-                                              "Sinkronkan agenda & tugas Google dengan tenang",
-                                            ),
+                                              ? "${L10n.tr("Connected as")} $_gcalEmail"
+                                              : L10n.tr("Connected (Read-Only)"))
+                                          : L10n.tr("Sync your schedule & to-do tasks gently"),
                                       style: TextStyle(
                                         fontFamily: "Nunito",
                                         fontSize: 12,
@@ -2183,8 +2087,8 @@ class _SettingProfileState extends State<SettingProfile> {
                                 ),
                                 child: Text(
                                   _isGcalConnected
-                                      ? L10n.tr("Disconnect", "Putuskan")
-                                      : L10n.tr("Connect", "Hubungkan"),
+                                      ? L10n.tr("Disconnect")
+                                      : L10n.tr("Connect"),
                                   style: const TextStyle(
                                     fontFamily: "Quicksand",
                                     fontWeight: FontWeight.bold,
@@ -2215,10 +2119,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        L10n.tr(
-                                          "Sync Sub & Shared Calendars",
-                                          "Sinkronkan Kalender Bersama",
-                                        ),
+                                        L10n.tr("Sync Sub & Shared Calendars"),
                                         style: TextStyle(
                                           fontFamily: "Quicksand",
                                           fontWeight: FontWeight.bold,
@@ -2227,10 +2128,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                         ),
                                       ),
                                       Text(
-                                        L10n.tr(
-                                          "Include events from sub-calendars & shared calendars",
-                                          "Sertakan agenda dari sub-kalender & kalender bersama",
-                                        ),
+                                        L10n.tr("Include events from sub-calendars & shared calendars"),
                                         style: TextStyle(
                                           fontFamily: "Nunito",
                                           fontSize: 11,
@@ -2260,7 +2158,7 @@ class _SettingProfileState extends State<SettingProfile> {
                     ),
 
                     _buildSectionHeader(
-                      L10n.tr("Account & Info", "Akun & Info"),
+                      L10n.tr("Account & Info"),
                     ),
 
                     // Info Container (Container 1: White/Grey card style)
@@ -2270,10 +2168,7 @@ class _SettingProfileState extends State<SettingProfile> {
                         children: [
                           _buildListTile(
                             icon: Icons.lock_outline_rounded,
-                            title: L10n.tr(
-                              "Change Password",
-                              "Ubah Kata Sandi",
-                            ),
+                            title: L10n.tr("Change Password"),
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -2286,7 +2181,7 @@ class _SettingProfileState extends State<SettingProfile> {
                           const Divider(height: 1),
                           _buildListTile(
                             icon: Icons.help_outline_rounded,
-                            title: L10n.tr("Help & FAQ", "Bantuan & FAQ"),
+                            title: L10n.tr("Help & FAQ"),
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -2299,7 +2194,7 @@ class _SettingProfileState extends State<SettingProfile> {
                           const Divider(height: 1),
                           _buildListTile(
                             icon: Icons.info_outline_rounded,
-                            title: L10n.tr("About Kinday", "Tentang Kinday"),
+                            title: L10n.tr("About Kinday"),
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -2312,7 +2207,7 @@ class _SettingProfileState extends State<SettingProfile> {
                           const Divider(height: 1),
                           _buildListTile(
                             icon: Icons.description_outlined,
-                            title: L10n.tr("Terms & Conditions", "Syarat & Ketentuan"),
+                            title: L10n.tr("Terms & Conditions"),
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -2325,7 +2220,7 @@ class _SettingProfileState extends State<SettingProfile> {
                           const Divider(height: 1),
                           _buildListTile(
                             icon: Icons.bug_report_outlined,
-                            title: L10n.tr("Report a Bug", "Laporkan Bug"),
+                            title: L10n.tr("Report a Bug"),
                             onTap: () async {
                               final Uri url = Uri.parse('https://forms.gle/PWU1nEtCS4vM53aCA');
                               if (await canLaunchUrl(url)) {
@@ -2335,7 +2230,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        L10n.tr("Could not launch link", "Tidak dapat membuka tautan"),
+                                        L10n.tr("Could not launch link"),
                                       ),
                                     ),
                                   );
@@ -2348,7 +2243,7 @@ class _SettingProfileState extends State<SettingProfile> {
                     ),
 
                     _buildSectionHeader(
-                      L10n.tr("Linked Accounts", "Akun Terhubung"),
+                      L10n.tr("Linked Accounts"),
                     ),
 
                     Container1(
@@ -2377,10 +2272,7 @@ class _SettingProfileState extends State<SettingProfile> {
                     ),
 
                     _buildSectionHeader(
-                      L10n.tr(
-                        "Data Backup & Restore",
-                        "Cadangkan & Pulihkan Data",
-                      ),
+                      L10n.tr("Data Backup & Restore"),
                     ),
 
                     // Data Backup & Restore Container
@@ -2398,7 +2290,7 @@ class _SettingProfileState extends State<SettingProfile> {
                               ),
                               const SizedBox(width: 8),
                               Text(
-                                L10n.tr("Last Backup", "Pencadangan Terakhir"),
+                                L10n.tr("Last Backup"),
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.button,
@@ -2435,7 +2327,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                     size: 16,
                                   ),
                                   label: Text(
-                                    L10n.tr("Backup", "Cadangkan"),
+                                    L10n.tr("Backup"),
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -2463,7 +2355,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                     size: 16,
                                   ),
                                   label: Text(
-                                    L10n.tr("Restore", "Pulihkan"),
+                                    L10n.tr("Restore"),
                                     style: TextStyle(
                                       color: AppColors.button,
                                       fontWeight: FontWeight.bold,
@@ -2501,7 +2393,7 @@ class _SettingProfileState extends State<SettingProfile> {
                             color: Colors.redAccent,
                           ),
                           label: Text(
-                            L10n.tr("Delete Account", "Hapus Akun"),
+                            L10n.tr("Delete Account"),
                             style: const TextStyle(
                               color: Colors.redAccent,
                               fontSize: 16,
@@ -2606,10 +2498,10 @@ class _SettingProfileState extends State<SettingProfile> {
       ),
       subtitle: Text(
         !_isFirebaseLoggedIn
-            ? L10n.tr("Cloud account not active", "Akun Cloud tidak aktif")
+            ? L10n.tr("Cloud account not active")
             : isLinked
-                ? (linkedEmail.isNotEmpty ? linkedEmail : L10n.tr("Connected", "Terhubung"))
-                : L10n.tr("Not Connected", "Belum Terhubung"),
+                ? (linkedEmail.isNotEmpty ? linkedEmail : L10n.tr("Connected"))
+                : L10n.tr("Not Connected"),
         style: TextStyle(
           fontFamily: "Nunito",
           color: !_isFirebaseLoggedIn
@@ -2627,10 +2519,7 @@ class _SettingProfileState extends State<SettingProfile> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                      L10n.tr(
-                        "Please log in with a cloud account first.",
-                        "Silakan masuk dengan akun cloud terlebih dahulu.",
-                      ),
+                      L10n.tr("Please log in with a cloud account first."),
                     ),
                     backgroundColor: Colors.orangeAccent,
                   ),
@@ -2653,8 +2542,8 @@ class _SettingProfileState extends State<SettingProfile> {
         ),
         child: Text(
           isLinked
-              ? L10n.tr("Disconnect", "Putuskan")
-              : L10n.tr("Connect", "Hubungkan"),
+              ? L10n.tr("Disconnect")
+              : L10n.tr("Connect"),
           style: const TextStyle(
             fontFamily: "Quicksand",
             fontWeight: FontWeight.bold,

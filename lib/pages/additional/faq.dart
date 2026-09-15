@@ -112,7 +112,7 @@ class _FaqPageState extends State<FaqPage> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          L10n.tr("Help & FAQ", "Bantuan & FAQ"),
+          L10n.tr("Help & FAQ"),
           style: TextStyle(
             fontFamily: "Quicksand",
             fontWeight: FontWeight.bold,
@@ -144,7 +144,7 @@ class _FaqPageState extends State<FaqPage> {
                             },
                           )
                         : null,
-                    hintText: L10n.tr("Search questions...", "Cari pertanyaan..."),
+                    hintText: L10n.tr("Search questions..."),
                     hintStyle: TextStyle(color: AppColors.background),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -176,7 +176,7 @@ class _FaqPageState extends State<FaqPage> {
                             Icon(Icons.help_outline, size: 64, color: AppColors.button),
                             const SizedBox(height: 16),
                             Text(
-                              L10n.tr("No results found.", "Tidak ada hasil ditemukan."),
+                              L10n.tr("No results found."),
                               style: TextStyle(
                                 fontFamily: "Quicksand",
                                 fontSize: 16,
