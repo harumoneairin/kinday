@@ -402,6 +402,8 @@ class AppDictionary {
     "You have an unsaved task draft. Would you like to restore it?":
         "保存されていないタスクの下書きがあります。復元しますか？",
     "You've done your best today!": "今日もよくがんばりました！",
+    "Let's start a new day!": "新しい一日を始めましょう！",
+    "Don't forget to take a break": "休憩を取るのを忘れないでね",
     "Suggested for now": "現在のおすすめ",
     "No Suggested Task": "おすすめのタスクはありません",
     "No description": "説明はありません",

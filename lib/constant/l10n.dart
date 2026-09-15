@@ -44,6 +44,7 @@ class L10n {
         r'^(\d+)\s*min$': r'$1分',
         r'^(\d+)\s*Days?$': r'$1日',
         r'^(\d+)\s*out\s+of\s+(\d+)\s+tasks\s+completed$': r'$2個中$1個のタスク完了',
+        r'^(\d+)\s*out\s+of\s+(\d+)\s+tasks$': r'$2個中$1個のタスク',
         r'^Delete\s+failed:\s*(.+)$': r'削除失敗: $1',
         r'^An\s+error\s+occurred:\s*(.+)$': r'エラーが発生しました: $1',
         // Energy Log Insights

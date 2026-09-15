@@ -88,10 +88,11 @@ class _HomepageState extends State<Homepage> {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
 
-    final activeTasks = userTasks.where((t) {
-      if (t.isCompleted) return false;
+    final todayTasks = userTasks.where((t) {
       return RepeatTaskService.shouldShowTaskOnDate(t, today);
     }).toList();
+
+    final activeTasks = todayTasks.where((t) => !t.isCompleted).toList();
 
     TaskCard? suggested;
     final userEnergy = latestEnergy ?? 3;
@@ -143,8 +144,8 @@ class _HomepageState extends State<Homepage> {
       _hasLogs = hasLogs;
       _suggestedTask = suggested;
       _allUserTasks = userTasks;
-      _totalTasks = userTasks.length;
-      _completedTasksCount = userTasks.where((t) => t.isCompleted).length;
+      _totalTasks = todayTasks.length;
+      _completedTasksCount = todayTasks.where((t) => t.isCompleted).length;
       _isGcalConnected = isGcal;
       _gcalEvents = gcalEvents;
       _isCalendarMonthly = isCalendarMonthly;
@@ -348,10 +349,25 @@ class _HomepageState extends State<Homepage> {
                           Transform.translate(
                             offset: const Offset(0, -2),
                             child: Text(
-                              L10n.tr(
-                                "You've done your best today!",
-                                "Kamu telah melakukan yang terbaik hari ini!",
-                              ),
+                              () {
+                                final hour = DateTime.now().hour;
+                                if (hour < 12) {
+                                  return L10n.tr(
+                                    "Let's start a new day!",
+                                    "Mari mulai hari yang baru!",
+                                  );
+                                } else if (hour < 17) {
+                                  return L10n.tr(
+                                    "Don't forget to take a break",
+                                    "Jangan lupa untuk istirahat",
+                                  );
+                                } else {
+                                  return L10n.tr(
+                                    "You've done your best today!",
+                                    "Kamu telah melakukan yang terbaik hari ini!",
+                                  );
+                                }
+                              }(),
                               style: AppTextStyles.affirmation,
                             ),
                           ),
@@ -897,8 +913,8 @@ class _HomepageState extends State<Homepage> {
                                   const SizedBox(height: 4),
                                   Text(
                                     L10n.tr(
-                                      "$_completedTasksCount out of $_totalTasks tasks completed",
-                                      "$_completedTasksCount dari $_totalTasks tugas selesai",
+                                      "$_completedTasksCount out of $_totalTasks tasks",
+                                      "$_completedTasksCount dari $_totalTasks tugas",
                                     ),
                                     style: TextStyle(
                                       fontSize: 13,
@@ -916,7 +932,7 @@ class _HomepageState extends State<Homepage> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: LinearProgressIndicator(
-                              value: _completedTasksCount / _totalTasks,
+                              value: (_completedTasksCount / _totalTasks).clamp(0.0, 1.0),
                               backgroundColor: Colors.white.withValues(
                                 alpha: 0.3,
                               ),
