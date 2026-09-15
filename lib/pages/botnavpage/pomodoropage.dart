@@ -222,7 +222,7 @@ class _PomodoropageState extends State<Pomodoropage> {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        "Subtasks",
+                        L10n.tr("Subtasks"),
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -290,12 +290,12 @@ class _PomodoropageState extends State<Pomodoropage> {
               const SizedBox(height: 15),
               // List of subtasks
               if (subtasks.isEmpty)
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Center(
                     child: Text(
-                      "No subtasks yet",
-                      style: TextStyle(color: Colors.grey),
+                      L10n.tr("No subtasks yet"),
+                      style: const TextStyle(color: Colors.grey),
                     ),
                   ),
                 )

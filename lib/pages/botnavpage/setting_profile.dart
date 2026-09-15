@@ -1783,7 +1783,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                             children: [
                                               Expanded(
                                                 child: Text(
-                                                  "$emoji $name",
+                                                  "$emoji ${L10n.tr(name)}",
                                                   overflow: TextOverflow.ellipsis,
                                                 ),
                                               ),
@@ -1883,7 +1883,7 @@ class _SettingProfileState extends State<SettingProfile> {
                                                 (val) => DropdownMenuItem(
                                                   value: val,
                                                   child: Text(
-                                                    val,
+                                                    L10n.tr(val),
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                   ),
@@ -2251,7 +2251,7 @@ class _SettingProfileState extends State<SettingProfile> {
                       child: Column(
                         children: [
                           _buildLinkedAccountTile(
-                            providerName: "Gmail (Google)",
+                            providerName: L10n.tr("Gmail (Google)"),
                             isLinked: _isGmailLinked,
                             linkedEmail: _gmailEmail,
                             onBind: _handleBindGmail,
@@ -2260,7 +2260,7 @@ class _SettingProfileState extends State<SettingProfile> {
                           ),
                           const Divider(height: 1),
                           _buildLinkedAccountTile(
-                            providerName: "Email",
+                            providerName: L10n.tr("Email"),
                             isLinked: _isEmailLinked,
                             linkedEmail: _passwordEmail,
                             onBind: _showBindEmailDialog,
@@ -2299,7 +2299,9 @@ class _SettingProfileState extends State<SettingProfile> {
                               ),
                               const Spacer(),
                               Text(
-                                _lastBackupTime,
+                                _lastBackupTime == "Never"
+                                    ? L10n.tr("Never")
+                                    : _lastBackupTime,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.button,

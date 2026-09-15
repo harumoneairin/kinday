@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kinday/constant/app_colors.dart';
 import 'package:kinday/constant/app_textstyle.dart';
+import 'package:kinday/constant/l10n.dart';
 import 'package:kinday/pages/botnavpage/pomodoropage.dart';
 import 'package:kinday/pages/mainpage.dart';
 
@@ -432,15 +433,15 @@ class TaskCard extends StatelessWidget {
   String get _energyLabel {
     switch (energylvl) {
       case 5:
-        return "High";
+        return L10n.tr("High");
       case 4:
-        return "Mid-High";
+        return L10n.tr("Mid-High");
       case 3:
-        return "Mid";
+        return L10n.tr("Mid");
       case 2:
-        return "Mid-Low";
+        return L10n.tr("Mid-Low");
       default:
-        return "Low";
+        return L10n.tr("Low");
     }
   }
 
@@ -448,35 +449,35 @@ class TaskCard extends StatelessWidget {
     String timeStr = dueTime != null && dueTime!.isNotEmpty ? " $dueTime" : "";
     switch (repeatType) {
       case RepeatType.daily:
-        return "Daily$timeStr";
+        return "${L10n.tr("Every Day")}$timeStr";
       case RepeatType.selectedDays:
         final days = selectedWeekDays.map((d) {
           switch (d) {
             case 1:
-              return "Mon";
+              return L10n.tr("Mon");
             case 2:
-              return "Tue";
+              return L10n.tr("Tue");
             case 3:
-              return "Wed";
+              return L10n.tr("Wed");
             case 4:
-              return "Thu";
+              return L10n.tr("Thu");
             case 5:
-              return "Fri";
+              return L10n.tr("Fri");
             case 6:
-              return "Sat";
+              return L10n.tr("Sat");
             case 7:
-              return "Sun";
+              return L10n.tr("Sun");
             default:
               return "";
           }
         }).join(", ");
-        return "${days.isEmpty ? 'Repeat' : days}$timeStr";
+        return "${days.isEmpty ? L10n.tr('Repeat') : days}$timeStr";
       case RepeatType.weekly:
-        return "Weekly$timeStr";
+        return "${L10n.tr("Every Week")}$timeStr";
       case RepeatType.monthly:
-        return "Monthly$timeStr";
+        return "${L10n.tr("Every Month")}$timeStr";
       case RepeatType.yearly:
-        return "Yearly$timeStr";
+        return "${L10n.tr("Every Year")}$timeStr";
       case RepeatType.none:
         return "";
     }
@@ -621,9 +622,9 @@ class TaskCard extends StatelessWidget {
                     );
                   }
                 },
-                child: const Text(
-                  "Start Focus",
-                  style: TextStyle(
+                child: Text(
+                  L10n.tr("Start Focus"),
+                  style: const TextStyle(
                     fontFamily: "Nunito",
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
@@ -674,17 +675,17 @@ class EnergyLevel extends StatelessWidget {
   String energyConvert() {
     switch (energy) {
       case 5:
-        return "High";
+        return L10n.tr("High");
       case 4:
-        return "Mid-High";
+        return L10n.tr("Mid-High");
       case 3:
-        return "Mid";
+        return L10n.tr("Mid");
       case 2:
-        return "Mid-Low";
+        return L10n.tr("Mid-Low");
       case 1:
-        return "Low";
+        return L10n.tr("Low");
       default:
-        return "Low";
+        return L10n.tr("Low");
     }
   }
 

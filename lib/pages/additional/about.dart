@@ -272,7 +272,7 @@ class AboutPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    "by the Kinday Team",
+                    L10n.tr("by the Kinday Team"),
                     style: TextStyle(
                       fontFamily: "Quicksand",
                       fontSize: 13,

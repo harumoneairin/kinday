@@ -414,9 +414,9 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
       );
     } else {
       messenger.showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            "Speech recognition is not available or permission denied",
+            L10n.tr("Speech recognition is not available or permission denied"),
           ),
         ),
       );

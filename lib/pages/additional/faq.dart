@@ -194,8 +194,8 @@ class _FaqPageState extends State<FaqPage> {
                         itemBuilder: (context, index) {
                           final faq = _filteredFaqs[index];
                           return FaqItemCard(
-                            question: L10n.tr(faq.questionEn, faq.questionId),
-                            answer: L10n.tr(faq.answerEn, faq.answerId),
+                            question: L10n.tr(faq.questionEn),
+                            answer: L10n.tr(faq.answerEn),
                           );
                         },
                       ),

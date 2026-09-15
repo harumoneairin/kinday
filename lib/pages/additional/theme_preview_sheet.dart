@@ -389,13 +389,14 @@ class _ThemePreviewSheetState extends State<ThemePreviewSheet> {
                       child: Scaffold(
                         body: IgnorePointer(
                           child: IndexedStack(
+                            key: ValueKey("preview_stack_${L10n.lang}"),
                             index: _selectedPageIndex,
-                            children: const [
-                              Homepage(),
-                              Tasklistpage(),
-                              Pomodoropage(),
-                              EnergyPage(),
-                              SettingProfile(),
+                            children: [
+                              Homepage(key: ValueKey("preview_home_${L10n.lang}")),
+                              Tasklistpage(key: ValueKey("preview_task_${L10n.lang}")),
+                              Pomodoropage(key: ValueKey("preview_pomodoro_${L10n.lang}")),
+                              EnergyPage(key: ValueKey("preview_energy_${L10n.lang}")),
+                              SettingProfile(key: ValueKey("preview_setting_${L10n.lang}")),
                             ],
                           ),
                         ),

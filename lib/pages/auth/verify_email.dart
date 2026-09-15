@@ -98,7 +98,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Failed to resend email: ${e.toString().replaceAll(RegExp(r'\[.*?\]'), '')}"),
+          content: Text(L10n.tr("Failed to resend email: ${e.toString().replaceAll(RegExp(r'\[.*?\]'), '')}")),
           backgroundColor: Colors.redAccent,
         ),
       );

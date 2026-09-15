@@ -54,6 +54,7 @@ class L10n {
         r'^Your\s+daily\s+AI\s+limit\s+of\s+(\d+)\s+breakdowns\s+has\s+been\s+reached!\s+Try\s+again\s+tomorrow\.$':
             r'1日のAI上限（$1回）に達しました！ 明日もう一度お試しください。',
         r'^Add\s*\((\d+)\)$': r'追加 ($1)',
+        r'^Failed\s+to\s+resend\s+email:\s*(.+)$': r'メールの再送信に失敗しました: $1',
         r'^Resend\s+in\s+(\d+)s$': r'$1秒後に再送信',
         // Energy Log Insights
         r'^Your\s+energy\s+tends\s+to\s+peak\s+at\s+(\d{2}:\d{2})\s+and\s+reach\s+its\s+lowest\s+point\s+at\s+(\d{2}:\d{2})\.$':
@@ -84,6 +85,7 @@ class L10n {
         r'^Your\s+daily\s+AI\s+limit\s+of\s+(\d+)\s+breakdowns\s+has\s+been\s+reached!\s+Try\s+again\s+tomorrow\.$':
             r'Batas harian $1 kali pemecahan AI Anda telah tercapai! Coba lagi besok.',
         r'^Add\s*\((\d+)\)$': r'Tambah ($1)',
+        r'^Failed\s+to\s+resend\s+email:\s*(.+)$': r'Gagal mengirim ulang email: $1',
         r'^Resend\s+in\s+(\d+)s$': r'Kirim ulang dalam $1 detik',
         // Energy Log Insights
         r'^Your\s+energy\s+tends\s+to\s+peak\s+at\s+(\d{2}:\d{2})\s+and\s+reach\s+its\s+lowest\s+point\s+at\s+(\d{2}:\d{2})\.$':

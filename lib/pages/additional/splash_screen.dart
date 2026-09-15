@@ -4,6 +4,7 @@ import 'package:kinday/constant/app_colors.dart';
 import 'package:kinday/constant/app_image.dart';
 import 'package:kinday/constant/app_textstyle.dart';
 import 'package:kinday/constant/app_widget.dart';
+import 'package:kinday/constant/l10n.dart';
 import 'package:kinday/database/notification_helper.dart';
 import 'package:kinday/database/preference_handler.dart';
 import 'package:kinday/pages/auth/login.dart';
@@ -253,7 +254,7 @@ class _SplashScreenState extends State<SplashScreen>
                                 horizontal: 20.0,
                               ),
                               child: Text(
-                                "Manage your tasks and focus with ease",
+                                L10n.tr("Manage your tasks and focus with ease"),
                                 textAlign: TextAlign.center,
                                 style: AppTextStyles.affirmation.copyWith(
                                   fontSize: 16,

@@ -296,8 +296,8 @@ class _RegisterPageState extends State<RegisterPage> {
             await _rollbackFirebaseRegistration();
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Error fetching user after registration. Rolling back..."),
+                SnackBar(
+                  content: Text(L10n.tr("Error fetching user after registration. Rolling back...")),
                 ),
               );
             }
@@ -306,8 +306,8 @@ class _RegisterPageState extends State<RegisterPage> {
           await _rollbackFirebaseRegistration();
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Local database registration failed. Rolling back..."),
+              SnackBar(
+                content: Text(L10n.tr("Local database registration failed. Rolling back...")),
               ),
             );
           }
@@ -315,8 +315,8 @@ class _RegisterPageState extends State<RegisterPage> {
       } else {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Registration failed. Please try again."),
+            SnackBar(
+              content: Text(L10n.tr("Registration failed. Please try again.")),
             ),
           );
         }
